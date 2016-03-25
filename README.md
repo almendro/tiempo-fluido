@@ -1,5 +1,6 @@
 # tiempo-liquido
 
+blog: http://almendro.3ns.com.ar/tiempo-liquido/
 
 V1
 
