@@ -3,7 +3,7 @@
     <head>
         <title>Título</title>
         <!-- <link rel="stylesheet" type="text/css" href="styles.css" media="screen" /> -->
-        
+        <meta charset="utf-8">
         <link rel="stylesheet" type="text/css"  media="screen" href="assets/desbichador/desbichador.css" />
         <script src="assets/desbichador/desbichador.js"></script>
         
@@ -14,6 +14,16 @@
         
         
         <script>
+        
+        var jornada  = [];
+        jornada[20150513] = "hoy";
+        jornada[20150514] = "mañana";
+        //jornada[] = "mañana+1";
+        jornada[(20150514+7)]="en una semana";
+        
+        for (d in jornada){
+          alert("jornada "+d+" "+jornada[d]);
+        }
         </script>
     </head>
     <body>
