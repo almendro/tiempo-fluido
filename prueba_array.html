@@ -43,7 +43,8 @@
     var b = a.clone().add(28, 'day'); 
     alert("moment a = "+a.format("YYYYMMDD"));
     alert("moment b = "+b.format("YYYYMMDD"));
-    
+    var c = b.clone().diff(a,'days');
+    alert("moment c diff = "+c);
     </script>
   </head>
   <body>
