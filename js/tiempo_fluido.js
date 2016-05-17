@@ -16,12 +16,21 @@ tiempoFluido.app = (function($,moment){
 
   var app = function(){
 
-    alert ("iniciamos la aplicación");
+    alert ('iniciamos la aplicación');
 
     this.inicia = function(){
-      $("body").css("background-color","#000");
+      $('#btn_agregar_carga').bind('click',agregarCarga);
+      $('#btn_ver_grilla').bind('click',verGrilla);
+
+    };
+    
+    var agregarCarga = function(){
+      alert("agregarCarga");
     }
     
+    var verGrilla = function(){
+      alert("verGrilla");
+    }
   };
 
   return app;
