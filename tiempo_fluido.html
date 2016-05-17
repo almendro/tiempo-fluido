@@ -7,9 +7,11 @@
 
     <link rel="stylesheet" type="text/css" href="css/tiempo_fluido.css" media="screen" />
     
-    <!--
+
     <script src="js/modernizr.js"></script>
     <script>
+    
+     
       Modernizr.load([
         {
           load: "js/jquery-2.2.3.min.js",
@@ -20,31 +22,35 @@
           }
         },
         {
+          load: "js/moment.min.js",
+          complete: function (){
+            if(!window.jQuery){
+              alert("fallo Moment");
+            }
+          }
+        },
+        {
           load: "js/tiempo_fluido.js",
           complete: function (){
             if(!window.tiempoFluido){
               alert("fallo tiempoFluido");
+            } else {
+              var miTiempoFluido = new tiempoFluido.app();
+              miTiempoFluido.inicia();
             }
           }
         }
       ]);
     </script>
-    -->
 
-    <!-- 
-    jQuery
-    http://jquery.com/
-    -->
-    <script src="js/jquery-2.2.3.min.js"></script>
-    
-    <!--
-    Moment 
-    http://momentjs.com/ via http://stackoverflow.com/questions/7763327/how-to-calculate-date-difference-in-javascript
-    -->
-    <script src="js/moment.min.js"></script>
+
+    <!--  jQuery    http://jquery.com/     -->
+    <!-- <script src="js/jquery-2.2.3.min.js"></script> -->
+    <!--    Moment     http://momentjs.com/ via http://stackoverflow.com/questions/7763327/how-to-calculate-date-difference-in-javascript    -->
+   <!-- <script src="js/moment.min.js"></script> -->
 
     <!-- Aplicación principal -->
-    <script src="js/tiempo_fluido.js"></script>    
+    <!-- <script src="js/tiempo_fluido.js"></script> -->
 
     <!-- *** DEV *** -->
     <!--
