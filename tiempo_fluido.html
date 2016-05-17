@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Tiempo Fluido</title>
+
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="css/tiempo_fluido.css" media="screen" />
+    
+
+    <script src="js/modernizr.js"></script>
+    <script>
+    
+     
+      Modernizr.load([
+        {
+          load: "js/jquery-2.2.3.min.js",
+          complete: function (){
+            if(!window.jQuery){
+              alert("fallo jQuery");
+            }
+          }
+        },
+        {
+          load: "js/moment.min.js",
+          complete: function (){
+            if(!window.jQuery){
+              alert("fallo Moment");
+            }
+          }
+        },
+        {
+          load: "js/tiempo_fluido.js",
+          complete: function (){
+            if(!window.tiempoFluido){
+              alert("fallo tiempoFluido");
+            } else {
+              var miTiempoFluido = new tiempoFluido.app();
+              miTiempoFluido.inicia();
+            }
+          }
+        }
+      ]);
+    </script>
+
+
+    <!--  jQuery    http://jquery.com/     -->
+    <!-- <script src="js/jquery-2.2.3.min.js"></script> -->
+    <!--    Moment     http://momentjs.com/ via http://stackoverflow.com/questions/7763327/how-to-calculate-date-difference-in-javascript    -->
+   <!-- <script src="js/moment.min.js"></script> -->
+
+    <!-- Aplicación principal -->
+    <!-- <script src="js/tiempo_fluido.js"></script> -->
+
+    <!-- *** DEV *** -->
+    <!--
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/desbichador/desbichador.css" />
+    <script src="assets/desbichador/desbichador.js"></script>
+    -->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/nicealert/style.css" />
+    <script src="assets/nicealert/nice_alert.js"></script>
+    
+    <!-- *** /DEV *** -->
+
+    
+
+    <script>
+    
+    </script>
+  </head>
+  <body>
+    <header>
+    </header>
+
+    <!-- navegación -->
+    <!-- <nav>
+      <ul>
+        <li><a href="#" >link</a></li>
+        <li><a href="#" >link</a></li>
+        <li><a href="#" >link</a></li>
+      </ul>
+    </nav> -->
+    <section id="intro">
+
+    <!-- introduccion -->
+    <!-- 
+      <header>
+        <h2>Título de sección introductoria</h2>
+      </header>
+      <p>Texto de la sección de introducción</p>
+    </section>
+    -->
+    <div id="content">
+    
+      <div id="main-content">    
+      
+        <div id="btn_agregar_carga" class="button"><a href="#">Agregar carga</a></div>
+        <div id="btn_ver_grilla" class="button"><a href="#">Ver grilla</a></div>
+        
+      </div><!-- #main-content -->
+    
+    </div><!-- #content -->
+
+    <!-- pie -->
+    <footer>
+
+    </footer>
+  </body>
+</html>
