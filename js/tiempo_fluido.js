@@ -37,5 +37,5 @@ tiempoFluido.app = (function($,moment){
 
 })(jQuery,moment);
 
-
+alert("cargado tiempo_fluido.js");
 /* fin js */
