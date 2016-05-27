@@ -18,7 +18,17 @@ tiempoFluido.app = (function($,moment){
 
     alert ('iniciamos la aplicación');
 
+    /* config */
+    var tiempoPorDia,
+        tiempoIntercargas,
+        resevaContingencias;
+
+    trace("cargamos configuracion guardada");
+        
+
     this.inicia = function(){
+
+      tiempoFluido.io.init();
       $('#btn_agregar_carga').bind('click',agregarCarga);
       $('#btn_ver_grilla').bind('click',verGrilla);
 
