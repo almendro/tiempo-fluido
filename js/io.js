@@ -15,21 +15,31 @@ var tiempoFluido = window.tiempoFluido || {};
 
 tiempoFluido.io = (function($){
 
-  var grilla = {
-
-    init : function(){
-
-       trace('iniciamos la GRILLA');
-    },
-
-    hideDialog : function (){
-
-       trace('hideDialog');
-      $(".dialog").fadeOut(300);
+  var io = function(){
+    
+    trace('creamos el objeto IO');
+    
+    var soy = this;
+    
+    jQuery.alwaysUseJsonInStorage(true);
+    var storage = jQuery.localStorage;
+    
+    if ( storage.isSet('configApp')){
+      trace('hay datos de configuración guardados');
+    } else {
+      trace('NO hay datos de configuración guardados');
+      trace('podimos email del usuario y completamos con datos por defecto');
     }
-  };
+    this.getConfigApp = function(){
 
-  return grilla;
+       trace('IO: getConfigApp');
+       
+       return {}; // tmp
+    };
+
+  }; // var io
+
+  return io;
 
 })(jQuery);
 

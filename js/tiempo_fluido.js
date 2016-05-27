@@ -18,19 +18,32 @@ tiempoFluido.app = (function($,moment){
 
     trace('iniciamos la aplicación');
 
-    /* config */
-    var tiempoPorDia,
-        tiempoIntercargas,
-        resevaContingencias;
-
-    trace("cargamos configuracion guardada");
-        
+    /* configuracion */
+    var configApp, configCarga;
+    var io;
+    var libreria;
+    var grillaJornada;
+    var cargaActual;
+    var jornadaActual;
 
     this.inicia = function(){
-
-      tiempoFluido.io.init();
-      $('#btn_agregar_carga').bind('click',agregarCarga);
-      $('#btn_ver_grilla').bind('click',verGrilla);
+    
+        trace("*** cargamos configuracion guardada ***");
+        /*
+        tiempoPorDia,
+        tiempoIntercargas,
+        resevaContingencias;
+        */
+        
+        io = new tiempoFluido.io();
+        configApp = io.getConfigApp();
+        
+        trace("configApp = "+configApp);
+        
+        //tiempoFluido.io.init();
+        
+        $('#btn_agregar_carga').bind('click',agregarCarga);
+        $('#btn_ver_grilla').bind('click',verGrilla);
 
     };
     
