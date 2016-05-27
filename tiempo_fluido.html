@@ -4,20 +4,49 @@
     <title>Tiempo Fluido</title>
 
     <meta charset="utf-8">
-
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	
     <link rel="stylesheet" type="text/css" href="css/tiempo_fluido.css" media="screen" />
-    
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/ripples.min.css" media="screen" />
 
     <script src="js/modernizr.js"></script>
+
     <script>
-    
-     
+
       Modernizr.load([
         {
           load: "js/jquery-2.2.3.min.js",
           complete: function (){
             if(!window.jQuery){
               alert("fallo jQuery");
+            }
+          }
+        },
+        {
+          load: "js/bootstrap.min.js",
+          complete: function (){
+            if(!window.jQuery){
+              alert("fallo Bootstrap");
+            }
+          }
+        },
+        {
+          load: "js/material.min.js",
+          complete: function (){
+            if(!window.jQuery){
+              alert("fallo Bootstrap");
+            }
+          }
+        },
+        {
+          load: "js/ripples.min.js",
+          complete: function (){
+            if(!window.jQuery){
+              alert("fallo Bootstrap");
             }
           }
         },
@@ -29,6 +58,10 @@
             }
           }
         },
+        "js/ui.js",
+        "js/carga.js",
+        "js/jornada.js",
+        "js/grilla.js",
         {
           load: "js/tiempo_fluido.js",
           complete: function (){
@@ -71,6 +104,7 @@
   </head>
   <body>
     <header>
+      <h1>Tiempo Fluido</h1>
     </header>
 
     <!-- navegación -->
@@ -81,23 +115,59 @@
         <li><a href="#" >link</a></li>
       </ul>
     </nav> -->
-    <section id="intro">
+
+
+    <section id="intro" class="section">
 
     <!-- introduccion -->
-    <!-- 
       <header>
-        <h2>Título de sección introductoria</h2>
+        <h2>Pantalla inicial</h2>
       </header>
-      <p>Texto de la sección de introducción</p>
+      <p>ingrese cargas o visualice la grilla de jornadas</p>
     </section>
-    -->
+    
     <div id="content">
     
-      <div id="main-content">    
-      
-        <div id="btn_agregar_carga" class="button"><a href="#">Agregar carga</a></div>
-        <div id="btn_ver_grilla" class="button"><a href="#">Ver grilla</a></div>
+      <div id="main-content">
+   
+        <section id="inicio" class="pantalla">
+        <div id="botonera_cargas" >
+          <a id="btn_agregar_carga" class="btn btn-raised btn-lg btn-primary" href="#">Agregar carga</a>
+          <a id="btn_ver_cargas" class="btn btn-raised" href="#">Ver cargas</a>
+        </div>
+        <div>
+          <a id="btn_ver_grilla" class="btn btn-raised btn-lg" href="#">Ver grilla</a>
+        </div>
+        </section>
+
+
+        <section id="abm_carga" class="pantalla">
+
+<form class="form-horizontal"> 
+<fieldset> 
+ <legend>ABM Carga</legend> 
+ <div class="form-group"> 
+  <label for="titulo" class="col-md-2 control-label">Título</label> 
+  <div class="col-md-10"> 
+   <input type="titulo" class="form-control" id="inputCargaTitulo" placeholder="Título"> 
+  </div> 
+ </div>
+ <div class="form-group"> 
+  <div class="col-md-10 col-md-offset-2"> 
+   <button type="button" class="btn btn-default">Cancel</button> 
+   <button type="submit" class="btn btn-primary">Submit</button> 
+  </div> 
+ </div> 
+</fieldset> 
+        </form> 
+
+        </section>
+
+        <section id="  " class="pantalla">
+
+        </section>
         
+
       </div><!-- #main-content -->
     
     </div><!-- #content -->
