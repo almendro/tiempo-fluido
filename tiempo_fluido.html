@@ -17,48 +17,22 @@
 
     <script>
 
+	  trace=function(e){alert(e);}
+	
       Modernizr.load([
         {
           load: "js/jquery-2.2.3.min.js",
           complete: function (){
             if(!window.jQuery){
-              alert("fallo jQuery");
+              trace("fallo jQuery");
             }
           }
         },
-        {
-          load: "js/bootstrap.min.js",
-          complete: function (){
-            if(!window.jQuery){
-              alert("fallo Bootstrap");
-            }
-          }
-        },
-        {
-          load: "js/material.min.js",
-          complete: function (){
-            if(!window.jQuery){
-              alert("fallo Bootstrap");
-            }
-          }
-        },
-        {
-          load: "js/ripples.min.js",
-          complete: function (){
-            if(!window.jQuery){
-              alert("fallo Bootstrap");
-            }
-          }
-        },
-        {
-          load: "js/moment.min.js",
-          complete: function (){
-            if(!window.jQuery){
-              alert("fallo Moment");
-            }
-          }
-        },
-        "js/jquery.storageapi.min.js",
+		"js/bootstrap.min.js",
+		"js/material.min.js",
+		"js/ripples.min.js",
+		"js/moment.min.js",
+		"js/jquery.storageapi.min.js",
         "js/ui.js",
         "js/carga.js",
         "js/jornada.js",
@@ -68,7 +42,7 @@
           load: "js/tiempo_fluido.js",
           complete: function (){
             if(!window.tiempoFluido){
-              alert("fallo tiempoFluido");
+              trace("fallo tiempoFluido");
             } else {
               var miTiempoFluido = new tiempoFluido.app();
               miTiempoFluido.inicia();
