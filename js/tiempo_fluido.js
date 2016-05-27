@@ -16,7 +16,7 @@ tiempoFluido.app = (function($,moment){
 
   var app = function(){
 
-    alert ('iniciamos la aplicación');
+    trace('iniciamos la aplicación');
 
     /* config */
     var tiempoPorDia,
@@ -35,11 +35,11 @@ tiempoFluido.app = (function($,moment){
     };
     
     var agregarCarga = function(){
-      alert("agregarCarga");
+      trace("agregarCarga");
     }
     
     var verGrilla = function(){
-      alert("verGrilla");
+      trace("verGrilla");
     }
   };
 
@@ -47,5 +47,5 @@ tiempoFluido.app = (function($,moment){
 
 })(jQuery,moment);
 
-alert("cargado tiempo_fluido.js");
+trace("cargado tiempo_fluido.js");
 /* fin js */

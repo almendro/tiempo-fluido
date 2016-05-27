@@ -19,12 +19,12 @@ tiempoFluido.ui = (function($){
 
     init : function(){
 
-       alert ('iniciamos la UI');
+       trace('iniciamos la UI');
     },
 
     hideDialog : function (){
 
-       alert ('hideDialog');
+       trace('hideDialog');
       $(".dialog").fadeOut(300);
     }
   };
@@ -33,5 +33,5 @@ tiempoFluido.ui = (function($){
 
 })(jQuery);
 
-alert("cargado ui.js");
+trace("cargado ui.js");
 /* fin js */

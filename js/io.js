@@ -19,12 +19,12 @@ tiempoFluido.io = (function($){
 
     init : function(){
 
-       alert ('iniciamos la GRILLA');
+       trace('iniciamos la GRILLA');
     },
 
     hideDialog : function (){
 
-       alert ('hideDialog');
+       trace('hideDialog');
       $(".dialog").fadeOut(300);
     }
   };
@@ -33,6 +33,6 @@ tiempoFluido.io = (function($){
 
 })(jQuery);
 
-alert("cargado oi.js");
+trace("cargado oi.js");
 
 /* fin js */

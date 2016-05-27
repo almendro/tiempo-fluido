@@ -19,12 +19,12 @@ tiempoFluido.grilla = (function($){
 
     init : function(){
 
-       alert ('iniciamos la GRILLA');
+       trace('iniciamos la GRILLA');
     },
 
     hideDialog : function (){
 
-       alert ('hideDialog');
+       trace('hideDialog');
       $(".dialog").fadeOut(300);
     }
   };
@@ -33,6 +33,6 @@ tiempoFluido.grilla = (function($){
 
 })(jQuery);
 
-alert("cargado grilla.js");
+trace("cargado grilla.js");
 
 /* fin js */
