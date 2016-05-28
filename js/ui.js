@@ -17,15 +17,21 @@ tiempoFluido.ui = (function($){
 
   var ui = {
 
-    init : function(){
-
-       alert ('iniciamos la UI');
-    },
+    iniciar : function(){
+       trace('iniciamos la UI');
+    }, 
 
     hideDialog : function (){
-
-       alert ('hideDialog');
+       trace('hideDialog');
       $(".dialog").fadeOut(300);
+    },
+    ocultarPantallas : function (){
+       trace('ocultarPantallas');
+      $(".pantalla").fadeOut(300);
+    },
+    mostrarPantalla : function (pantalla){
+       trace(' mostrarPantalla '+pantalla);
+      $("#"+pantalla).fadeIn(300);
     }
   };
   
@@ -33,5 +39,5 @@ tiempoFluido.ui = (function($){
 
 })(jQuery);
 
-alert("cargado ui.js");
+trace("cargado ui.js");
 /* fin js */

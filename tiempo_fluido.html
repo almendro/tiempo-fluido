@@ -4,8 +4,8 @@
     <title>Tiempo Fluido</title>
 
     <meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
     <link rel="stylesheet" type="text/css" href="css/tiempo_fluido.css" media="screen" />
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="screen" />
@@ -17,56 +17,32 @@
 
     <script>
 
+      trace=function(e){alert(e);}
+    
       Modernizr.load([
         {
           load: "js/jquery-2.2.3.min.js",
           complete: function (){
             if(!window.jQuery){
-              alert("fallo jQuery");
+              trace("fallo jQuery");
             }
           }
         },
-        {
-          load: "js/bootstrap.min.js",
-          complete: function (){
-            if(!window.jQuery){
-              alert("fallo Bootstrap");
-            }
-          }
-        },
-        {
-          load: "js/material.min.js",
-          complete: function (){
-            if(!window.jQuery){
-              alert("fallo Bootstrap");
-            }
-          }
-        },
-        {
-          load: "js/ripples.min.js",
-          complete: function (){
-            if(!window.jQuery){
-              alert("fallo Bootstrap");
-            }
-          }
-        },
-        {
-          load: "js/moment.min.js",
-          complete: function (){
-            if(!window.jQuery){
-              alert("fallo Moment");
-            }
-          }
-        },
+        "js/bootstrap.min.js",
+        "js/material.min.js",
+        "js/ripples.min.js",
+        "js/moment.min.js",
+        "js/jquery.storageapi.min.js",
         "js/ui.js",
         "js/carga.js",
         "js/jornada.js",
         "js/grilla.js",
+        "js/io.js",
         {
           load: "js/tiempo_fluido.js",
           complete: function (){
             if(!window.tiempoFluido){
-              alert("fallo tiempoFluido");
+              trace("fallo tiempoFluido");
             } else {
               var miTiempoFluido = new tiempoFluido.app();
               miTiempoFluido.inicia();
@@ -116,15 +92,6 @@
       </ul>
     </nav> -->
 
-
-    <section id="intro" class="section">
-
-    <!-- introduccion -->
-      <header>
-        <h2>Pantalla inicial</h2>
-      </header>
-      <p>ingrese cargas o visualice la grilla de jornadas</p>
-    </section>
     
     <div id="content">
     
@@ -163,10 +130,46 @@
 
         </section>
 
-        <section id="  " class="pantalla">
+        <section id="pepe" class="pantalla">
 
         </section>
         
+    <section id="config" class="pantalla">
+      <header>
+        <h2>Configuración</h2>
+      </header>
+      <p>Perfil de usuario y preferencias de funcionamiento general.</p>
+      <form id="profile" class="subsection">
+<fieldset>
+ <legend>Perfil de usuario</legend> 
+ <div class="form-group"> 
+  <label for="perfil_nombre" class="col-md-2 control-label">Nombre</label> 
+  <div class="col-md-10"> 
+   <input type="text" class="form-control" id="perfil_nombre" placeholder="Nombre real"> 
+  </div>
+ </div>
+ <div class="form-group"> 
+  <label for="perfil_id" class="col-md-2 control-label">Id (alias)</label> 
+  <div class="col-md-10"> 
+   <input type="text" class="form-control" id="perfil_id" placeholder="alias"> 
+  </div>
+ </div>
+ <div class="form-group"> 
+  <label for="perfil_email" class="col-md-2 control-label">Id (alias)</label> 
+  <div class="col-md-10"> 
+   <input type="text" class="form-control" id="perfil_email" placeholder="email"> 
+  </div>
+ </div>
+ <div class="form-group"> 
+  <div class="col-md-10 col-md-offset-2"> 
+   <button type="button" class="btn btn-default">Reset</button> 
+   <button type="button" class="btn btn-primary enviar">Crear perfil</button> 
+  </div> 
+ </div> 
+</fieldset> 
+      </form>
+      
+    </section>
 
       </div><!-- #main-content -->
     

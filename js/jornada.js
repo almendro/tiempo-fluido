@@ -19,12 +19,12 @@ tiempoFluido.jornada = (function($){
 
     init : function(){
 
-       alert ('iniciamos la JORNADA');
+       trace('iniciamos la JORNADA');
     },
 
     hideDialog : function (){
 
-       alert ('hideDialog');
+       trace('hideDialog');
       $(".dialog").fadeOut(300);
     }
   };
@@ -33,6 +33,6 @@ tiempoFluido.jornada = (function($){
 
 })(jQuery);
 
-alert("cargado jornada.js");
+trace("cargado jornada.js");
 
 /* fin js */

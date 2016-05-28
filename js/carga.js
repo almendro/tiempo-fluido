@@ -19,12 +19,12 @@ tiempoFluido.carga = (function($){
 
     init : function(){
 
-       alert ('iniciamos la CARGA');
+       trace('iniciamos la CARGA');
     },
 
     hideDialog : function (){
 
-       alert ('hideDialog');
+       trace('hideDialog');
       $(".dialog").fadeOut(300);
     }
   };
@@ -33,6 +33,6 @@ tiempoFluido.carga = (function($){
 
 })(jQuery);
 
-alert("cargado carga.js");
+trace("cargado carga.js");
 
 /* fin js */
