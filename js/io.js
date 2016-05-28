@@ -47,12 +47,6 @@ tiempoFluido.io = (function($){
        return false; // tmp
     };
     
-    this.habilitarFormulario = function(){
-
-       trace('IO: habilitarFormulario');
-       
-       return false; // tmp
-    };
 
   }; // var io
 

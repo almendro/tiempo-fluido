@@ -29,6 +29,9 @@ tiempoFluido.aplicacion = (function($,moment){
     var grillaJornada;
     var cargaActual;
     var jornadaActual;
+    
+    /* botones enviar */
+    var $botonesEnviar = jQuery("input.enviar");
 
     this.iniciar = function(){
     
@@ -61,6 +64,21 @@ tiempoFluido.aplicacion = (function($,moment){
         $('#btn_ver_grilla').bind('click',verGrilla);
 
     }; /* this.iniciar */
+
+    var habilitarFormulario = function(formulario, pantalla){
+
+       trace('IO: habilitarFormulario');
+       deshabilitarBotonesEnviar();
+       /* SEGUIR AQUI ... 
+       asociar al boton enviar el evento para la función que
+       tomara los datos de los campos y los enviara a IO para almacenar.
+       */
+       return false; // tmp
+    };
+    
+    var deshabilitarBotonesEnviar = function(){
+      $botonesEnviar.unbind("click.misEventos");
+    }
     
     var agregarCarga = function(){
       trace("agregarCarga");
