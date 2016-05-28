@@ -55,12 +55,12 @@ tiempoFluido.io = (function($){
         var soy = $(this);
         var id_propiedad = soy.attr("id");
         var propiedad = id_propiedad.replace(formulario+"_","");
-        trace(propiedad+" = "+soy.val());
-        /*
-        salvar[formulario][propiedad] = soy.val();
-        trace (propiedad+" "+salvar[formulario][propiedad]);
-        */
+        //trace(propiedad+" = "+soy.val());
+        salvar[propiedad] = soy.val();
+        trace (propiedad+" = "+salvar[propiedad]);
+        storage.set('tf.'+formulario,salvar);
         /* SEGUIR AQUI .... ver la forma de guardar los datos en el storage */
+        trace("storage.get('tf."+formulario+"."+propiedad+"') = "+ storage.get('tf.'+formulario+'.'+propiedad));
       });
     };
     

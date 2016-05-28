@@ -17,13 +17,13 @@ tiempoFluido.aplicacion = (function($,moment){
   var aplicacion = function(){
 
     trace('iniciamos la aplicación');
-
+    
     /* configuracion */
     var perfil, configuracionAplicacion, configuracionCarga;
     
     perfil = {
       nombre:"",
-      id: "",
+      id: "pepe!",
       email: ""
     };
     
@@ -84,7 +84,10 @@ tiempoFluido.aplicacion = (function($,moment){
     var enviarDatos = function (evento){
       trace("enviarDatos: "+evento.data.form);
       deshabilitarBotonesEnviar();
-      io.salvarDatos(evento.data.form);
+      var formulario = evento.data.form;
+      //var objeto = eval(evento.data.form);
+      //trace('objeto.ID = '+objeto["id"]);
+      io.salvarDatos(formulario);
       //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));
       //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));
     };
