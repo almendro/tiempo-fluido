@@ -21,6 +21,12 @@ tiempoFluido.aplicacion = (function($,moment){
     /* configuracion */
     var perfil, configuracionAplicacion, configuracionCarga;
     
+    perfil = {
+      nombre:"",
+      id: "",
+      email: ""
+    };
+    
     /* data e interfaz usuario */
     var io, ui;
     
@@ -31,7 +37,7 @@ tiempoFluido.aplicacion = (function($,moment){
     var jornadaActual;
     
     /* botones enviar */
-    var $botonesEnviar = jQuery("input.enviar");
+    var $botonesEnviar = jQuery("button.enviar");
 
     this.iniciar = function(){
     
@@ -44,12 +50,12 @@ tiempoFluido.aplicacion = (function($,moment){
         ui = tiempoFluido.ui;
         io = new tiempoFluido.io();
 
-        ui.ocultarPantallas();
+        ui.ocultarSeccion();
 
         perfil = io.cargarPerfil();
         if (perfil==false){
           trace("crear perfil");
-          ui.mostrarPantalla("configuracion");
+          ui.mostrarSeccion("configuracion");
           habilitarFormulario("perfil","configuracion");
         } else {
           trace("presentamos el perfil: "+perfil.id+" "+perfil.email+" "+perfil.nombre);
@@ -65,20 +71,27 @@ tiempoFluido.aplicacion = (function($,moment){
 
     }; /* this.iniciar */
 
-    var habilitarFormulario = function(formulario, pantalla){
-
-       trace('IO: habilitarFormulario');
-       deshabilitarBotonesEnviar();
-       /* SEGUIR AQUI ... 
-       asociar al boton enviar el evento para la función que
-       tomara los datos de los campos y los enviara a IO para almacenar.
-       */
-       return false; // tmp
+    var habilitarFormulario = function(formulario, seccion){
+      
+      trace('habilitarFormulario: '+formulario+" "+seccion);
+      deshabilitarBotonesEnviar();
+      ui.ocultarSubsecciones();
+      ui.mostrarSubseccion(formulario);
+      jQuery(".enviar",jQuery("#"+formulario)).bind('click.misEventos', {form: formulario}, enviarDatos);
+      return false; // tmp
+    };
+    
+    var enviarDatos = function (evento){
+      trace("enviarDatos: "+evento.data.form);
+      deshabilitarBotonesEnviar();
+      io.salvarDatos(evento.data.form);
+      //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));
+      //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));
     };
     
     var deshabilitarBotonesEnviar = function(){
       $botonesEnviar.unbind("click.misEventos");
-    }
+    };
     
     var agregarCarga = function(){
       trace("agregarCarga");

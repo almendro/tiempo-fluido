@@ -47,7 +47,23 @@ tiempoFluido.io = (function($){
        return false; // tmp
     };
     
-
+    this.salvarDatos = function (formulario){
+      trace('IO: salvarDatos '+formulario);
+      var datos = jQuery("input",$("#"+formulario));
+      var salvar = {};
+      datos.each(function(evento){
+        var soy = $(this);
+        var id_propiedad = soy.attr("id");
+        var propiedad = id_propiedad.replace(formulario+"_","");
+        trace(propiedad+" = "+soy.val());
+        /*
+        salvar[formulario][propiedad] = soy.val();
+        trace (propiedad+" "+salvar[formulario][propiedad]);
+        */
+        /* SEGUIR AQUI .... ver la forma de guardar los datos en el storage */
+      });
+    };
+    
   }; // var io
 
   return io;
