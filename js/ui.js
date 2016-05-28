@@ -17,15 +17,21 @@ tiempoFluido.ui = (function($){
 
   var ui = {
 
-    init : function(){
-
+    iniciar : function(){
        trace('iniciamos la UI');
-    },
+    }, 
 
     hideDialog : function (){
-
        trace('hideDialog');
       $(".dialog").fadeOut(300);
+    },
+    ocultarPantallas : function (){
+       trace('ocultarPantallas');
+      $(".pantalla").fadeOut(300);
+    },
+    mostrarPantalla : function (pantalla){
+       trace(' mostrarPantalla '+pantalla);
+      $("#"+pantalla).fadeIn(300);
     }
   };
   
