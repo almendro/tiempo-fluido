@@ -21,9 +21,9 @@ tiempoFluido.ui = (function($){
        trace('iniciamos la UI');
     }, 
 
-    hideDialog : function (){
-       trace('hideDialog');
-      $(".dialog").fadeOut(300);
+    ocultarDialogos : function (){
+       trace('ocultarDialogos');
+      $(".dialogo").fadeOut(300);
     },
     ocultarPantallas : function (){
        trace('ocultarPantallas');

@@ -12,21 +12,25 @@ Martín Ochoa
 
 var tiempoFluido = window.tiempoFluido || {};
 
-tiempoFluido.app = (function($,moment){
+tiempoFluido.aplicacion = (function($,moment){
 
-  var app = function(){
+  var aplicacion = function(){
 
     trace('iniciamos la aplicación');
 
     /* configuracion */
-    var profile, configApp, configCarga;
+    var perfil, configuracionAplicacion, configuracionCarga;
+    
+    /* data e interfaz usuario */
     var io, ui;
+    
+    /* datos */
     var libreria;
     var grillaJornada;
     var cargaActual;
     var jornadaActual;
 
-    this.inicia = function(){
+    this.iniciar = function(){
     
         trace("*** cargamos configuracion guardada ***");
         /*
@@ -39,25 +43,24 @@ tiempoFluido.app = (function($,moment){
 
         ui.ocultarPantallas();
 
-        profile = io.getProfile();
-        if (profile==false){
+        perfil = io.cargarPerfil();
+        if (perfil==false){
           trace("crear perfil");
-          ui.mostrarPantalla("config");
-          oi.habilitarForm("config");
+          ui.mostrarPantalla("configuracion");
+          oi.habilitarFormulario("perfil","configuracion");
         } else {
-          trace("presentamos el perfil: "+profile.id+" "+profile.email+" "+profile.name);
-          configApp = io.getConfigApp(profile.id);
-        
-          trace("configApp = "+configApp);
+          trace("presentamos el perfil: "+perfil.id+" "+perfil.email+" "+perfil.nombre);
+          configuracionAplicacion = io.cargarConfiguracionAplicacion(perfil.id);
+          trace("configuracionAplicacion = "+configuracionAplicacion);
         }
         
         
-        //tiempoFluido.io.init();
+        /* tiempoFluido.io.init(); */
         
         $('#btn_agregar_carga').bind('click',agregarCarga);
         $('#btn_ver_grilla').bind('click',verGrilla);
 
-    };
+    }; /* this.iniciar */
     
     var agregarCarga = function(){
       trace("agregarCarga");
@@ -68,7 +71,7 @@ tiempoFluido.app = (function($,moment){
     }
   };
 
-  return app;
+  return aplicacion;
 
 })(jQuery,moment);
 

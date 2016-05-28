@@ -24,28 +24,34 @@ tiempoFluido.io = (function($){
     jQuery.alwaysUseJsonInStorage(true);
     var storage = jQuery.localStorage;
     
-    this.getProfile = function(){
+    this.cargarPerfil = function(){
 
-       trace('IO: getProfile');
-       var profile;
-       if ( storage.isSet('tf.profile')){
+       trace('IO: cargarPerfil');
+       var perfil;
+       if ( storage.isSet('tf.perfil')){
          trace('hay datos de perfil');
-         profile = storage.get('tf.profile');
-         trace('profile='+profile);
+         perfil = storage.get('tf.perfil');
+         trace('perfil='+perfil);
        } else {
          trace('NO hay datos de perfil guardados');
-         trace('podimos email del usuario y completamos con datos por defecto');
-          profile = false;
+         perfil = false;
        }
     
-       return profile;
+       return perfil;
     };
 
-    this.getConfigApp = function(){
+    this.cargarConfiguracionAplicacion = function(){
 
-       trace('IO: getConfigApp');
+       trace('IO: cargarConfiguracionAplicacion');
        
-       return {}; // tmp
+       return false; // tmp
+    };
+    
+    this.habilitarFormulario = function(){
+
+       trace('IO: habilitarFormulario');
+       
+       return false; // tmp
     };
 
   }; // var io
