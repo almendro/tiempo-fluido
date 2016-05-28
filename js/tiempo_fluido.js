@@ -19,8 +19,8 @@ tiempoFluido.app = (function($,moment){
     trace('iniciamos la aplicación');
 
     /* configuracion */
-    var configApp, configCarga;
-    var io;
+    var profile, configApp, configCarga;
+    var io, ui;
     var libreria;
     var grillaJornada;
     var cargaActual;
@@ -34,11 +34,23 @@ tiempoFluido.app = (function($,moment){
         tiempoIntercargas,
         resevaContingencias;
         */
-        
+        ui = tiempoFluido.ui;
         io = new tiempoFluido.io();
-        configApp = io.getConfigApp();
+
+        ui.ocultarPantallas();
+
+        profile = io.getProfile();
+        if (profile==false){
+          trace("crear perfil");
+          ui.mostrarPantalla("config");
+          oi.habilitarForm("config");
+        } else {
+          trace("presentamos el perfil: "+profile.id+" "+profile.email+" "+profile.name);
+          configApp = io.getConfigApp(profile.id);
         
-        trace("configApp = "+configApp);
+          trace("configApp = "+configApp);
+        }
+        
         
         //tiempoFluido.io.init();
         
