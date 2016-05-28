@@ -50,7 +50,7 @@ tiempoFluido.aplicacion = (function($,moment){
         if (perfil==false){
           trace("crear perfil");
           ui.mostrarPantalla("configuracion");
-          oi.habilitarFormulario("perfil","configuracion");
+          habilitarFormulario("perfil","configuracion");
         } else {
           trace("presentamos el perfil: "+perfil.id+" "+perfil.email+" "+perfil.nombre);
           configuracionAplicacion = io.cargarConfiguracionAplicacion(perfil.id);
