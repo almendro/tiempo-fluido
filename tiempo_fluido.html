@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      
+     
     <link rel="stylesheet" type="text/css" href="css/tiempo_fluido.css" media="screen" />
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="screen" />
@@ -18,7 +18,7 @@
     <script>
 
       trace=function(e){alert(e);}
-    
+   
       Modernizr.load([
         {
           load: "js/jquery-2.2.3.min.js",
@@ -66,19 +66,18 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/desbichador/desbichador.css" />
     <script src="assets/desbichador/desbichador.js"></script>
     -->
-    
+   
     <link rel="stylesheet" type="text/css" media="screen" href="assets/nicealert/style.css" />
     <script src="assets/nicealert/nice_alert.js"></script>
-    
+   
     <!-- *** /DEV *** -->
-
-    
-
     <script>
-    
+   
     </script>
   </head>
+
   <body>
+
     <header>
       <h1>Tiempo Fluido</h1>
     </header>
@@ -92,87 +91,81 @@
       </ul>
     </nav> -->
 
-    
     <div id="content">
-    
-      <div id="main-content">
    
+      <div id="main-content">
+  
         <section id="inicio" class="pantalla">
-        <div id="botonera_cargas" >
-          <a id="btn_agregar_carga" class="btn btn-raised btn-lg btn-primary" href="#">Agregar carga</a>
-          <a id="btn_ver_cargas" class="btn btn-raised" href="#">Ver cargas</a>
-        </div>
-        <div>
-          <a id="btn_ver_grilla" class="btn btn-raised btn-lg" href="#">Ver grilla</a>
-        </div>
+          <div id="botonera_cargas" >
+            <a id="btn_agregar_carga" class="btn btn-raised btn-lg btn-primary" href="#">Agregar carga</a>
+            <a id="btn_ver_cargas" class="btn btn-raised" href="#">Ver cargas</a>
+          </div>
+          <div>
+            <a id="btn_ver_grilla" class="btn btn-raised btn-lg" href="#">Ver grilla</a>
+          </div>
         </section>
 
-
         <section id="abm_carga" class="pantalla">
-
-<form class="form-horizontal"> 
-<fieldset> 
- <legend>ABM Carga</legend> 
- <div class="form-group"> 
-  <label for="titulo" class="col-md-2 control-label">Título</label> 
-  <div class="col-md-10"> 
-   <input type="titulo" class="form-control" id="inputCargaTitulo" placeholder="Título"> 
-  </div> 
- </div>
- <div class="form-group"> 
-  <div class="col-md-10 col-md-offset-2"> 
-   <button type="button" class="btn btn-default">Cancel</button> 
-   <button type="submit" class="btn btn-primary">Submit</button> 
-  </div> 
- </div> 
-</fieldset> 
-        </form> 
-
+          <form class="form-horizontal">
+            <fieldset>
+            <legend>ABM Carga</legend>
+              <div class="form-group">
+                <label for="titulo" class="col-md-2 control-label">Título</label>
+                <div class="col-md-10">
+                 <input type="titulo" class="form-control" id="inputCargaTitulo" placeholder="Título">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                  <button type="button" class="btn btn-default">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
         </section>
 
         <section id="pepe" class="pantalla">
-
         </section>
-        
-    <section id="config" class="pantalla">
-      <header>
-        <h2>Configuración</h2>
-      </header>
-      <p>Perfil de usuario y preferencias de funcionamiento general.</p>
-      <form id="profile" class="subsection">
-<fieldset>
- <legend>Perfil de usuario</legend> 
- <div class="form-group"> 
-  <label for="perfil_nombre" class="col-md-2 control-label">Nombre</label> 
-  <div class="col-md-10"> 
-   <input type="text" class="form-control" id="perfil_nombre" placeholder="Nombre real"> 
-  </div>
- </div>
- <div class="form-group"> 
-  <label for="perfil_id" class="col-md-2 control-label">Id (alias)</label> 
-  <div class="col-md-10"> 
-   <input type="text" class="form-control" id="perfil_id" placeholder="alias"> 
-  </div>
- </div>
- <div class="form-group"> 
-  <label for="perfil_email" class="col-md-2 control-label">Id (alias)</label> 
-  <div class="col-md-10"> 
-   <input type="text" class="form-control" id="perfil_email" placeholder="email"> 
-  </div>
- </div>
- <div class="form-group"> 
-  <div class="col-md-10 col-md-offset-2"> 
-   <button type="button" class="btn btn-default">Reset</button> 
-   <button type="button" class="btn btn-primary enviar">Crear perfil</button> 
-  </div> 
- </div> 
-</fieldset> 
-      </form>
-      
-    </section>
+       
+        <section id="config" class="pantalla">
+         <header>
+           <h2>Configuración</h2>
+         </header>
+         <p>Perfil de usuario y preferencias de funcionamiento general.</p>
+         <form id="profile" class="subsection">
+            <fieldset>
+              <legend>Perfil de usuario</legend>
+              <div class="form-group">
+              <label for="perfil_nombre" class="col-md-2 control-label">Nombre</label>
+              <div class="col-md-10">
+              <input type="text" class="form-control" id="perfil_nombre" placeholder="Nombre real">
+              </div>
+              </div>
+              <div class="form-group">
+              <label for="perfil_id" class="col-md-2 control-label">Id (alias)</label>
+              <div class="col-md-10">
+              <input type="text" class="form-control" id="perfil_id" placeholder="alias">
+              </div>
+              </div>
+              <div class="form-group">
+              <label for="perfil_email" class="col-md-2 control-label">Id (alias)</label>
+              <div class="col-md-10">
+              <input type="text" class="form-control" id="perfil_email" placeholder="email">
+              </div>
+              </div>
+              <div class="form-group">
+              <div class="col-md-10 col-md-offset-2">
+              <button type="button" class="btn btn-default">Reset</button>
+              <button type="button" class="btn btn-primary enviar">Crear perfil</button>
+              </div>
+              </div>
+            </fieldset>
+          </form>
+        </section><!-- #config -->
 
       </div><!-- #main-content -->
-    
+   
     </div><!-- #content -->
 
     <!-- pie -->
