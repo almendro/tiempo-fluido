@@ -10,7 +10,8 @@ Martín Ochoa
 */
 
 
-.pantalla
+.seccion,
+.subseccion
 {
   display: none;
 }
