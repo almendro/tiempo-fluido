@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 
 Tiempo Fluido
 -------------
@@ -24,12 +24,23 @@ tiempoFluido.io = (function($){
     jQuery.alwaysUseJsonInStorage(true);
     var storage = jQuery.localStorage;
     
-    if ( storage.isSet('configApp')){
-      trace('hay datos de configuración guardados');
-    } else {
-      trace('NO hay datos de configuración guardados');
-      trace('podimos email del usuario y completamos con datos por defecto');
-    }
+    this.getProfile = function(){
+
+       trace('IO: getProfile');
+       var profile;
+       if ( storage.isSet('tf.profile')){
+         trace('hay datos de perfil');
+         profile = storage.get('tf.profile');
+         trace('profile='+profile);
+       } else {
+         trace('NO hay datos de perfil guardados');
+         trace('podimos email del usuario y completamos con datos por defecto');
+          profile = false;
+       }
+    
+       return profile;
+    };
+
     this.getConfigApp = function(){
 
        trace('IO: getConfigApp');
