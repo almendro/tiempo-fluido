@@ -19,15 +19,11 @@ tiempoFluido.aplicacion = (function($,moment){
     trace('iniciamos la aplicación');
     
     /* configuracion */
-    var perfil, configuracionAplicacion, configuracionCarga;
-    
-    perfil = {
-      nombre:"",
-      id: "pepe!",
-      email: ""
-    };
-    
-    /* data e interfaz usuario */
+    var perfil, 
+        configuracionAplicacion, 
+        configuracionCarga;
+        
+    /* data input/output e interfaz usuario */
     var io, ui;
     
     /* datos */
@@ -37,7 +33,7 @@ tiempoFluido.aplicacion = (function($,moment){
     var jornadaActual;
     
     /* botones enviar */
-    var $botonesEnviar = jQuery("button.enviar");
+    var $botonesEnviar;
 
     this.iniciar = function(){
     
@@ -50,15 +46,23 @@ tiempoFluido.aplicacion = (function($,moment){
         ui = tiempoFluido.ui;
         io = new tiempoFluido.io();
 
-        ui.ocultarSeccion();
+        perfil = {
+          id: "",
+          nombre:"",
+          alias: "",
+          email: ""
+        };
+        
+        $botonesEnviar = jQuery( "button.enviar" );
+        ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
 
         perfil = io.cargarPerfil();
-        if (perfil==false){
+        if ( perfil==false ){
           trace("crear perfil");
           ui.mostrarSeccion("configuracion");
-          habilitarFormulario("perfil","configuracion");
+          habilitarFormulario( "perfil" , "configuracion" ); // CAMBIAR agregar forma de procesar para seguimiento
         } else {
-          trace("presentamos el perfil: "+perfil.id+" "+perfil.email+" "+perfil.nombre);
+          trace( "presentamos el perfil: " + perfil.id + " " + perfil.nombre + " " + perfil.alias + " " + perfil.email );
           configuracionAplicacion = io.cargarConfiguracionAplicacion(perfil.id);
           trace("configuracionAplicacion = "+configuracionAplicacion);
         }
