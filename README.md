@@ -1,8 +1,8 @@
 # tiempo-liquido
 
-blog: http://almendro.3ns.com.ar/tiempo-liquido/
+blog: http://almendro.3ns.com.ar/tiempo-fluido/
 
-V1
+V1 (BORRADOR SIN CORREGIR NI REVISAR)
 
 Gestor de tiempo que distribuye de  manera uniforme, como si fuera líquido, la carga horaria de  proyectos o tareas a lo largo del tiempo en días.
 
