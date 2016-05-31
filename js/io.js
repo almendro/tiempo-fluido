@@ -40,10 +40,10 @@ tiempoFluido.io = (function($){
        return perfil;
     };
 
-    this.cargarConfiguracionAplicacion = function(){
+    this.cargarConfiguracionAplicacion = function(perfil){
 
        trace('IO: cargarConfiguracionAplicacion');
-       
+       Trace( 'perfil = ' + perfil );
        return false; // tmp
     };
     
@@ -59,12 +59,12 @@ tiempoFluido.io = (function($){
         salvar[propiedad] = soy.val();
         trace (propiedad+" = "+salvar[propiedad]);
         storage.set('tf.'+formulario,salvar);
-        /* SEGUIR AQUI .... ver la forma de guardar los datos en el storage */
-        trace("storage.get('tf."+formulario+"."+propiedad+"') = "+ storage.get('tf.'+formulario+'.'+propiedad));
-      });
-    };
+        trace( "storage.get('tf." + formulario + "." + propiedad + "') = " +  storage.get( 'tf.' + formulario + '.' + propiedad ) );
+      }); /* datos.each */
+      return storage.get( 'tf.' + formulario ); 
+    }; /* salvarDatos */
     
-  }; // var io
+  }; /* var io */
 
   return io;
 
