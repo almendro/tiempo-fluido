@@ -49,13 +49,13 @@ tiempoFluido.io = (function($){
        return perfil;
     };
 
-    this.cargarConfiguracionAplicacion = function(){
-
+    this.cargarConfiguracionAplicacion = function(perfil){
+ 
        trace('IO: cargarConfiguracionAplicacion');
-       
-       return false; // tmp
-    };
-    
+       trace( 'perfil = ' + perfil );
+
+        return false; // tmp
+     };    
     this.salvarDatos = function ( formulario , callback ){
       trace('IO: salvarDatos ' + formulario);
       //trace('IO: salvarDatos ' + callback);
