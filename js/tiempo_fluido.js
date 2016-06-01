@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 
 Tiempo Fluido
 -------------
@@ -37,7 +37,9 @@ tiempoFluido.aplicacion = (function($,moment){
         seccionSiguiente , 
         subseccionSiguiente ;
     
-    /* botones enviar */
+    /* botones enviar 
+    para capturar todos los botones de los formularios
+    */
     var $botonesEnviar;
 
     this.iniciar = function(){
@@ -58,19 +60,26 @@ tiempoFluido.aplicacion = (function($,moment){
           email: ""
         };
         
+        /* Dev  */
+        var tmp = io.borrarTodo();
+       
+        
         $botonesEnviar = jQuery( "button.enviar" );
         ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
 
         perfil = io.cargarPerfil();
+        
         if ( perfil==false )
         {
           trace("crear perfil");
           seccionActual = "configuracion";
           subseccionActual = "perfil";
-          seccionSiguiente = "bienvenida";
-          subseccionSiguiente = "nuevoPerfil";
+          seccionSiguiente = "inicio";
+          subseccionSiguiente = "bienvenida";
           ui.mostrarSeccion( seccionActual );
-          habilitarFormulario( subseccionActual , seccionActual ); // CAMBIAR agregar forma de procesar para seguimiento
+          habilitarFormulario( subseccionActual , seccionActual , function (){
+            trace("mostrar " + seccionSiguiente + " " + subseccionSiguiente );
+          }); // CAMBIAR agregar forma de procesar para seguimiento
         } 
         else 
         {
@@ -87,23 +96,27 @@ tiempoFluido.aplicacion = (function($,moment){
 
     }; /* this.iniciar */
 
-    var habilitarFormulario = function( formulario ,  seccion ){
+    var habilitarFormulario = function( formulario ,  seccion , callback ){
       
       trace('habilitarFormulario: '+formulario+" "+seccion);
+      //trace("callback " + callback);
       deshabilitarBotonesEnviar();
       ui.ocultarSubsecciones();
       ui.mostrarSubseccion(formulario);
-      jQuery( ".enviar" ,bjQuery( "#"+formulario ) ).bind( 'click.misEventos', { form: formulario }, enviarDatos );
-      return false; // tmp
+      jQuery( ".enviar" , jQuery( "#"+formulario ) ).bind( 'click.misEventos', { formulario: formulario, callback: callback }, enviarDatos );
+      //return true; // tmp
     };
     
     var enviarDatos = function (evento){
-      trace("enviarDatos: "+evento.data.form);
       deshabilitarBotonesEnviar();
-      var formulario = evento.data.form;
+      var formulario = evento.data.formulario;
+      var callback = evento.data.callback;
+      trace( "enviarDatos: " + formulario );
+      //trace( "callback " + callback );
       //var objeto = eval(evento.data.form);
       //trace('objeto.ID = '+objeto["id"]);
-      return io.salvarDatos(formulario);
+      //return
+       io.salvarDatos( formulario , callback );
       //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));
       //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));
     };

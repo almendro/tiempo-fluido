@@ -24,6 +24,15 @@ tiempoFluido.io = (function($){
     jQuery.alwaysUseJsonInStorage(true);
     var storage = jQuery.localStorage;
     
+    // DEV
+    // storage.removeAll();
+    
+    this.borrarTodo = function(){
+       trace('IO: borrarTodo');
+       storage.removeAll();  
+       return true;
+    };
+    
     this.cargarPerfil = function(){
 
        trace('IO: cargarPerfil');
@@ -40,15 +49,16 @@ tiempoFluido.io = (function($){
        return perfil;
     };
 
-    this.cargarConfiguracionAplicacion = function(perfil){
+    this.cargarConfiguracionAplicacion = function(){
 
        trace('IO: cargarConfiguracionAplicacion');
-       Trace( 'perfil = ' + perfil );
+       
        return false; // tmp
     };
     
-    this.salvarDatos = function (formulario){
-      trace('IO: salvarDatos '+formulario);
+    this.salvarDatos = function ( formulario , callback ){
+      trace('IO: salvarDatos ' + formulario);
+      //trace('IO: salvarDatos ' + callback);
       var datos = jQuery("input",$("#"+formulario));
       var salvar = {};
       datos.each(function(evento){
@@ -59,9 +69,10 @@ tiempoFluido.io = (function($){
         salvar[propiedad] = soy.val();
         trace (propiedad+" = "+salvar[propiedad]);
         storage.set('tf.'+formulario,salvar);
-        trace( "storage.get('tf." + formulario + "." + propiedad + "') = " +  storage.get( 'tf.' + formulario + '.' + propiedad ) );
+        //trace( "storage.get('tf." + formulario + "." + propiedad + "') = " + storage.get( 'tf.' + formulario + '.' + propiedad ));
       }); /* datos.each */
-      return storage.get( 'tf.' + formulario ); 
+      // return storage.get( 'tf.' + formulario ); 
+      return callback();
     }; /* salvarDatos */
     
   }; /* var io */
