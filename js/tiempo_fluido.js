@@ -60,6 +60,14 @@ tiempoFluido.aplicacion = (function($,moment){
           email: ""
         };
         
+        preferencias_default = {
+          tiempo_por_jornada: 7*60,
+          tiempo_intercargas: 5,
+          reserva_contingencias: 2*60,
+          tiempo_minimo: 20
+          dias:[1,1,1,1,1,0,0] 
+        };
+        
         /* Dev  */
         var tmp = io.borrarTodo();
        

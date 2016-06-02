@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 
 Tiempo Fluido
 -------------
@@ -13,6 +13,6 @@ Martín Ochoa
 .seccion,
 .subseccion
 {
-  display: none;
+  display: block;
 }
 /* fin css */
