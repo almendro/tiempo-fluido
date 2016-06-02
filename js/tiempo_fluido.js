@@ -65,7 +65,7 @@ tiempoFluido.aplicacion = (function($,moment){
           tiempo_por_jornada: 7*60,
           tiempo_intercargas: 5,
           reserva_contingencias: 2*60,
-          tiempo_minimo: 20
+          tiempo_minimo: 20,
           dias:[1,1,1,1,1,0,0] // semana inicia lunes
         };
         
