@@ -21,7 +21,8 @@ tiempoFluido.aplicacion = (function($,moment){
     /* configuracion */
     var perfil, 
         configuracionAplicacion, 
-        configuracionCarga;
+        configuracionCarga,
+        preferenciasDefault;
         
     /* data input/output e interfaz usuario */
     var io, ui;
@@ -60,12 +61,12 @@ tiempoFluido.aplicacion = (function($,moment){
           email: ""
         };
         
-        preferencias_default = {
+        preferenciasDefault = {
           tiempo_por_jornada: 7*60,
           tiempo_intercargas: 5,
           reserva_contingencias: 2*60,
           tiempo_minimo: 20
-          dias:[1,1,1,1,1,0,0] 
+          dias:[1,1,1,1,1,0,0] // semana inicia lunes
         };
         
         /* Dev  */
@@ -79,6 +80,7 @@ tiempoFluido.aplicacion = (function($,moment){
         
         if ( perfil==false )
         {
+          /* En este punto no hay definido un perfil por lo cual iniciamos la configuracion de uno y luego las preferencias */
           trace("crear perfil");
           seccionActual = "configuracion";
           subseccionActual = "perfil";
@@ -87,6 +89,8 @@ tiempoFluido.aplicacion = (function($,moment){
           ui.mostrarSeccion( seccionActual );
           habilitarFormulario( subseccionActual , seccionActual , function (){
             trace("mostrar " + seccionSiguiente + " " + subseccionSiguiente );
+            ui.mostrarSeccion ( "inicio" );
+            ui.mostrarSubseccion ( "bienvenida" );
           }); // CAMBIAR agregar forma de procesar para seguimiento
         } 
         else 

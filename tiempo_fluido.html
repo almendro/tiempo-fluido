@@ -103,8 +103,23 @@
             <h2>Bienvenido <span class="usuario"></span></h2>
           </header>
           <p>Esta es la primera vez que inicia la aplicación con el perfil <span class="id"></span>.</p>
-        </section>
+          <p>Puedes elegir entre configurar las preferencias de la aplicación y las características de tu tiempo o comenzar a usar con los valores por defecto.</p>
+          <div id="botonera_bienvenida" >
+            <a id="btn_configurar_preferencias" class="btn btn-raised btn-lg btn-primary" href="#">Configurar preferencias</a>
+            <a id="btn_ver_valores_defecto" class="btn btn-raised btn-lg" href="#">Ver valores po defecto</a>  
+            <a id="btn_comenzar_ya" class="btn btn-raised btn-lg btn-primary" href="#">Comenzar ya!</a>
+            <div id="valores_defecto" class="popup">
+             <p id="valor_tiempo_por_jornada">Tiempo por jornada <span class="valor"></span></p>
+             <p id="valor_tiempo_intercargas">Tiempo inter cargas <span class="valor"></span></p>
+             <p id="valor_reserva_contingencias">Reserva para contingencias <span class="valor"></span></p>
+             <p id="valor_tiempo_minimo">Tiemo mínimo <span class="valor"></span></p>
+             <p id="valor_dias" class="multi">Días de semana <span class="valor"></span></p>
+            </div><!-- #valores_defecto -->
+          </div>
+        </section> <!-- #bienvenida.subseccion -->
 
+          <section id="tablero" class="subseccion">
+        
           <div id="botonera_cargas" >
             <a id="btn_agregar_carga" class="btn btn-raised btn-lg btn-primary" href="#">Agregar carga</a>
             <a id="btn_ver_cargas" class="btn btn-raised" href="#">Ver cargas</a>
@@ -112,7 +127,9 @@
           <div>
             <a id="btn_ver_grilla" class="btn btn-raised btn-lg" href="#">Ver grilla</a>
           </div>
-        </section>
+          </section> <!-- #bienvenida.subseccion -->
+          
+        </section><!-- #inicio.seccion -->
 
         <section id="abm_carga" class="seccion">
           <form class="form-horizontal">
