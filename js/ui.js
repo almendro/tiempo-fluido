@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 
 Tiempo Fluido
 -------------
@@ -31,6 +31,7 @@ tiempoFluido.ui = (function($){
     },
     mostrarSeccion : function (seccion){
       trace('UI: mostrarSeccion'+seccion);
+      this.ocultarSeccion();
       $("#"+seccion).fadeIn(300);
     },
     ocultarSubsecciones : function (){
@@ -39,6 +40,7 @@ tiempoFluido.ui = (function($){
     },
     mostrarSubseccion : function (subseccion){
       trace('UI: mostrarSubseccion '+subseccion);
+      this.ocultarSubsecciones();
       $("#"+subseccion).fadeIn(300);
     }
   };

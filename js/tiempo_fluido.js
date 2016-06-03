@@ -74,7 +74,7 @@ tiempoFluido.aplicacion = (function($,moment){
        
         
         $botonesEnviar = jQuery( "button.enviar" );
-        ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
+        //ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
 
         perfil = io.cargarPerfil();
         
@@ -91,7 +91,10 @@ tiempoFluido.aplicacion = (function($,moment){
             trace("mostrar " + seccionSiguiente + " " + subseccionSiguiente );
             ui.mostrarSeccion ( "inicio" );
             ui.mostrarSubseccion ( "bienvenida" );
-          }); // CAMBIAR agregar forma de procesar para seguimiento
+            $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
+            $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
+            
+          });
         } 
         else 
         {
@@ -103,17 +106,27 @@ tiempoFluido.aplicacion = (function($,moment){
         
         /* tiempoFluido.io.init(); */
         
-        $('#btn_agregar_carga').bind('click',agregarCarga);
+/*        $('#btn_agregar_carga').bind('click',agregarCarga);
         $('#btn_ver_grilla').bind('click',verGrilla);
-
+*/
     }; /* this.iniciar */
-
+    
+    
+    var comenzarYa = function () {
+      trace("comenzarYa: ");
+    }; /* comenzarYa */
+ 
+       
+    var configurarPreferencias = function () {
+       trace("configurarPreferencias: ");
+    }; /* configurarPreferencias */
+    
+    
     var habilitarFormulario = function( formulario ,  seccion , callback ){
       
       trace('habilitarFormulario: '+formulario+" "+seccion);
       //trace("callback " + callback);
       deshabilitarBotonesEnviar();
-      ui.ocultarSubsecciones();
       ui.mostrarSubseccion(formulario);
       jQuery( ".enviar" , jQuery( "#"+formulario ) ).bind( 'click.misEventos', { formulario: formulario, callback: callback }, enviarDatos );
       //return true; // tmp
