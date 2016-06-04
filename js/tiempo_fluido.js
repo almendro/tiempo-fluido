@@ -32,6 +32,8 @@ tiempoFluido.aplicacion = (function($,moment){
     var grillaJornada;
     var cargaActual;
     var jornadaActual;
+    
+    var dias_nombres;
 
     var seccionActual , 
         subseccionActual , 
@@ -69,6 +71,11 @@ tiempoFluido.aplicacion = (function($,moment){
           dias:[1,1,1,1,1,0,0] // semana inicia lunes
         };
         
+        dias_nombres = [
+          "lun", "mar", "mie", "jue", "vie", "sab", "dom"
+        ];
+
+        
         /* Dev  */
         var tmp = io.borrarTodo();
        
@@ -93,7 +100,11 @@ tiempoFluido.aplicacion = (function($,moment){
             ui.mostrarSubseccion ( "bienvenida" );
             $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
             $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
-            
+            ui.verPreferencias ({
+              datos: preferenciasDefault,
+              div: "#valores_defecto",
+              prefijo: "valor_" 
+            });
           });
         } 
         else 
