@@ -87,7 +87,13 @@ tiempoFluido.aplicacion = (function($,moment){
         
         if ( perfil==false )
         {
-          /* En este punto no hay definido un perfil por lo cual iniciamos la configuracion de uno y luego las preferencias */
+          /*
+          En este punto no hay definido un perfil 
+          por lo cual iniciamos la configuracion de uno 
+          y luego ofrecemos la posibilidad de
+          establecer las preferencias generales
+          o iniciar con los valores por defecto
+          */
           trace("crear perfil");
           seccionActual = "configuracion";
           subseccionActual = "perfil";
