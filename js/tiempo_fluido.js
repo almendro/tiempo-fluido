@@ -64,14 +64,14 @@ tiempoFluido.aplicacion = (function($,moment){
         };
         
         preferenciasDefault = {
-          tiempo_por_jornada: 7*60,
-          tiempo_intercargas: 5,
-          reserva_contingencias: 2*60,
-          tiempo_minimo: 20,
-          dias:[1,1,1,1,1,0,0] // semana inicia lunes
+          tiempoPorJornada: 7*60, /* minutos */
+          tiempoIntercargas: 5, /* minutos */
+          reservaContingencias: 2*60, /* minutos */
+          tiempoMinimo: 20, /* minutos */
+          diasDeSemana:[1,1,1,1,1,0,0] /* semana inicia lunes */
         };
         
-        dias_nombres = [
+        diasDeSemanaNombresCortos = [
           "lun", "mar", "mie", "jue", "vie", "sab", "dom"
         ];
 
@@ -103,7 +103,7 @@ tiempoFluido.aplicacion = (function($,moment){
             ui.verPreferencias ({
               datos: preferenciasDefault,
               div: "#valores_defecto",
-              prefijo: "valor_" 
+              prefijo: "valor_"
             });
           });
         } 
