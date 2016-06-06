@@ -100,7 +100,12 @@ tiempoFluido.aplicacion = (function($,moment){
           seccionSiguiente = "inicio";
           subseccionSiguiente = "bienvenida";
           ui.mostrarSeccion( seccionActual );
-          habilitarFormulario( subseccionActual , seccionActual , function (){
+          habilitarFormulario( subseccionActual , seccionActual , function( datosPerfil ){
+            /* 
+            Obtener datos para generar el perfil 
+            y luego salvarlos
+            */
+            
             /*
             Mostrar pantalla de Bienvenida
             */
