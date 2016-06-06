@@ -161,6 +161,7 @@ tiempoFluido.aplicacion = (function($,moment){
       //var objeto = eval(evento.data.form);
       //trace('objeto.ID = '+objeto["id"]);
       //return
+      io.obtenerDatosFormulario( formulario );
        io.salvarDatos( formulario , callback );
       //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));
       //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));

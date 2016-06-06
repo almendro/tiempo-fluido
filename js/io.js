@@ -55,7 +55,22 @@ tiempoFluido.io = (function($){
        trace( 'perfil = ' + perfil );
 
         return false; // tmp
-     };    
+     };
+
+    this.obtenerDatosFormulario = function ( formulario , callback ){
+      trace('IO: obtenerDatosFormulario ' + formulario);
+      var datos = $( ".propiedad" , $( "#" + formulario ));
+      var salida = {};
+      datos.each(function(evento){
+        var soy = $(this);
+        var id_propiedad = soy.attr("id");
+        var propiedad = id_propiedad.replace( formulario + "_" , "" );
+        salida[propiedad] = soy.val();
+        trace (propiedad+" = "+salida[propiedad]);
+      }); /* datos.each */ 
+      return ( callback )? callback( salida ) : salida;
+    }; /* obtenerDatosFormulario */
+
     this.salvarDatos = function ( formulario , callback ){
       trace('IO: salvarDatos ' + formulario);
       //trace('IO: salvarDatos ' + callback);
