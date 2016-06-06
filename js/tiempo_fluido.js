@@ -101,6 +101,9 @@ tiempoFluido.aplicacion = (function($,moment){
           subseccionSiguiente = "bienvenida";
           ui.mostrarSeccion( seccionActual );
           habilitarFormulario( subseccionActual , seccionActual , function (){
+            /*
+            Mostrar pantalla de Bienvenida
+            */
             trace("mostrar " + seccionSiguiente + " " + subseccionSiguiente );
             ui.mostrarSeccion ( "inicio" );
             ui.mostrarSubseccion ( "bienvenida" );
