@@ -142,12 +142,20 @@ tiempoFluido.aplicacion = (function($,moment){
     
     var generarId = function ( datosPerfil ) {
       var id = datosPerfil.email;
-      id = id.replace( "." , "_dot_" );
-      id = id.replace( "@" , "_at_" );
+      id = replaceAll( id, "." , "_dot_" );
+      id = replaceAll( id, "@" , "_at_" );
       trace(" generarId: "+id);
       datosPerfil[ "id" ] = id;
       return datosPerfil;
     };
+    
+    var replaceAll = function( string, omit, place, prevstring ) {
+      if (prevstring && string === prevstring)
+        return string;
+      prevstring = string.replace(omit, place);
+      return replaceAll(prevstring, omit, place, string)
+    };
+    /* http://stackoverflow.com/a/22870785  */
     
     var comenzarYa = function () {
       trace("comenzarYa: ");
