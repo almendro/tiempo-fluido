@@ -59,13 +59,18 @@ tiempoFluido.io = (function($){
 
     this.obtenerDatosFormulario = function ( formulario , callback ){
       trace('IO: obtenerDatosFormulario ' + formulario);
-      var datos = $( ".propiedad" , $( "#" + formulario ));
+      var datos = $("."+formulario+".propiedad" , $( "#" + formulario ));
       var salida = {};
       datos.each(function(evento){
         var soy = $(this);
         var id_propiedad = soy.attr("id");
         var propiedad = id_propiedad.replace( formulario + "_" , "" );
-        salida[propiedad] = soy.val();
+        /* poner aqui la recursiva para procesar grupis array */
+        if( soy.hasClass("array") ) {
+          salida[propiedad] = obtenerDatosFormulario ( id_propiedad );
+        } else {
+          salida[propiedad] = soy.val();
+        }
         trace (propiedad+" = "+salida[propiedad]);
       }); /* datos.each */ 
       return ( callback )? callback( salida ) : salida;
