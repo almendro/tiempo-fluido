@@ -71,22 +71,10 @@ tiempoFluido.io = (function($){
       return ( callback )? callback( salida ) : salida;
     }; /* obtenerDatosFormulario */
 
-    this.salvarDatos = function ( formulario , callback ){
-      trace('IO: salvarDatos ' + formulario);
-      //trace('IO: salvarDatos ' + callback);
-      var datos = jQuery("input",$("#"+formulario));
-      var salvar = {};
-      datos.each(function(evento){
-        var soy = $(this);
-        var id_propiedad = soy.attr("id");
-        var propiedad = id_propiedad.replace(formulario+"_","");
-        //trace(propiedad+" = "+soy.val());
-        salvar[propiedad] = soy.val();
-        trace (propiedad+" = "+salvar[propiedad]);
-        storage.set('tf.'+formulario,salvar);
-        //trace( "storage.get('tf." + formulario + "." + propiedad + "') = " + storage.get( 'tf.' + formulario + '.' + propiedad ));
-      }); /* datos.each */
-      // return storage.get( 'tf.' + formulario ); 
+    this.salvarDatos = function ( datos , objetoStorage , callback ){
+      trace('IO: salvarDatos ' + datos );
+      trace('IO: salvarDatos ' + objetoStorage );
+      storage.set('tf.'+objetoStorage , datos );
       return callback();
     }; /* salvarDatos */
     

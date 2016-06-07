@@ -104,20 +104,24 @@ tiempoFluido.aplicacion = (function($,moment){
             /* 
             Obtener datos para generar el perfil 
             y luego salvarlos
-            */
             
-            /*
-            Mostrar pantalla de Bienvenida
+            (habría que poner un control para que no llegue false)
             */
-            trace("mostrar " + seccionSiguiente + " " + subseccionSiguiente );
-            ui.mostrarSeccion ( "inicio" );
-            ui.mostrarSubseccion ( "bienvenida" );
-            $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
-            $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
-            ui.verPreferencias ({
-              datos: preferenciasDefault,
-              div: "#valores_defecto",
-              prefijo: "valor_"
+            datosPerfil = generarId(datosPerfil);
+            io.salvarDatos( datosPerfil , "perfil" , function(){ 
+              /*
+              Mostrar pantalla de Bienvenida
+              */
+              trace("mostrar " + seccionSiguiente + " " + subseccionSiguiente );
+              ui.mostrarSeccion ( "inicio" );
+              ui.mostrarSubseccion ( "bienvenida" );
+              $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
+              $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
+              ui.verPreferencias ({
+                datos: preferenciasDefault,
+                div: "#valores_defecto",
+                prefijo: "valor_"
+              });
             });
           });
         } 
@@ -136,6 +140,14 @@ tiempoFluido.aplicacion = (function($,moment){
 */
     }; /* this.iniciar */
     
+    var generarId = function ( datosPerfil ) {
+      var id = datosPerfil.email;
+      id = id.replace( "." , "_dot_" );
+      id = id.replace( "@" , "_at_" );
+      trace(" generarId: "+id);
+      datosPerfil[ "id" ] = id;
+      return datosPerfil;
+    };
     
     var comenzarYa = function () {
       trace("comenzarYa: ");
@@ -166,10 +178,8 @@ tiempoFluido.aplicacion = (function($,moment){
       //var objeto = eval(evento.data.form);
       //trace('objeto.ID = '+objeto["id"]);
       //return
-      io.obtenerDatosFormulario( formulario );
-       io.salvarDatos( formulario , callback );
-      //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));
-      //eval(evento.data.form) = io.salvarDatos(evento.data.form,eval(evento.data.form));
+      io.obtenerDatosFormulario( formulario , callback );
+      // io.salvarDatos( formulario , callback );
     };
     
     var deshabilitarBotonesEnviar = function(){
