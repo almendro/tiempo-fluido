@@ -122,8 +122,8 @@ tiempoFluido.aplicacion = (function($,moment){
                 div: "#valores_defecto",
                 prefijo: "valor_"
               });
-            });
-          });
+            }); /* io.salvarDatos */
+          }); /* habilitarFormulario */
         } 
         else 
         {
@@ -164,6 +164,31 @@ tiempoFluido.aplicacion = (function($,moment){
        
     var configurarPreferencias = function () {
        trace("configurarPreferencias: ");
+       ui.mostrarSeccion( "configuracion" );
+       habilitarFormulario( "preferencias" , "configuracion" , function( datosPreferencias ){
+         /*
+         salvamos los datos en el objeto del 
+         id del perfil actual.
+         */
+         io.salvarDatos( datosPreferencias , perfil.id+".preferencias" , function(){ 
+              /*
+              Mostrar pantalla de inicio
+              */
+              
+              trace("mostrar pantalla de inicio" );
+              ui.mostrarSeccion ( "inicio" );
+              /*
+              ui.mostrarSubseccion ( "bienvenida" );
+              $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
+              $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
+              ui.verPreferencias ({
+                datos: preferenciasDefault,
+                div: "#valores_defecto",
+                prefijo: "valor_"
+              });
+              */
+        }); /* io.salvarDatos */
+      }); /* habilitarFormulario */
     }; /* configurarPreferencias */
     
     

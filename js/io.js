@@ -19,7 +19,7 @@ tiempoFluido.io = (function($){
     
     trace('creamos el objeto IO');
     
-    var soy = this;
+    var soyIo = this;
     
     jQuery.alwaysUseJsonInStorage(true);
     var storage = jQuery.localStorage;
@@ -64,14 +64,17 @@ tiempoFluido.io = (function($){
       datos.each(function(evento){
         var soy = $(this);
         var id_propiedad = soy.attr("id");
+        
         var propiedad = id_propiedad.replace( formulario + "_" , "" );
         /* poner aqui la recursiva para procesar grupis array */
+         trace (propiedad);
         if( soy.hasClass("array") ) {
-          salida[propiedad] = obtenerDatosFormulario ( id_propiedad );
+           trace ("array");
+          salida[propiedad] = soyIo.obtenerDatosFormulario ( id_propiedad );
         } else {
           salida[propiedad] = soy.val();
         }
-        trace (propiedad+" = "+salida[propiedad]);
+        trace (" = "+salida[propiedad]);
       }); /* datos.each */ 
       return ( callback )? callback( salida ) : salida;
     }; /* obtenerDatosFormulario */
