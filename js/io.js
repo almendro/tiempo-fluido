@@ -77,6 +77,11 @@ tiempoFluido.io = (function($){
           salida[propiedad] = soyIo.obtenerDatosFormulario ( id_propiedad );
         } else {
           salida[propiedad] = soy.val();
+          /* aqui para procesar segun el tipo de datos checkbox radio, etc
+          http://api.jquery.com/val/
+          http://www.wastedpotential.com/html-multi-checkbox-set-the-correct-way-to-group-checkboxes/
+          http://stackoverflow.com/questions/9533081/get-value-of-checked-checkbox-list-in-array-in-jquery
+          */
         }
         trace ( propiedad + " = " + salida[propiedad]);
       }); /* datos.each */ 
