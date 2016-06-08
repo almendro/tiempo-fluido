@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 
 Tiempo Fluido
 -------------
@@ -31,6 +31,7 @@ tiempoFluido.ui = (function($){
     },
     mostrarSeccion : function (seccion){
       trace('UI: mostrarSeccion'+seccion);
+      this.ocultarSeccion();
       $("#"+seccion).fadeIn(300);
     },
     ocultarSubsecciones : function (){
@@ -39,7 +40,23 @@ tiempoFluido.ui = (function($){
     },
     mostrarSubseccion : function (subseccion){
       trace('UI: mostrarSubseccion '+subseccion);
+      this.ocultarSubsecciones();
       $("#"+subseccion).fadeIn(300);
+    },
+    
+    verPreferencias : function (p){
+      trace('UI: verPreferencias '+p);
+      var $div = $(p.div);
+      var $propiedades = $( ".propiedad" , $div ).each( function (e) { 
+        var soy = $(this);
+        var $valor = $(".valor", soy);
+        var id_propiedad = soy.attr("id");
+        var propiedad = id_propiedad.replace(p.prefijo,"");
+        //trace(propiedad+" = "+soy.val());
+        $valor.text(p.datos[propiedad]);
+        trace (propiedad+" = "+p.datos[propiedad]);
+      });
+      
     }
   };
   
