@@ -53,7 +53,7 @@ tiempoFluido.io = (function($){
 
        var preferencias;
        if ( storage.isSet( 'tf.' + perfilId + '.preferencias' ) ) {
-         trace('hay datos de preferenciad');
+         trace('hay datos de preferencias');
          preferencias = storage.get( 'tf.' + perfilId + '.preferencias' );
        } else {
          trace('NO hay datos de preferencias guardados');
@@ -72,22 +72,22 @@ tiempoFluido.io = (function($){
         
         var propiedad = id_propiedad.replace( formulario + "_" , "" );
         /* poner aqui la recursiva para procesar grupis array */
-         trace (propiedad);
         if( soy.hasClass("array") ) {
            trace ("array");
           salida[propiedad] = soyIo.obtenerDatosFormulario ( id_propiedad );
         } else {
           salida[propiedad] = soy.val();
         }
-        trace (" = "+salida[propiedad]);
+        trace ( propiedad + " = " + salida[propiedad]);
       }); /* datos.each */ 
       return ( callback )? callback( salida ) : salida;
     }; /* obtenerDatosFormulario */
 
     this.salvarDatos = function ( datos , objetoStorage , callback ){
-      trace('IO: salvarDatos ' + datos );
-      trace('IO: salvarDatos ' + objetoStorage );
+      trace('IO: salvarDatos datos ' + datos );
+      trace('IO: salvarDatos objetoStorage ' + objetoStorage );
       storage.set('tf.'+objetoStorage , datos );
+      trace('tf.' + objetoStorage + " = " + datos );
       return callback();
     }; /* salvarDatos */
     
