@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ee">
+<head>
+<meta charset="utf-8">
+<title>Galeria ordenable</title>
+
+<!-- fotos de http://es.freeimages.com/ -->
+
+<link rel="stylesheet" href="./js/jquery-ui.min.css">
+<script src="./js/jquery-1.11.3.min.js"></script>
+<script src="./js/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="./style.css">
+<script>
+$(function() {
+    $("#enviar").click(function(){
+        if($("#diaSemana_lun").is(':checked')){
+            alert("True");
+        }
+        else{
+            alert("False");
+        }
+
+    });
+
+});
+
+</script>
+</head>
+<body>
+
+
+<input type="checkbox" value="lun" id="diaSemana_lun">
+<input type="button" value="ENVIAR" id="enviar">
+
+<div id="salida">
+<div id="generar_html" class="menu-item">GENERAR HTML</div>
+<pre id="salida_html"><code class="nohighlight">...</code></pre></textarea>
+</div>
+</body>
+</html>
