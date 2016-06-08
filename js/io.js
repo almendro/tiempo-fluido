@@ -72,8 +72,8 @@ tiempoFluido.io = (function($){
         
         var propiedad = id_propiedad.replace( formulario + "_" , "" );
         /* poner aqui la recursiva para procesar grupis array */
-        if( soy.hasClass("array") ) {
-           trace ("array");
+        if( soy.hasClass("objeto") ) {
+           trace ("objeto");
           salida[propiedad] = soyIo.obtenerDatosFormulario ( id_propiedad );
         } else {
           salida[propiedad] = soy.val();
