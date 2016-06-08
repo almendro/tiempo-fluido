@@ -62,6 +62,8 @@ tiempoFluido.aplicacion = (function($,moment){
           email: ""
         };
         
+        configuracion = {};
+        
         preferenciasDefault = {
           tiempoPorJornada: 7*60, /* minutos */
           tiempoIntercargas: 5, /* minutos */
@@ -107,6 +109,7 @@ tiempoFluido.aplicacion = (function($,moment){
             (habría que poner un control para que no llegue false)
             */
             datosPerfil = generarId(datosPerfil);
+            perfil = datosPerfil;
             io.salvarDatos( datosPerfil , "perfil" , function(){ 
               /*
               Mostrar pantalla de Bienvenida
