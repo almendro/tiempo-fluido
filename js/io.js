@@ -21,11 +21,8 @@ tiempoFluido.io = (function($){
     
     var soyIo = this;
     
-    jQuery.alwaysUseJsonInStorage(true);
-    var storage = jQuery.localStorage;
-    
-    // DEV
-    // storage.removeAll();
+    $.alwaysUseJsonInStorage(true);
+    var storage = $.localStorage;
     
     this.borrarTodo = function(){
        trace('IO: borrarTodo');
@@ -49,12 +46,20 @@ tiempoFluido.io = (function($){
        return perfil;
     };
 
-    this.cargarConfiguracionAplicacion = function(perfil){
- 
-       trace('IO: cargarConfiguracionAplicacion');
-       trace( 'perfil = ' + perfil );
+    this.cargarPreferencias = function(perfilId){
 
-        return false; // tmp
+       trace('IO: cargarPreferencias');
+       trace( 'perfilId = ' + perfilId );
+
+       var preferencias;
+       if ( storage.isSet( 'tf.' + perfilId + '.preferencias' ) ) {
+         trace('hay datos de preferenciad');
+         preferencias = storage.get( 'tf.' + perfilId + '.preferencias' );
+       } else {
+         trace('NO hay datos de preferencias guardados');
+         preferencias = false;
+       }
+       return preferencias; // tmp
      };
 
     this.obtenerDatosFormulario = function ( formulario , callback ){

@@ -19,14 +19,13 @@ tiempoFluido.aplicacion = (function($,moment){
     trace('iniciamos la aplicación');
     
     /* configuracion */
-    var perfil, 
-        configuracionAplicacion, 
-        configuracionCarga,
+    var perfil,
+        configuracion,
         preferenciasDefault;
-        
+  
     /* data input/output e interfaz usuario */
     var io, ui;
-    
+
     /* datos */
     var libreria;
     var grillaJornada;
@@ -77,7 +76,7 @@ tiempoFluido.aplicacion = (function($,moment){
 
         
         /* Dev  */
-        var tmp = io.borrarTodo();
+        //var tmp = io.borrarTodo();
        
         
         $botonesEnviar = jQuery( "button.enviar" );
@@ -128,8 +127,11 @@ tiempoFluido.aplicacion = (function($,moment){
         else 
         {
           trace( "presentamos el perfil: " + perfil.id + " " + perfil.nombre + " " + perfil.alias + " " + perfil.email );
-          configuracionAplicacion = io.cargarConfiguracionAplicacion(perfil.id);
-          trace("configuracionAplicacion = "+configuracionAplicacion);
+          configuracion['preferencias'] = io.cargarPreferencias( perfil.id );
+          trace( "configuracion['preferencias'] = " + configuracion.preferencias );
+          if (configuracion.preferencias==false){
+            trace('mostrar aviso de no configuracion');
+          }
         }
         
         
