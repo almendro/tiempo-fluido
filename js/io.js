@@ -82,12 +82,12 @@ tiempoFluido.io = (function($){
           http://www.wastedpotential.com/html-multi-checkbox-set-the-correct-way-to-group-checkboxes/
           http://stackoverflow.com/questions/9533081/get-value-of-checked-checkbox-list-in-array-in-jquery
           */
-          /*
+          
           trace("type "+soy.attr("type"));
           if( soy.attr("type")=="checkbox"){
-              salida[propiedad] = (soy.attr("checked"));
+              salida[propiedad] = soy.is(":checked"); /* gracias Marcelo! */
           }
-          */
+          
         }
         trace ( propiedad + " = " + salida[propiedad]);
       }); /* datos.each */ 
