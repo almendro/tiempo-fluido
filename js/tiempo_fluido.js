@@ -118,8 +118,7 @@ tiempoFluido.aplicacion = (function($,moment){
             
             (habría que poner un control para que no llegue false)
             */
-            datosPerfil = generarId(datosPerfil);
-            perfil = datosPerfil;
+            perfil = generarId(datosPerfil);
             io.salvarDatos( datosPerfil , "perfil" , function(){ 
               /*
               Mostrar pantalla de Bienvenida
@@ -127,6 +126,8 @@ tiempoFluido.aplicacion = (function($,moment){
               trace("mostrar " + seccionSiguiente + " " + subseccionSiguiente );
               ui.mostrarSeccion ( "inicio" );
               ui.mostrarSubseccion ( "bienvenida" );
+              $( '.valor.nombre' ).text( perfil.nombre );
+              $( '.valor.id' ).text( perfil.id );
               $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
               $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
               ui.verPreferencias ({
