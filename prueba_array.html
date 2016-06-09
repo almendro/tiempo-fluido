@@ -81,9 +81,13 @@ alert(titulo);
                 dom: false
             }
         };
-        var pre2 = pre;
+        var dame = function ( obj ) {
+          return obj;
+        }
+        var pre2 = dame(pre);
         
         pre.tiempoMinimo = 55;
+        alert ("pre"+pre.tiempoMinimo);
         alert ("pre2 "+pre2.tiempoMinimo);
     </script>
   </head>
