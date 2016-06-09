@@ -69,7 +69,16 @@ tiempoFluido.aplicacion = (function($,moment){
           tiempoIntercargas: 5, /* minutos */
           reservaContingencias: 2*60, /* minutos */
           tiempoMinimo: 20, /* minutos */
-          diasDeSemana:[1,1,1,1,1,0,0] /* semana inicia lunes */
+          diasDeSemana: /* [1,1,1,1,1,0,0] semana inicia lunes */
+            {
+                lun: true,
+                mar: true,
+                mie: true,
+                jue: true,
+                vie: true,
+                sab: false,
+                dom: false
+            }
         };
         
         diasDeSemanaNombresCortos = [
@@ -78,14 +87,15 @@ tiempoFluido.aplicacion = (function($,moment){
 
         
         /* Dev  */
-        //var tmp = io.borrarTodo();
-       
-        
+        // var tmp = io.borrarTodo();
+
         $botonesEnviar = jQuery( "button.enviar" );
         //ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
 
         perfil = io.cargarPerfil();
         
+        /*DEV*/
+        var tmp = io.borrarObjeto(perfil.id+".preferencias");
         if ( perfil==false )
         {
           /*
@@ -108,22 +118,12 @@ tiempoFluido.aplicacion = (function($,moment){
             
             (habría que poner un control para que no llegue false)
             */
-            datosPerfil = generarId(datosPerfil);
-            perfil = datosPerfil;
+            perfil = generarId(datosPerfil);
             io.salvarDatos( datosPerfil , "perfil" , function(){ 
               /*
               Mostrar pantalla de Bienvenida
               */
-              trace("mostrar " + seccionSiguiente + " " + subseccionSiguiente );
-              ui.mostrarSeccion ( "inicio" );
-              ui.mostrarSubseccion ( "bienvenida" );
-              $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
-              $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
-              ui.verPreferencias ({
-                datos: preferenciasDefault,
-                div: "#valores_defecto",
-                prefijo: "valor_"
-              });
+              bienvenida("primeraVez");
             }); /* io.salvarDatos */
           }); /* habilitarFormulario */
         } 
@@ -134,6 +134,7 @@ tiempoFluido.aplicacion = (function($,moment){
           trace( "configuracion['preferencias'] = " + configuracion.preferencias );
           if (configuracion.preferencias==false){
             trace('mostrar aviso de no configuracion');
+            bienvenida();
           }
         }
         
@@ -162,6 +163,29 @@ tiempoFluido.aplicacion = (function($,moment){
     };
     /* http://stackoverflow.com/a/22870785  */
     
+    /* control de pantallas */
+    
+    var bienvenida = function (primeraVez) {
+              ui.mostrarSeccion ( "inicio" );
+              ui.mostrarSubseccion ( "bienvenida" );
+              $( '.valor.nombre' ).text( perfil.nombre );
+              $( '.valor.id' ).text( perfil.id );
+              $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
+              $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
+              ui.verPreferencias ({
+                datos: preferenciasDefault,
+                div: "#valores_defecto",
+                prefijo: "valor_"
+              });
+              if(primeraVez=="primeraVez"){
+                  $("#primerVez").show();
+                  $("#noHayPreferencias").hide();
+              } else {
+                  $("#primerVez").hide();
+                  $("#noHayPreferencias").show();
+              }
+    }; /* bienvenida */
+
     var comenzarYa = function () {
       trace("comenzarYa: ");
     }; /* comenzarYa */

@@ -30,6 +30,13 @@ tiempoFluido.io = (function($){
        return true;
     };
     
+    this.borrarObjeto = function (objeto){
+        trace("IO: borrarObjeto "+objeto);
+        storage.remove("tf."+objeto);
+        trace(objeto+"? "+storage.isSet("tf."+objeto));
+        return true;
+    }
+    
     this.cargarPerfil = function(){
 
        trace('IO: cargarPerfil');
@@ -72,8 +79,8 @@ tiempoFluido.io = (function($){
         
         var propiedad = id_propiedad.replace( formulario + "_" , "" );
         /* poner aqui la recursiva para procesar grupis array */
-        if( soy.hasClass("array") ) {
-           trace ("array");
+        if( soy.hasClass("objeto") ) {
+          trace ("objeto");
           salida[propiedad] = soyIo.obtenerDatosFormulario ( id_propiedad );
         } else {
           salida[propiedad] = soy.val();
@@ -82,6 +89,12 @@ tiempoFluido.io = (function($){
           http://www.wastedpotential.com/html-multi-checkbox-set-the-correct-way-to-group-checkboxes/
           http://stackoverflow.com/questions/9533081/get-value-of-checked-checkbox-list-in-array-in-jquery
           */
+          
+          trace("type "+soy.attr("type"));
+          if( soy.attr("type")=="checkbox"){
+              salida[propiedad] = soy.is(":checked"); /* gracias Marcelo! */
+          }
+          
         }
         trace ( propiedad + " = " + salida[propiedad]);
       }); /* datos.each */ 

@@ -7,10 +7,10 @@
 
     <!-- <link rel="stylesheet" type="text/css" href="styles.css" media="screen" /> -->
         
-    <!--
+    
     <link rel="stylesheet" type="text/css" media="screen" href="assets/desbichador/desbichador.css" />
     <script src="assets/desbichador/desbichador.js"></script>
-    -->
+    
     
     <link rel="stylesheet" type="text/css" media="screen" href="assets/nicealert/style.css" />
     <script src="assets/nicealert/nice_alert.js"></script>
@@ -58,11 +58,37 @@ alert("mensaje de 'hola':" + m);
     saludo = hola( "hola", chau);
     alert("saludo = "+saludo);
 
-
+    /*
     alert("jquery");
     var titulo;
     $("#intro h2").each();
 alert(titulo);
+*/
+
+  var pre = {
+          tiempoPorJornada: 7*60, /* minutos */
+          tiempoIntercargas: 5, /* minutos */
+          reservaContingencias: 2*60, /* minutos */
+          tiempoMinimo: 20, /* minutos */
+          diasDeSemana: /* [1,1,1,1,1,0,0] semana inicia lunes */
+            {
+                lun: true,
+                mar: true,
+                mie: true,
+                jue: true,
+                vie: true,
+                sab: false,
+                dom: false
+            }
+        };
+        var dame = function ( obj ) {
+          return obj;
+        }
+        var pre2 = dame(pre);
+        
+        pre.tiempoMinimo = 55;
+        alert ("pre"+pre.tiempoMinimo);
+        alert ("pre2 "+pre2.tiempoMinimo);
     </script>
   </head>
   <body>
