@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form>
+		<div><input type="checkbox" class="check" id="a1" name="a" value="Pepe1"><label for="a1">Pepe1</label></div>
+		<div><input type="checkbox" class="check" id="a2" name="a" value="Pepe2"><label for="a2">Pepe2</label></div>
+		<div><input type="checkbox" class="check" id="a3" name="a" value="Pepe3"><label for="a3">Pepe3</label></div>
+		<div><input type="checkbox" class="check" id="a4" name="a" value="Pepe4"><label for="a4">Pepe4</label></div>
+		<div><input type="checkbox" class="check" id="a5" name="a" value="Pepe5"><label for="a5">Pepe5</label></div>
+		<div><input type="checkbox" class="check" id="a6" name="a" value="Pepe6"><label for="a6">Pepe6</label></div>
+		<div><input type="checkbox" class="check" id="a7" name="a" value="Pepe7"><label for="a7">Pepe7</label></div>
+
+		<div><span id="mensaje"></span></div>
+	</form>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(".check").change(function(){
+			if ($(this).is(":checked")) {
+				$("#mensaje").html("Usted checkeo " + $(this).val());
+			}
+			else {
+				$("#mensaje").html("Usted des-checkeo " + $(this).val());
+			}
+		});
+	</script>
+</body>
+</html>
