@@ -30,6 +30,13 @@ tiempoFluido.io = (function($){
        return true;
     };
     
+    this.borrarObjeto = function (objeto){
+        trace("IO: borrarObjeto "+objeto);
+        storage.remove("tf."+objeto);
+        trace(objeto+"? "+storage.isSet("tf."+objeto));
+        return true;
+    }
+    
     this.cargarPerfil = function(){
 
        trace('IO: cargarPerfil');
