@@ -178,10 +178,10 @@ tiempoFluido.aplicacion = (function($,moment){
                 prefijo: "valor_"
               });
               if(primeraVez=="primeraVez"){
-                  $("#primerVez").show();
+                  $("#primeraVez").show();
                   $("#noHayPreferencias").hide();
               } else {
-                  $("#primerVez").hide();
+                  $("#primeraVez").hide();
                   $("#noHayPreferencias").show();
               }
     }; /* bienvenida */

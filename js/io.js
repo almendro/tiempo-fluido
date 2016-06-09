@@ -32,7 +32,9 @@ tiempoFluido.io = (function($){
     
     this.borrarObjeto = function (objeto){
         trace("IO: borrarObjeto "+objeto);
-        storage.remove("tf."+objeto);
+        if (storage.isSet("tf."+objeto)){
+          storage.remove("tf."+objeto);
+        }
         trace(objeto+"? "+storage.isSet("tf."+objeto));
         return true;
     }
