@@ -44,13 +44,14 @@
             if(!window.tiempoFluido){
               trace("fallo tiempoFluido");
             } else {
-              var miTiempoFluido = new tiempoFluido.aplicacion();
-              miTiempoFluido.iniciar();
-              
               /*** DEV ***/
+              //desbichador_init();
               $("#clearAllNiceAlert").click(function(){
                 $("#nice_alert alertbox").hide();
               });
+              
+              var miTiempoFluido = new tiempoFluido.aplicacion();
+              miTiempoFluido.iniciar();
             }
           }
         }
@@ -105,7 +106,7 @@
 
         <section id="bienvenida" class="subseccion">
           <header>
-            <h2>Bienvenido <span class="usuario"></span></h2>
+            <h2>Bienvenido <span class="valor nombre"></span></h2>
           </header>
           <p>Esta es la primera vez que inicia la aplicación con el perfil <span class="id"></span>.</p>
           <p>Puedes elegir entre configurar las preferencias de la aplicación y las características de tu tiempo o comenzar a usar con los valores por defecto.</p>
