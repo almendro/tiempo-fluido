@@ -69,7 +69,16 @@ tiempoFluido.aplicacion = (function($,moment){
           tiempoIntercargas: 5, /* minutos */
           reservaContingencias: 2*60, /* minutos */
           tiempoMinimo: 20, /* minutos */
-          diasDeSemana:[1,1,1,1,1,0,0] /* semana inicia lunes */
+          diasDeSemana: /* [1,1,1,1,1,0,0] semana inicia lunes */
+            {
+                lun: true,
+                mar: true,
+                mie: true,
+                jue: true,
+                vie: true,
+                sab: false,
+                dom: false
+            }
         };
         
         diasDeSemanaNombresCortos = [
