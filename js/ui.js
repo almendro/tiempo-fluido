@@ -57,6 +57,21 @@ tiempoFluido.ui = (function($){
         trace (propiedad+" = "+p.datos[propiedad]);
       });
       
+    },
+    
+    ponerDatos : function ( p ){
+      trace('UI: verPreferencias '+p);
+      AAAAAAAAASQQQQQWUUUUUIIIIII
+      var $div = $(p.div);
+      var $propiedades = $( ".propiedad" , $div ).each( function (e) { 
+        var soy = $(this);
+        var $valor = $(".valor", soy);
+        var id_propiedad = soy.attr("id");
+        var propiedad = id_propiedad.replace(p.prefijo,"");
+        //trace(propiedad+" = "+soy.val());
+        $valor.text(p.datos[propiedad]);
+        trace (propiedad+" = "+p.datos[propiedad]);
+      });
     }
   };
   

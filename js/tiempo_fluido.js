@@ -123,6 +123,7 @@ tiempoFluido.aplicacion = (function($,moment){
               /*
               Mostrar pantalla de Bienvenida
               */
+              configuracion['preferencias'] = false;
               bienvenida("primeraVez");
             }); /* io.salvarDatos */
           }); /* habilitarFormulario */
@@ -194,6 +195,7 @@ tiempoFluido.aplicacion = (function($,moment){
     var configurarPreferencias = function () {
        trace("configurarPreferencias: ");
        ui.mostrarSeccion( "configuracion" );
+       ui.ponerDatos ("preferencias", configuracion['preferencias'] == false? preferenciasDefault : configuracion['preferencias'] );
        habilitarFormulario( "preferencias" , "configuracion" , function( datosPreferencias ){
          /*
          salvamos los datos en el objeto del 
