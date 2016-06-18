@@ -1,0 +1,143 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <title>Prueba: modulo Formularios</title>
+
+    <meta charset="utf-8">
+
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css" media="screen" /> -->
+
+    <script src="assets/jquery-2.2.3.min.js"></script>
+    
+    <!--
+    Moment 
+    http://momentjs.com/ via http://stackoverflow.com/questions/7763327/how-to-calculate-date-difference-in-javascript
+    -->
+    <script src="assets/jquery.serializejson.min.js"></script>
+    
+    
+    <script>
+      $(function(){
+      /*
+      var consola = {
+        div : $("html").append("<div id='consola'></div>"),
+        log : function (e){
+          consola.div.append("<pre>"+e+"</pre>");
+        });
+      */  
+      var consola = $("html").append("<div id='consola'></div>");
+      var log = function (e){
+          consola.append("<pre>"+e+"</pre>");
+        }
+        log("hola");
+        
+        
+        var pre = {
+          tiempoPorJornada: 7*60, /* minutos */
+          tiempoIntercargas: 5, /* minutos */
+          reservaContingencias: 2*60, /* minutos */
+          tiempoMinimo: 20, /* minutos */
+          diasDeSemana: /* [1,1,1,1,1,0,0] semana inicia lunes */
+            {
+                lun: true,
+                mar: true,
+                mie: true,
+                jue: true,
+                vie: true,
+                sab: false,
+                dom: false
+            }
+        };
+        
+        var mostrar = function(){
+          log("vamos");
+          dame = $("#preferencias").serializeJSON({checkboxUncheckedValue: false});
+          log(dame);
+          log(JSON.stringify(dame));
+        }
+        
+        $("#preferencias .enviar").click(mostrar);
+      
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+    </header>
+    <section id="intro">
+    <!-- introduccion -->
+      <header>
+        <h2>Formulario de preferencias</h2>
+      </header>
+      <p>Texto</p>
+    </section>
+    
+    <div id="content">
+    
+      <div id="main-content">    
+        <form id="preferencias" class="subseccion">
+          <fieldset>
+            <legend>Preferencias</legend>
+
+            <div class="form-group">
+              <label for="preferencias_tiempoPorJornada" class="col-md-2 control-label">Tiempo por jornada</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control preferencias propiedad" name="tiempoPorJornada" data-value-type="number" placeholder="horas">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="preferencias_tiempoIntercargas" class="col-md-2 control-label">Tiempo entre cargas</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control preferencias propiedad" name="tiempoIntercargas" data-value-type="number" placeholder="minutos">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="preferencias_reservaContingencias" class="col-md-2 control-label">Reserva para contingencias (hs:min)</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control preferencias propiedad" name="reservaContingencias" data-value-type="number" placeholder="horas:minutos">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="preferencias_tiempoMinimo" class="col-md-2 control-label">Tiempo mínimo por tarea por día min)</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control preferencias propiedad" name="tiempoMinimo" data-value-type="number" placeholder="minutos">
+              </div>
+            </div>
+
+            <div name="diasDeSemana" class="form-group horizontal preferencias propiedad objeto">
+              <p>Días de la semana laborable</p>
+              <label for="preferencias_diasDeSemana_lun" class="col-md-2 control-label">lunes</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[lun]" value="lun">
+              <label for="preferencias_diasDeSemana_mar" class="col-md-2 control-label">martes</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[mar]" value="mar">
+              <label for="preferencias_diasDeSemana_mie" class="col-md-2 control-label">miercoles</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[mie]" value="mie">
+              <label for="preferencias_diasDeSemana_jue" class="col-md-2 control-label">jueves</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[jue]" value="jue">
+              <label for="preferencias_diasDeSemana_vie" class="col-md-2 control-label">viernes</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[vie]" value="vie">
+              <label for="preferencias_diasDeSemana_sab" class="col-md-2 control-label">sábado</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[sab]" value="sab">
+              <label for="preferencias_diasDeSemana_dom" class="col-md-2 control-label">domingo</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[dom]" value="dom">
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-10 col-md-offset-2">
+                <button type="button" class="btn btn-default">Reset</button>
+                <button type="button" class="btn btn-primary enviar">Salvar preferencias</button>
+              </div>
+            </div>
+
+          </fieldset>
+        </form><!-- #preferencias -->
+      </div><!-- #main-content -->
+    
+    </div><!-- #content -->
+    
+    <footer>
+    <!-- pie -->
+    </footer>
+
+  </body>
+</html>
