@@ -57,7 +57,24 @@
         }
         
         $("#preferencias .enviar").click(mostrar);
-      
+        
+        /* precargar form */
+        
+        var populateForm = function(p){
+          log(JSON.stringify(p));
+          var form = p.form;
+          var data = p.data;
+          var z = p.z==undefined ? 0: p.z;
+          log("z = "+z);
+          for (d in data){
+            log(d);
+          }
+        }
+        
+        populateForm({
+          form: "preferencias",
+          data: pre
+        });
       });
     </script>
   </head>
