@@ -6,7 +6,7 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" type="text/css" href="assets/dev/style.css" media="screen" />
-
+   
     <script src="assets/jquery-2.2.3.min.js"></script>
     
     <!--
@@ -68,10 +68,12 @@
           log("z = "+z);
           var d;
           var target;
+          var $elemento;
           for ( d in data){
-           target = z==0 ? String(d) : p.target+"["+String(d)+"]";
+            target = z==0 ? String(d) : p.target+"["+String(d)+"]";
             log("target = "+target);
             if (typeof data[d] === "object" ){
+              /* recursiva */
               log("objet");
               z++;
               populateForm({
@@ -81,7 +83,27 @@
                 target: target
               });
             } else {
+              /* poner valor */
               log("d = "+data[d]);
+              
+              $elemento = $("[name='"+target+"']");
+              log("type "+$elemento.attr("type"));
+              switch($elemento.attr("type"))  
+              {  
+                case "text":   case "hidden":  case "textarea":  
+                  $elemento.val(data[d]);   
+                break;   
+                case "checkbox":
+                    $elemento.attr("checked",data[d]); 
+                  //}
+                break;
+                case "radio":
+                  $elemento.each( function (){
+                    if($(this).attr('value') == data[d]) {
+                      $elemento.attr("checked",data[d]); 
+                    }
+                break;
+              } 
             }
           }
           log("---");

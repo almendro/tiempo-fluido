@@ -19,5 +19,6 @@ Martín Ochoa
   padding:0;
   font-size: 1em;
   font-family: mono;
+  word-wrap: break-word;
 }
 /* fin css */
