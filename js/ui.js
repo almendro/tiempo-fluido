@@ -57,8 +57,10 @@ tiempoFluido.ui = (function($){
         trace (propiedad+" = "+p.datos[propiedad]);
       });
       
-    },
+    } /* verPreferencias */
+    ,
     
+    /*
     ponerDatos : function ( p ){
       trace('UI: verPreferencias '+p);
       AAAAAAAAASQQQQQWUUUUUIIIIII
@@ -73,6 +75,12 @@ tiempoFluido.ui = (function($){
         trace (propiedad+" = "+p.datos[propiedad]);
       });
     }
+    */
+    ponerDatos : function ( p ){
+      trace('UI: ponerDatos '+p);
+      return populateForm (p);
+    } /* ponerDatos */
+    
   };
   
   return ui;

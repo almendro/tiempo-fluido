@@ -50,6 +50,7 @@
               } 
             }
           }
+          return true;
         }; /* populateForm */
         // usando variante: https://stackoverflow.com/a/21023179
         // ver otra opcion: https://stackoverflow.com/a/29241028
