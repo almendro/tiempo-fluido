@@ -195,7 +195,12 @@ tiempoFluido.aplicacion = (function($,moment){
     var configurarPreferencias = function () {
        trace("configurarPreferencias: ");
        ui.mostrarSeccion( "configuracion" );
-       ui.ponerDatos ("preferencias", configuracion['preferencias'] == false? preferenciasDefault : configuracion['preferencias'] );
+       ui.ponerDatos ({
+           form: "#preferencias",
+           data: 
+             configuracion['preferencias'] == false ? 
+             preferenciasDefault : configuracion['preferencias'] 
+       });
        habilitarFormulario( "preferencias" , "configuracion" , function( datosPreferencias ){
          /*
          salvamos los datos en el objeto del 
