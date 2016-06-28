@@ -46,7 +46,7 @@ tiempoFluido.io = (function($){
        if ( storage.isSet('tf.perfil')){
          trace('hay datos de perfil');
          perfil = storage.get('tf.perfil');
-         trace('perfil='+perfil);
+         trace('perfil='+JSON.stringify(perfil));
        } else {
          trace('NO hay datos de perfil guardados');
          perfil = false;
@@ -102,14 +102,20 @@ tiempoFluido.io = (function($){
       }); /* datos.each */ 
       return ( callback )? callback( salida ) : salida;
     }; /* obtenerDatosFormulario */
-
+    
+    this.obtenerDatosFormulario = function ( formulario , callback ){
+       trace('IO: obtenerDatosFormulario (serializeJSON)' + formulario);
+      var salida = $("#"+formulario).serializeJSON({checkboxUncheckedValue: false}); 
+      return ( callback )? callback( salida ) : salida;
+    }; /* obtenerDatosFormulario */
+    
     this.salvarDatos = function ( datos , objetoStorage , callback ){
-      trace('IO: salvarDatos datos ' + datos );
+      trace('IO: salvarDatos datos ' + JSON.stringify(datos) );
       trace('IO: salvarDatos objetoStorage ' + objetoStorage );
       storage.set('tf.'+objetoStorage , datos );
       trace('tf.' + objetoStorage + " = " + datos );
       return callback();
-    }; /* salvarDatos */
+    1}; /* salvarDatos */
     
   }; /* var io */
 

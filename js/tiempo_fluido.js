@@ -95,7 +95,7 @@ tiempoFluido.aplicacion = (function($,moment){
         perfil = io.cargarPerfil();
         
         /*DEV*/
-        var tmp = io.borrarObjeto(perfil.id+".preferencias");
+        //var tmp = io.borrarObjeto(perfil.id+".preferencias");
         if ( perfil==false )
         {
           /*
@@ -132,10 +132,14 @@ tiempoFluido.aplicacion = (function($,moment){
         {
           trace( "presentamos el perfil: " + perfil.id + " " + perfil.nombre + " " + perfil.alias + " " + perfil.email );
           configuracion['preferencias'] = io.cargarPreferencias( perfil.id );
-          trace( "configuracion['preferencias'] = " + configuracion.preferencias );
+          trace( "configuracion['preferencias'] = " + JSON.stringify(configuracion.preferencias) );
           if (configuracion.preferencias==false){
             trace('mostrar aviso de no configuracion');
             bienvenida();
+          }
+          else
+          {
+            comenzarYa();
           }
         }
         
