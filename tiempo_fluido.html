@@ -6,8 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
       
-    <link rel="stylesheet" type="text/css" href="assets/jquery.mobile.1.4.5/jquery.mobile.theme-1.4.5.min.css" media="screen" />
-    
+    <link rel="stylesheet" type="text/css" href="assets/jquery.mobile.1.4.5/jquery.mobile-1.4.5.min.css" media="screen" />
+<!--
+   <link rel="stylesheet" type="text/css" href="assets/jquery.mobile.1.4.5/jquery.mobile.theme-1.4.5.min.css" media="screen" />
+-->    
     <link rel="stylesheet" type="text/css" href="css/tiempo_fluido.css" media="screen" />
     <!--
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="screen" />
@@ -76,31 +78,31 @@
    
   </head>
 
-  <body>
+  <body >
 
     <!-- /* DEV */ -->
     <div id="clearAllNiceAlert" style="display:block;position:fixed;top:0;left:40%;" class="btn btn-raised btn-danger btn-xs">
     Clear All NiceAlerts
     </div>
-    <section data-role="page" id="principal">
+    
+    <section data-role="page" data-theme="b" id="principal">
     <header data-role="header">
       <h1>Tiempo Fluido</h1>
     </header>
 
+    <div data-role="main">
     <!-- navegación -->
     <nav id="menu_principal">
-      <ul>
+      <ul data-role="listview">
         <li><a data-role="button" id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a></li>
         <li><a data-role="button" id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
         <li><a data-role="button" id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
         <li><a data-role="button" id="m_configuracion" href="#configuracion" >Configuración</a></li>
       </ul>
     </nav>
+    </div>
     </section>
-    <div id="content">
-   
-      <div id="main-content">
-
+    
       <section id="inicio" class="seccion">
 
         <section id="bienvenida" class="subseccion">
@@ -160,26 +162,30 @@
       </section><!-- #inicio.seccion -->
 
 
-        <section id="abm_carga" class="seccion">
-          <form class="form-horizontal">
-            <fieldset>
-            <legend>ABM Carga</legend>
-              <div class="form-group">
-                <label for="titulo" class="col-md-2 control-label">Título</label>
-                <div class="col-md-10">
-                 <input type="titulo" class="form-control" id="inputCargaTitulo" placeholder="Título">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-10 col-md-offset-2">
-                  <button type="button" class="btn btn-default">Cancel</button>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-        </section>
-
+    <section data-role="page" id="agregar_carga" class="seccion">
+      <header data-role="header">
+        <h1>Agregar carga</h1>
+      </header>
+      <a href="#" data-rel="back" data-role="button" > Regresar </a>
+      <form class="form-horizontal">
+        <fieldset>
+          <legend>ABM Carga</legend>
+          <div class="form-group">
+            <label for="titulo" class="col-md-2 control-label">Título</label>
+            <div class="col-md-10">
+              <input type="titulo" class="form-control" id="inputCargaTitulo" placeholder="Título">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+              <button type="button" class="btn btn-default">Cancel</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+    
         <section id="pepe" class="seccion">
         </section>
        
@@ -281,10 +287,6 @@
             </fieldset>
           </form><!-- #preferencias -->
         </section><!-- #configuracion -->
-
-      </div><!-- #main-content -->
-   
-    </div><!-- #content -->
 
     <!-- pie -->
     <footer>
