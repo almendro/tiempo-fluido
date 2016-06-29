@@ -87,7 +87,7 @@ tiempoFluido.aplicacion = (function($,moment){
 
         
         /* Dev  */
-        // var tmp = io.borrarTodo();
+        var tmp = io.borrarTodo();
 
         $botonesEnviar = jQuery( "button.enviar" );
         //ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
