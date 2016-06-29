@@ -65,15 +65,6 @@
       ]);
     </script>
 
-
-    <!--  jQuery    http://jquery.com/     -->
-    <!-- <script src="js/jquery-2.2.3.min.js"></script> -->
-    <!--    Moment     http://momentjs.com/ via http://stackoverflow.com/questions/7763327/how-to-calculate-date-difference-in-javascript    -->
-   <!-- <script src="js/moment.min.js"></script> -->
-
-    <!-- Aplicación principal -->
-    <!-- <script src="js/tiempo_fluido.js"></script> -->
-
     <!-- *** DEV *** -->
     <!-- - ->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/desbichador/desbichador.css" />
@@ -91,20 +82,21 @@
     <div id="clearAllNiceAlert" style="display:block;position:fixed;top:0;left:40%;" class="btn btn-raised btn-danger btn-xs">
     Clear All NiceAlerts
     </div>
-    <header>
+    <section data-role="page" id="principal">
+    <header data-role="header">
       <h1>Tiempo Fluido</h1>
     </header>
 
     <!-- navegación -->
     <nav id="menu_principal">
       <ul>
-        <li><a id="agregar_carga" href="#a_agregar_carga" >Agregar carga</a></li>
-        <li><a id="ver_jornada" href="#a_ver_jornada" >Ver jornada</a></li>
-        <li><a id="ver_grilla" href="#a_ver_grilla" >Ver grilla</a></li>
-        <li><a id="configuracion" href="#a_configuracion" >Configuración</a></li>
+        <li><a data-role="button" id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a></li>
+        <li><a data-role="button" id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
+        <li><a data-role="button" id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
+        <li><a data-role="button" id="m_configuracion" href="#configuracion" >Configuración</a></li>
       </ul>
     </nav>
-
+    </section>
     <div id="content">
    
       <div id="main-content">
