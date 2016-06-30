@@ -23,25 +23,25 @@ tiempoFluido.ui = (function($){
 
     ocultarDialogos : function (){
       trace('ocultarDialogos');
-      $(".dialogo").fadeOut(300);
+    //  $(".dialogo").fadeOut(300);
     },
     ocultarSeccion : function (){
       trace('ocultarSeccion');
-      $(".seccion").fadeOut(300);
+    //  $(".seccion").fadeOut(300);
     },
     mostrarSeccion : function (seccion){
       trace('UI: mostrarSeccion'+seccion);
-      this.ocultarSeccion();
-      $("#"+seccion).fadeIn(300);
+    //  this.ocultarSeccion();
+    //  $("#"+seccion).fadeIn(300);
     },
     ocultarSubsecciones : function (){
       trace('UI: ocultarSubsecciones');
-      $(".subseccion").fadeOut(300);
+    //  $(".subseccion").fadeOut(300);
     },
     mostrarSubseccion : function (subseccion){
       trace('UI: mostrarSubseccion '+subseccion);
-      this.ocultarSubsecciones();
-      $("#"+subseccion).fadeIn(300);
+    //  this.ocultarSubsecciones();
+    //  $("#"+subseccion).fadeIn(300);
     },
     
     verPreferencias : function (p){
