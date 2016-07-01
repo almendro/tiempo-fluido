@@ -21,7 +21,7 @@
 
     <script>
 
-      trace=function(e){alert(e);}
+     trace=function(e){/*alert(e);*/}
    
       Modernizr.load([
         {
@@ -86,8 +86,9 @@
     </div>
     <!-- -->
 
-    <header data-role="header" data-theme="b" data-position="fixed">
+    <header id="mi_cabecera" data-role="header" data-theme="b" data-position="fixed">
       <h1>Tiempo Fluido</h1>
+      <a href="#consola" id="dev" class="ui-btn ui-btn-right ui-icon-eye ui-btn-icon-notext ui-corner-all" >DEV</a>
     </header>
     
     <section data-role="page" id="principal">
@@ -321,13 +322,20 @@
       <!-- navegación -->
       <nav data-role="navbar" id="menu_principal">
         <ul>
-          <li><a data-icon="star" data-transition="fade" id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a></li>
-          <li><a data-icon="grid" data-transition="fade" id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
-          <li><a data-icon="grid" data-transition="fade" id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
+          <li><a data-icon="plus" data-transition="fade" id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a></li>
+          <li><a data-icon="clock" data-transition="fade" id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
+          <li><a data-icon="calendar" data-transition="fade" id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
           <li><a data-icon="gear" data-transition="fade" id="m_configuracion" href="#configuracion" >Configuración</a></li>
         </ul>
       </nav>
     </footer>
+
+    <div data-role="panel" data-position="right" data-display="reveal" id="consola">
+    <!-- panel content goes here -->
+      <h3>CONSOLA</h3>
+      <a href="#mi_cabecera" data-rel="close" class="ui-btn ui-btn-right ui-icon-close ui-btn-icon-notext ui-corner-all" >cerrar</a>
+      <div id="log"></div>
+    </div><!-- /panel -->
 
   </body>
 </html>
