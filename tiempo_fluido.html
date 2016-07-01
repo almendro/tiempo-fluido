@@ -18,11 +18,14 @@
     <link rel="stylesheet" type="text/css" href="css/ripples.min.css" media="screen" />
     -->
     <script src="assets/modernizr.js"></script>
-
+    <!--<script src="assets/.js"></script>-->
+    
+    <link rel="stylesheet" type="text/css" href="assets/dev/style.css" media="screen" />
+    
     <script>
-
-     trace=function(e){/*alert(e);*/}
-   
+      // trace=function(e){/*alert(e);*/}
+      var $log, trace;
+      
       Modernizr.load([
         {
           load: "assets/jquery-2.2.3.min.js",
@@ -55,9 +58,17 @@
             } else {
               /*** DEV ***/
               //desbichador_init();
+              /*
               $("#clearAllNiceAlert").click(function(){
                 $("#nice_alert alertbox").hide();
               });
+              */
+              
+              $log = $("#consola #log");
+              trace = function (e){
+                $log.append("<p>"+e+"</p>");
+                $( "#consola" ).trigger( "updatelayout" );
+              }
               
               var miTiempoFluido = new tiempoFluido.aplicacion();
               miTiempoFluido.iniciar();
@@ -71,11 +82,11 @@
     <!-- - ->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/desbichador/desbichador.css" />
     <script src="assets/desbichador/desbichador.js"></script>
-    <!-- -->
-   
+    <!-- - ->
+    
     <link rel="stylesheet" type="text/css" media="screen" href="assets/nicealert/style.css" />
     <script src="assets/nicealert/nice_alert.js"></script>
-   
+    -->
   </head>
 
   <body class="ui-body-a" >
@@ -330,10 +341,18 @@
       </nav>
     </footer>
 
-    <div data-role="panel" data-position="right" data-display="reveal" id="consola">
+    <div data-role="panel" data-position="right" data-display="overlay" data-theme="b" id="consola">
     <!-- panel content goes here -->
       <h3>CONSOLA</h3>
-      <a href="#mi_cabecera" data-rel="close" class="ui-btn ui-btn-right ui-icon-close ui-btn-icon-notext ui-corner-all" >cerrar</a>
+      <!-- no funcuona por ahora el boton de cerrar consola
+      <a 
+        href="#mi_cabecera" 
+        data-rel="close" 
+        class="ui-btn ui-btn-right ui-icon-delete ui-btn-icon-notext ui-corner-all" 
+        >
+        cerrar
+      </a>
+      -->
       <div id="log"></div>
     </div><!-- /panel -->
 

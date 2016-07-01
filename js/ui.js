@@ -19,6 +19,8 @@ tiempoFluido.ui = (function($){
 
     iniciar : function(){
       trace('iniciamos la UI');
+      
+      trace('elementos jQuery mobile');
       $( "[data-role='navbar']" ).navbar();
       $( "[data-role='header'], [data-role='footer']" ).toolbar();
       //$( "[data-role='footer']" ).toolbar();
@@ -36,7 +38,11 @@ tiempoFluido.ui = (function($){
           }
         });
       });
-    }, 
+      
+      $( "body>[data-role='panel']" ).panel();
+      
+    } /* iniciar */
+    , 
 
     ocultarDialogos : function (){
       trace('ocultarDialogos');
