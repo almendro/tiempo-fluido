@@ -78,32 +78,23 @@
    
   </head>
 
-  <body >
+  <body class="ui-body-a" >
 
     <!-- /* DEV */ -->
     <div id="clearAllNiceAlert" style="display:block;position:fixed;top:0;left:40%;" class="btn btn-raised btn-danger btn-xs">
     Clear All NiceAlerts
     </div>
-    
-    <section data-role="page" data-theme="b" id="principal">
-    <header data-role="header">
+    <!-- -->
+
+    <header data-role="header" data-theme="b" data-position="fixed">
       <h1>Tiempo Fluido</h1>
     </header>
+    
+    <section data-role="page" id="principal">
 
       <div role="main" class="ui-content">
-    <!-- navegación -->
-    <nav id="menu_principal">
-      <ul data-role="listview">
-        <li><a data-role="button" id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a></li>
-        <li><a data-role="button" id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
-        <li><a data-role="button" id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
-        <li><a data-role="button" id="m_configuracion" href="#configuracion" >Configuración</a></li>
-      </ul>
-    </nav>
-    </div>
-    <footer data-role="footer">
-footer principal
-    </footer>
+        <p>Hola!</p>
+      </div>
     </section>
     
       <section data-role="page" id="inicio" class="seccion">
@@ -187,6 +178,28 @@ footer principal
           </div>
         </fieldset>
       </form>
+    </section>
+
+<!-- ------------------ -->
+
+    <section data-role="page" id="ver_jornada" class="seccion">
+      <header>
+        <h2>Jornada</h2>
+      </header>
+      <div role="main" class="ui-content">
+        <p>Hola!</p>
+      </div>      
+    </section>
+
+<!-- ------------------ -->
+
+    <section data-role="page" id="ver_grilla" class="seccion">
+      <header>
+        <h2>Grilla</h2>
+      </header>
+      <div role="main" class="ui-content">
+        <p>Hola!</p>
+      </div>      
     </section>
 
 <!-- ------------------ -->
@@ -301,6 +314,20 @@ footer principal
           </div>
  </div><!-- tabs -->       
         </section><!-- #configuracion -->
+ 
+ <!-- ------------------ -->
+ 
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+      <!-- navegación -->
+      <nav data-role="navbar" id="menu_principal">
+        <ul>
+          <li><a data-icon="star" data-transition="fade" id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a></li>
+          <li><a data-icon="grid" data-transition="fade" id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
+          <li><a data-icon="grid" data-transition="fade" id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
+          <li><a data-icon="gear" data-transition="fade" id="m_configuracion" href="#configuracion" >Configuración</a></li>
+        </ul>
+      </nav>
+    </footer>
 
   </body>
 </html>

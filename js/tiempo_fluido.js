@@ -18,6 +18,8 @@ tiempoFluido.aplicacion = (function($,moment){
 
     trace('iniciamos la aplicación');
     
+    var tf; /* objeto con toda la data de usuario */
+    
     /* configuracion */
     var perfil,
         configuracion,
@@ -52,7 +54,10 @@ tiempoFluido.aplicacion = (function($,moment){
         tiempoIntercargas,
         resevaContingencias;
         */
+        
         ui = tiempoFluido.ui;
+        ui.iniciar();
+        
         io = new tiempoFluido.io();
 
         perfil = {
