@@ -80,16 +80,21 @@ $( ".selector" ).tabs( "option", "active", 1 );
       var indice = prop.indice;
       trace("prop "+indice+" "+$seccion.attr("id"));
       $( "[data-role='tabs']",$seccion ).tabs("option","active",indice);
+      /* establecer estado activo */
       $( "[data-role='tabs'] a",$seccion ).each( function(e) {
         $(this).removeClass("ui-tabs-active");
         trace("e="+e+" i="+$(this).index()+" "+$(this).attr("href")+" | indice "+indice);
         if(e == indice){
           $(this).addClass("ui-tabs-active");
         }
-      });
+      }); /* / each */
     } /* / mostrarSubseccion */
     ,
     deshabilitarSubseccion : function (subseccion){
+      var prop = this.subseccionProp(subseccion);
+      var $seccion = prop.seccion;
+      var indice = prop.indice;
+      $( "[data-role='tabs']",$seccion ).tabs("option","disabled",[indice]);
       
     } /* /deshabilitarSubseccion */
     ,

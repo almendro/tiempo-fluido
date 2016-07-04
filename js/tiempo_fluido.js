@@ -117,6 +117,7 @@ tiempoFluido.aplicacion = (function($,moment){
           subseccionSiguiente = "bienvenida";
           //$( ".selector" ).tabs( "disable", "#foo" );
           ui.mostrarSeccion( seccionActual );
+          ui.deshabilitarSubseccion("preferencias");
           habilitarFormulario( subseccionActual , seccionActual , function( datosPerfil ){
             /* 
             Obtener datos para generar el perfil 
