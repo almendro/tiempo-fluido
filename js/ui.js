@@ -76,13 +76,6 @@ $( ".selector" ).tabs( "option", "active", 1 );
 
     */
       var prop = this.subseccionProp(subseccion);
-      /*
-      var $seccion = $("#"+subseccion).parents(".seccion");
-      trace("sec "+ $seccion.attr("id"));
-      var $subsecciones = $(".subseccion",$seccion);
-      var indice = ($subsecciones.filter("#"+subseccion).index())-1;
-      trace("indice "+indice);
-      */
       var $seccion = prop.seccion;
       var indice = prop.indice;
       trace("prop "+indice+" "+$seccion.attr("id"));
@@ -90,7 +83,7 @@ $( ".selector" ).tabs( "option", "active", 1 );
       $( "[data-role='tabs'] a",$seccion ).each( function(e) {
         $(this).removeClass("ui-tabs-active");
         trace("e="+e+" i="+$(this).index()+" "+$(this).attr("href")+" | indice "+indice);
-        if($(this).index() == indice){
+        if(e == indice){
           $(this).addClass("ui-tabs-active");
         }
       });
