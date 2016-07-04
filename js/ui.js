@@ -33,9 +33,8 @@ tiempoFluido.ui = (function($){
         $( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
         // Add active class to current nav button
         $( "[data-role='navbar'] a" ).each(function() {
-            trace(current);
+          trace(current+" text  ="+ $(this).text());
           if ( $( this ).text() === current ) {
-            
             $( this ).addClass( "ui-btn-active" );
           }
         });

@@ -73,9 +73,9 @@
               var miTiempoFluido = new tiempoFluido.aplicacion();
               miTiempoFluido.iniciar();
             }
-          }
+          }/* /complete */
         }
-      ]);
+      ]);/* /Modernizr.load */
     </script>
 
     <!-- *** DEV *** -->
@@ -97,82 +97,82 @@
     </div>
     <!-- -->
 
+<!-- ------------------ -->
+
     <header id="mi_cabecera" data-role="header" data-theme="b" data-position="fixed">
       <h1>Tiempo Fluido</h1>
       <a href="#consola" id="dev" class="ui-btn ui-btn-right ui-icon-eye ui-btn-icon-notext ui-corner-all" >DEV</a>
-    </header>
-    
-    <section data-role="page" id="principal">
+    </header><!-- /#mi_cabecera -->
 
-      <div role="main" class="ui-content">
-        <p>Hola!</p>
-      </div>
-    </section>
-    
-      <section data-role="page" id="inicio" class="seccion">
+<!-- ------------------ -->
 
-        <section id="bienvenida" class="subseccion">
-          <header>
-            <h2>Bienvenido <span class="valor nombre"></span></h2>
-          </header>
-          <div id="primeraVez">
-            <p>Esta es la primera vez que inicia la aplicación con el perfil <span class="valor id"></span>.</p>
-            <p>Puedes elegir entre configurar las preferencias de la aplicación y las características de tu tiempo o comenzar a usar con los valores por defecto.</p>
+    <section id="inicio" data-role="page" class="seccion">
+      <header data-role="header">
+        <h1>Inicio</h1>
+      </header>
+      <section id="bienvenida" class="subseccion">
+        <header>
+          <h2>Bienvenido <span class="valor nombre"></span></h2>
+        </header>
+        <div id="primeraVez">
+          <p>Esta es la primera vez que inicia la aplicación con el perfil <span class="valor id"></span>.</p>
+          <p>Puedes elegir entre configurar las preferencias de la aplicación y las características de tu tiempo o comenzar a usar con los valores por defecto.</p>
+        </div>
+        <div id="noHayPreferencias">
+          <p>No hay configuradas preferencias para el perfil <span class="valor id"></span>.</p>
+          <p>Puedes elegir entre configurar las preferencias de la aplicación y las características de tu tiempo o comenzar a usar con los valores por defecto.</p>
+        </div>
+        <div id="botonera_bienvenida" >
+          <a id="btn_configurar_preferencias" class="btn btn-raised btn-lg btn-primary" href="#">Configurar preferencias</a>
+          <a id="btn_ver_valores_defecto" class="btn btn-raised btn-lg" href="#">Ver valores po defecto</a>  
+          <a id="btn_comenzar_ya" class="btn btn-raised btn-lg btn-primary" href="#">Comenzar ya!</a>
+        </div><!-- #botonera_bienvenida -->
+
+        <div id="valores_defecto" class="popup">
+          <p id="valor_tiempoPorJornada" class="propiedad" >
+            Tiempo por jornada:&nbsp;
+            <span class="valor"></span>
+          </p>
+          <p id="valor_tiempoIntercargas" class="propiedad" >
+            Tiempo intercargas:&nbsp;
+            <span class="valor"></span>
+          </p>
+          <p id="valor_reservaContingencias" class="propiedad" >
+            Reserva para contingencias:&nbsp;
+            <span class="valor"></span>
+          </p>
+          <p id="valor_tiempoMinimo" class="propiedad" >
+            Tiemo mínimo:&nbsp;
+            <span class="valor"></span>
+          </p>
+          <p id="valor_diasDeSemana" class="propiedad objeto">
+            Días de semana:&nbsp;
+            <span class="valor"></span>
+          </p>
+        </div><!-- /#valores_defecto -->
+
+      </section> <!-- /#bienvenida.subseccion -->
+
+
+      <section id="tablero" class="subseccion">
+        <div id="botonera_cargas" >
+          <a id="btn_agregar_carga" class="btn btn-raised btn-lg btn-primary" href="#">Agregar carga</a>
+          <a id="btn_ver_cargas" class="btn btn-raised" href="#">Ver cargas</a>
           </div>
-          <div id="noHayPreferencias">
-            <p>No hay configuradas preferencias para el perfil <span class="valor id"></span>.</p>
-            <p>Puedes elegir entre configurar las preferencias de la aplicación y las características de tu tiempo o comenzar a usar con los valores por defecto.</p>
-          </div>
-          <div id="botonera_bienvenida" >
-            <a id="btn_configurar_preferencias" class="btn btn-raised btn-lg btn-primary" href="#">Configurar preferencias</a>
-            <a id="btn_ver_valores_defecto" class="btn btn-raised btn-lg" href="#">Ver valores po defecto</a>  
-            <a id="btn_comenzar_ya" class="btn btn-raised btn-lg btn-primary" href="#">Comenzar ya!</a>
-          </div><!-- #botonera_bienvenida -->
+          <div>
+          <a id="btn_ver_grilla" class="btn btn-raised btn-lg" href="#">Ver grilla</a>
+        </div>
+      </section> <!-- /#tablero.subseccion -->
 
-          <div id="valores_defecto" class="popup">
-            <p id="valor_tiempoPorJornada" class="propiedad" >
-              Tiempo por jornada:&nbsp;
-              <span class="valor"></span>
-            </p>
-            <p id="valor_tiempoIntercargas" class="propiedad" >
-              Tiempo intercargas:&nbsp;
-              <span class="valor"></span>
-            </p>
-            <p id="valor_reservaContingencias" class="propiedad" >
-              Reserva para contingencias:&nbsp;
-              <span class="valor"></span>
-            </p>
-            <p id="valor_tiempoMinimo" class="propiedad" >
-              Tiemo mínimo:&nbsp;
-              <span class="valor"></span>
-            </p>
-            <p id="valor_diasDeSemana" class="propiedad objeto">
-              Días de semana:&nbsp;
-              <span class="valor"></span>
-            </p>
-          </div><!-- #valores_defecto -->
+    </section><!-- /#inicio.seccion -->
 
-        </section> <!-- #bienvenida.subseccion -->
+<!-- ------------------ -->
 
-
-        <section id="tablero" class="subseccion">
-          <div id="botonera_cargas" >
-            <a id="btn_agregar_carga" class="btn btn-raised btn-lg btn-primary" href="#">Agregar carga</a>
-            <a id="btn_ver_cargas" class="btn btn-raised" href="#">Ver cargas</a>
-            </div>
-            <div>
-            <a id="btn_ver_grilla" class="btn btn-raised btn-lg" href="#">Ver grilla</a>
-          </div>
-        </section> <!-- #tablero.subseccion -->
-
-      </section><!-- #inicio.seccion -->
-
-
-    <section data-role="page" id="agregar_carga" class="seccion">
+    <section id="agregar_carga" data-role="page" class="seccion">
       <header data-role="header">
         <h1>Agregar carga</h1>
       </header>
-      <a href="#" data-rel="back" data-role="button" > Regresar </a>
+
       <form class="form-horizontal">
         <fieldset>
           <legend>ABM Carga</legend>
@@ -190,142 +190,142 @@
           </div>
         </fieldset>
       </form>
-    </section>
+    </section><!-- /#agregar_carga -->
 
 <!-- ------------------ -->
 
-    <section data-role="page" id="ver_jornada" class="seccion">
-      <header>
-        <h2>Jornada</h2>
+    <section id="ver_jornada" data-role="page" class="seccion">
+      <header data-role="header">
+        <h1>Ver jornada</h1>
       </header>
       <div role="main" class="ui-content">
         <p>Hola!</p>
       </div>      
-    </section>
+    </section><!-- /#ver_jornada -->
 
 <!-- ------------------ -->
 
-    <section data-role="page" id="ver_grilla" class="seccion">
-      <header>
-        <h2>Grilla</h2>
+    <section id="ver_grilla" data-role="page" class="seccion">
+      <header data-role="header">
+        <h1>Ver grilla</h1>
       </header>
       <div role="main" class="ui-content">
         <p>Hola!</p>
       </div>      
-    </section>
+    </section><!-- /#ver_grilla -->
 
 <!-- ------------------ -->
 
-<section data-role="page" id="configuracion" class="seccion">
-         <header>
-           <h2>Configuración</h2>
-         </header>
-         <p>Perfil de usuario y preferencias de funcionamiento general.</p>
- <div data-role="tabs">
-   <div data-role="navbar">
-     <ul>
-       <li><a href="#perfil" data-ajax="false">Perfil</a></li>
-       <li><a href="#preferencias" data-ajax="false">Preferencias</a></li>
-       <li><a href="#otras" data-ajax="false">Otras</a></li>
-     </ul>
-   </div>
-         <form id="perfil" class="subseccion ui-content">
-            <fieldset>
-              <legend>Perfil de usuario</legend>
+    <section data-role="page" id="configuracion" class="seccion">
+      <header data-role="header">
+        <h1>Configuración</h1>
+      </header>
+      <p>Perfil de usuario y preferencias de funcionamiento general.</p>
+      <div data-role="tabs">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#perfil" data-ajax="false">Perfil</a></li>
+            <li><a href="#preferencias" data-ajax="false">Preferencias</a></li>
+            <li><a href="#otras" data-ajax="false">Otras</a></li>
+          </ul>
+        </div>
+        <form id="perfil" class="subseccion ui-content">
+          <fieldset>
+            <legend>Perfil de usuario</legend>
 
-<div class="form-group">
-<label for="perfil_nombre" class="col-md-2 control-label">Nombre</label>
-<div class="col-md-10">
-<input type="text" class="form-control perfil propiedad" id="perfil_nombre" placeholder="Nombre real">
-</div>
-</div>
-
-<div class="form-group">
-<label for="perfil_alias" class="col-md-2 control-label">Id (alias)</label>
-<div class="col-md-10">
-<input type="text" class="form-control perfil propiedad" id="perfil_alias" placeholder="alias">
-</div>
-</div>
-
-<div class="form-group">
-<label for="perfil_email" class="col-md-2 control-label">Email</label>
-<div class="col-md-10">
-<input type="text" class="form-control perfil propiedad" id="perfil_email" placeholder="email">
-</div>
-</div>
-
-<div class="form-group">
-<div class="col-md-10 col-md-offset-2">
-<button type="button" class="btn btn-default">Reset</button>
-<button type="button" class="btn btn-primary enviar">Crear Perfil</button>
-</div>
-</div>
-
-            </fieldset>
-          </form>
-          
-          <form id="preferencias" class="subseccion ui-content">
-            <fieldset>
-              <legend>Preferencias</legend>
-
-              <div class="form-group">
-                <label for="preferencias_tiempoPorJornada" class="col-md-2 control-label">Tiempo por jornada</label>
-                <div class="col-md-10">
-                  <input type="text" class="form-control preferencias propiedad" name="tiempoPorJornada" data-value-type="number" placeholder="horas">
-                </div>
+            <div class="form-group">
+              <label for="perfil_nombre" class="col-md-2 control-label">Nombre</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control perfil propiedad" id="perfil_nombre" placeholder="Nombre real">
               </div>
-              <div class="form-group">
-                <label for="preferencias_tiempoIntercargas" class="col-md-2 control-label">Tiempo entre cargas</label>
-                <div class="col-md-10">
-                  <input type="text" class="form-control preferencias propiedad" name="tiempoIntercargas" data-value-type="number" placeholder="minutos">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="preferencias_reservaContingencias" class="col-md-2 control-label">Reserva para contingencias (hs:min)</label>
-                <div class="col-md-10">
-                  <input type="text" class="form-control preferencias propiedad" name="reservaContingencias" data-value-type="number" placeholder="horas:minutos">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="preferencias_tiempoMinimo" class="col-md-2 control-label">Tiempo mínimo por tarea por día min)</label>
-                <div class="col-md-10">
-                  <input type="text" class="form-control preferencias propiedad" name="tiempoMinimo" data-value-type="number" placeholder="minutos">
-                </div>
-              </div>
+            </div>
 
-              <div name="diasDeSemana" class="form-group horizontal preferencias propiedad objeto">
-                <p>Días de la semana laborable</p>
-                <label for="preferencias_diasDeSemana_lun" class="col-md-2 control-label">lunes</label>
-                <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[lun]" value="lun">
-                <label for="preferencias_diasDeSemana_mar" class="col-md-2 control-label">martes</label>
-                <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[mar]" value="mar">
-                <label for="preferencias_diasDeSemana_mie" class="col-md-2 control-label">miercoles</label>
-                <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[mie]" value="mie">
-                <label for="preferencias_diasDeSemana_jue" class="col-md-2 control-label">jueves</label>
-                <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[jue]" value="jue">
-                <label for="preferencias_diasDeSemana_vie" class="col-md-2 control-label">viernes</label>
-                <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[vie]" value="vie">
-                <label for="preferencias_diasDeSemana_sab" class="col-md-2 control-label">sábado</label>
-                <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[sab]" value="sab">
-                <label for="preferencias_diasDeSemana_dom" class="col-md-2 control-label">domingo</label>
-                <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[dom]" value="dom">
+            <div class="form-group">
+              <label for="perfil_alias" class="col-md-2 control-label">Id (alias)</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control perfil propiedad" id="perfil_alias" placeholder="alias">
               </div>
-              
-<div class="form-group">
-<div class="col-md-10 col-md-offset-2">
-<button type="button" class="btn btn-default">Reset</button>
-<button type="button" class="btn btn-primary enviar">Salvar preferencias</button>
-</div>
-</div>
+            </div>
 
-            </fieldset>
-          </form><!-- #preferencias -->
-          
-          <div id="otras" class="subsection ui-content">
-            <h1>Otras configuraciones</h1>
-          </div>
- </div><!-- tabs -->       
-        </section><!-- #configuracion -->
+            <div class="form-group">
+              <label for="perfil_email" class="col-md-2 control-label">Email</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control perfil propiedad" id="perfil_email" placeholder="email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-10 col-md-offset-2">
+                <button type="button" class="btn btn-default">Reset</button>
+                <button type="button" class="btn btn-primary enviar">Crear Perfil</button>
+              </div>
+            </div>
+
+         </fieldset>
+        </form><!-- /#perfil -->
+        
+        <form id="preferencias" class="subseccion ui-content">
+          <fieldset>
+            <legend>Preferencias</legend>
+
+            <div class="form-group">
+              <label for="preferencias_tiempoPorJornada" class="col-md-2 control-label">Tiempo por jornada</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control preferencias propiedad" name="tiempoPorJornada" data-value-type="number" placeholder="horas">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="preferencias_tiempoIntercargas" class="col-md-2 control-label">Tiempo entre cargas</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control preferencias propiedad" name="tiempoIntercargas" data-value-type="number" placeholder="minutos">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="preferencias_reservaContingencias" class="col-md-2 control-label">Reserva para contingencias (hs:min)</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control preferencias propiedad" name="reservaContingencias" data-value-type="number" placeholder="horas:minutos">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="preferencias_tiempoMinimo" class="col-md-2 control-label">Tiempo mínimo por tarea por día min)</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control preferencias propiedad" name="tiempoMinimo" data-value-type="number" placeholder="minutos">
+              </div>
+            </div>
+
+            <div name="diasDeSemana" class="form-group horizontal preferencias propiedad objeto">
+              <p>Días de la semana laborable</p>
+              <label for="preferencias_diasDeSemana_lun" class="col-md-2 control-label">lunes</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[lun]" value="lun">
+              <label for="preferencias_diasDeSemana_mar" class="col-md-2 control-label">martes</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[mar]" value="mar">
+              <label for="preferencias_diasDeSemana_mie" class="col-md-2 control-label">miercoles</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[mie]" value="mie">
+              <label for="preferencias_diasDeSemana_jue" class="col-md-2 control-label">jueves</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[jue]" value="jue">
+              <label for="preferencias_diasDeSemana_vie" class="col-md-2 control-label">viernes</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[vie]" value="vie">
+              <label for="preferencias_diasDeSemana_sab" class="col-md-2 control-label">sábado</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[sab]" value="sab">
+              <label for="preferencias_diasDeSemana_dom" class="col-md-2 control-label">domingo</label>
+              <input type="checkbox" class="form-control preferencias_diasDeSemana propiedad" name="diasDeSemana[dom]" value="dom">
+            </div>
+            
+            <div class="form-group">
+              <div class="col-md-10 col-md-offset-2">
+                <button type="button" class="btn btn-default">Reset</button>
+                <button type="button" class="btn btn-primary enviar">Salvar preferencias</button>
+              </div>
+            </div>
+
+          </fieldset>
+        </form><!-- /#preferencias -->
+        
+        <div id="otras" class="subsection ui-content">
+          <h1>Otras configuraciones</h1>
+        </div>
+      </div><!-- /tabs -->       
+    </section><!-- /#configuracion -->
  
  <!-- ------------------ -->
  
@@ -333,6 +333,7 @@
       <!-- navegación -->
       <nav data-role="navbar" id="menu_principal">
         <ul>
+        <li><a data-icon="home" data-transition="fade" id="m_inicio" href="#inicio" >Inicio</a></li>
           <li><a data-icon="plus" data-transition="fade" id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a></li>
           <li><a data-icon="clock" data-transition="fade" id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
           <li><a data-icon="calendar" data-transition="fade" id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
