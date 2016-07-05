@@ -92,7 +92,7 @@ tiempoFluido.aplicacion = (function($,moment){
 
         
         /* Dev  */
-        var tmp = io.borrarTodo();
+        //var tmp = io.borrarTodo();
 
         $botonesEnviar = jQuery( "button.enviar" );
         //ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
@@ -111,28 +111,33 @@ tiempoFluido.aplicacion = (function($,moment){
           o iniciar con los valores por defecto
           */
           trace("crear perfil");
+          
           seccionActual = "configuracion";
           subseccionActual = "perfil";
-          seccionSiguiente = "inicio";
-          subseccionSiguiente = "bienvenida";
-          //$( ".selector" ).tabs( "disable", "#foo" );
+
           ui.mostrarSeccion( seccionActual );
           ui.deshabilitarSubseccion("preferencias");
-          habilitarFormulario( subseccionActual , seccionActual , function( datosPerfil ){
-            /* 
-            Obtener datos para generar el perfil 
-            y luego salvarlos
+          
+          habilitarFormulario({
+            formulario: subseccionActual , 
+            seccion: seccionActual , 
+            callback: function( datosPerfil ){
+              /* 
+              Obtener datos para generar el perfil 
+              y luego salvarlos
             
-            (habría que poner un control para que no llegue false)
-            */
-            perfil = generarId(datosPerfil);
-            io.salvarDatos( datosPerfil , "perfil" , function(){ 
-              /*
-              Mostrar pantalla de Bienvenida
+              (habría que poner un control para que no llegue false)
               */
-              configuracion['preferencias'] = false;
-              bienvenida("primeraVez");
-            }); /* io.salvarDatos */
+              // perfil = 
+              generarId(datosPerfil);
+              io.salvarDatos( datosPerfil , "perfil" , function(){ 
+                /*
+                Mostrar pantalla de Bienvenida
+                */
+                configuracion['preferencias'] = false;
+                bienvenida("primeraVez");
+              }); /* io.salvarDatos */
+            } /* / callback */
           }); /* habilitarFormulario */
         } 
         else 
@@ -166,15 +171,7 @@ tiempoFluido.aplicacion = (function($,moment){
       datosPerfil[ "id" ] = id;
       return datosPerfil;
     };
-    
-    var replaceAll = function( string, omit, place, prevstring ) {
-      if (prevstring && string === prevstring)
-        return string;
-      prevstring = string.replace(omit, place);
-      return replaceAll(prevstring, omit, place, string)
-    };
-    /* http://stackoverflow.com/a/22870785  */
-    
+
     /* control de pantallas */
     
     var bienvenida = function (primeraVez) {
@@ -239,13 +236,23 @@ tiempoFluido.aplicacion = (function($,moment){
     }; /* configurarPreferencias */
     
     
-    var habilitarFormulario = function( formulario ,  seccion , callback ){
+    var habilitarFormulario = function(p){
+        
+      trace('habilitarFormulario: '+p.formulario+" "+p.seccion);
       
-      trace('habilitarFormulario: '+formulario+" "+seccion);
-      //trace("callback " + callback);
       deshabilitarBotonesEnviar();
-      ui.mostrarSubseccion(formulario);
-      jQuery( ".enviar" , jQuery( "#"+formulario ) ).bind( 'click.misEventos', { formulario: formulario, callback: callback }, enviarDatos );
+      ui.mostrarSubseccion(p.formulario);
+      jQuery( 
+        ".enviar" , 
+        jQuery( "#"+p.formulario ) 
+      ).bind( 
+        'click.misEventos', 
+        { /* parametros para enviarDatos */
+          formulario: p.formulario, 
+          callback: p.callback 
+        },
+        enviarDatos 
+      );
       //return true; // tmp
     };
     
