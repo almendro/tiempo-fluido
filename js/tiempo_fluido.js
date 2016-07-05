@@ -41,6 +41,8 @@ tiempoFluido.aplicacion = (function($,moment){
         seccionSiguiente , 
         subseccionSiguiente ;
     
+    var dev; /* Opciones de desarrollador */
+    
     /* botones enviar 
     para capturar todos los botones de los formularios
     */
@@ -55,11 +57,18 @@ tiempoFluido.aplicacion = (function($,moment){
         resevaContingencias;
         */
         
+        /* iniciar módulos */
+        
         ui = tiempoFluido.ui;
         ui.iniciar();
         
         io = new tiempoFluido.io();
 
+        dev = new tiempoFluido.dev();
+        dev.iniciar();
+        
+        /* fin iniciar módulos */
+        
         perfil = {
           id: "",
           nombre:"",
