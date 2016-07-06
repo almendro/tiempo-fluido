@@ -25,12 +25,21 @@ tiempoFluido.dev = (function($){
         "click.misEventos",
         this.borrarTodo
       );
-    },
+    } /* /iniciar */
+    ,
     
     borrarTodo: function(){
       trace( "DEV: borrarTodo" );
-      
-    }
+      tiempoFluido.ui.mostrarDialogoConfirmar({
+        mensaje: "Borrar todos los datos ¿Estás seguro?",
+        callbackSi: function(){
+          tiempoFluido.io.borrarTodo();
+        },
+        callbackNo: function(){
+          trace("Cancelar");
+        }
+      }); /* /mostrarDialogoConfirmar */
+    } /* /borrarTodo */
 
   }; /* /var dev */
 

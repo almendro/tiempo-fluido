@@ -49,13 +49,17 @@ tiempoFluido.ui = (function($){
       trace('ocultarDialogos');
     //  $(".dialogo").fadeOut(300);
     },
-    mostrarDialogo : function (p){
-      trace("mostrarDialogo");
-      var mennsaje = p.mensaje;
+    mostrarDialogoConfirmar : function (p){
+      trace("mostrarDialogoConfirmar");
+      var mensaje = p.mensaje;
       var callbackSi = p.callbackSi;
       var callbackNo = p.callbackNo;
-      
-    },
+      $("#dialogo_confirmar").popup("open");
+      $("#dialogo_si").bind("click.misEventos",callbackSi);
+      $("#dialogo_no").bind("click.misEventos",callbackNo);
+    } /* /mostrarDialogoConfirmar */
+    ,
+    
     ocultarSeccion : function (){
       trace('ocultarSeccion');
     //  $(".seccion").fadeOut(300);
