@@ -21,9 +21,14 @@ tiempoFluido.dev = (function($){
 
       trace('iniciamos Dev');
       
+      $("#dev_borrar_todo").bind(
+        "click.misEventos",
+        this.borrarTodo
+      );
     },
     
     borrarTodo: function(){
+      trace( "DEV: borrarTodo" );
       
     }
 

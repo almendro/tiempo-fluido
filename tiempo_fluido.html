@@ -23,8 +23,9 @@
     <link rel="stylesheet" type="text/css" href="assets/dev/style.css" media="screen" />
     
     <script>
-      // trace=function(e){/*alert(e);*/}
+      
       var $log, trace;
+      //trace=function(e){alert(e);}
       
       Modernizr.load([
         {
@@ -84,7 +85,7 @@
     <!-- - ->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/desbichador/desbichador.css" />
     <script src="assets/desbichador/desbichador.js"></script>
-    <!-- - ->
+    <!-- -->
     
     <link rel="stylesheet" type="text/css" media="screen" href="assets/nicealert/style.css" />
     <script src="assets/nicealert/nice_alert.js"></script>
@@ -226,10 +227,10 @@
       <div data-role="tabs">
         <div data-role="navbar">
           <ul>
-            <li><a href="#perfil" data-ajax="false">Perfil</a></li>
-            <li><a href="#preferencias" data-ajax="false">Preferencias</a></li>
-            <li><a href="#otras" data-ajax="false">Otras</a></li>
-            <li><a href="#dev" data-icon="power" class="icon-notext" data-ajax="false">DEV</a></li>
+            <li><a href="#perfil" data-icon="user" data-ajax="false">Perfil</a></li>
+            <li><a href="#preferencias" data-icon="bullets" data-ajax="false">Preferencias</a></li>
+            <li><a href="#otras" data-icon="bullets" data-ajax="false">Otras</a></li>
+            <li><a href="#dev" data-icon="power" data-ajax="false">DEV</a></li>
           </ul>
         </div>
         <form id="perfil" class="subseccion ui-content">
@@ -339,7 +340,7 @@
           <section>
             <h3>Local storage</h3>
             <p>
-              Manejo del localstorage del navegador
+              Manejo del local storage del navegador y los datos almacenados.
             </p>
             <button 
               id="dev_borrar_todo" 
@@ -365,7 +366,23 @@
         </ul>
       </nav>
     </footer>
-
+    
+    <div id="dialogo_confirmar" 
+      data-role="popup" 
+      data-overlay-theme="b" 
+      data-theme="b" 
+      data-dismissible="false"
+    >
+      <div data-role="header" data-theme="a">
+        <h1>Confirmar</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <h3 class="ui-title">(mensaje)</p>
+        <button id="dialogo_no" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">NO</button>
+        <button id="dialogo_si" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">SI</a>
+      </div>
+    </div>
+    
     <div data-role="panel" data-position="right" data-display="overlay" data-theme="b" id="consola">
     <!-- panel content goes here -->
       <h3>CONSOLA</h3>

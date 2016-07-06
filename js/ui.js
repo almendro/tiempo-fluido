@@ -49,6 +49,13 @@ tiempoFluido.ui = (function($){
       trace('ocultarDialogos');
     //  $(".dialogo").fadeOut(300);
     },
+    mostrarDialogo : function (p){
+      trace("mostrarDialogo");
+      var mennsaje = p.mensaje;
+      var callbackSi = p.callbackSi;
+      var callbackNo = p.callbackNo;
+      
+    },
     ocultarSeccion : function (){
       trace('ocultarSeccion');
     //  $(".seccion").fadeOut(300);
