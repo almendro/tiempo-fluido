@@ -16,27 +16,48 @@ var tiempoFluido = window.tiempoFluido || {};
 tiempoFluido.dev = (function($){
 
   var dev = {
-
     iniciar : function(){
 
       trace('iniciamos Dev');
       
       $("#dev_borrar_todo").bind(
         "click.misEventos",
+        {soy: "#dev_borrar_todo"},
         this.borrarTodo
       );
     } /* /iniciar */
     ,
     
-    borrarTodo: function(){
-      trace( "DEV: borrarTodo" );
+    borrarTodo: function(e){
+      trace( "DEV: borrarTodo "+e.data.soy );
       tiempoFluido.ui.mostrarDialogoConfirmar({
+        target: e.data.soy,
         mensaje: "Borrar todos los datos ¿Estás seguro?",
-        callbackSi: function(){
-          tiempoFluido.io.borrarTodo();
+        callbackSi: function(e){
+          trace("Si");
+          io.borrarTodo();
+          /*
+          $( document ).on( 
+            "popupafterclose", 
+            e.data.$dialogo, 
+            function() {
+              $( this ).remove();
+            }
+          );*/
+          e.data.$dialogo.remove();
         },
-        callbackNo: function(){
+        callbackNo: function(e){
           trace("Cancelar");
+          /*
+          $( document ).on( 
+            "popupafterclose", 
+            e.data.$dialogo, 
+            function() {
+              $( this ).remove();
+            }
+          );
+          */
+          e.data.$dialogo.remove();
         }
       }); /* /mostrarDialogoConfirmar */
     } /* /borrarTodo */

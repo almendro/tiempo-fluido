@@ -51,15 +51,70 @@ tiempoFluido.ui = (function($){
     },
     mostrarDialogoConfirmar : function (p){
       trace("mostrarDialogoConfirmar");
+      var target = p.target;
       var mensaje = p.mensaje;
       var callbackSi = p.callbackSi;
       var callbackNo = p.callbackNo;
-      $("#dialogo_confirmar").popup("open");
-      $("#dialogo_si").bind("click.misEventos",callbackSi);
-      $("#dialogo_no").bind("click.misEventos",callbackNo);
+      /*
+      $("#dialogo_confirmar")
+        .appendTo( $.mobile.activePage )
+        .popup();
+      */
+      var $dialogo = this.crearDialogoConfirmar({target: target});
+      trace("$dialogo id="+$dialogo.attr("id"));
+      //$dialogo.popup("open");
+      $(".mensaje",$dialogo).text(mensaje);
+      $(".dialogo_si",$dialogo).bind("click.misEventos",{$dialogo:$dialogo},callbackSi);
+      $(".dialogo_no",$dialogo).bind("click.misEventos",{$dialogo:$dialogo},callbackNo);
     } /* /mostrarDialogoConfirmar */
     ,
-    
+    crearDialogoConfirmar : function (p){
+      var target = p.target; // el #id boton que llama al dialogo
+      var $target = $(target);
+      var id = "dialogo_confirmar_"+$target.attr('id');
+      trace("crearDialogoConfirmar "+target+" id="+id);
+      var popup = '<div id="'+id+'" ';
+          popup+= 'data-role="popup" ';
+          popup+= 'data-overlay-theme="b" ';
+          popup+= 'data-theme="b" ';
+          popup+= 'data-dismissible="false" >';
+          popup+= '<div data-role="header" data-theme="a">';
+          popup+= '<h1>Confirmar</h1>';
+          popup+= '</div>';
+          popup+= '<div role="main" class="ui-content">';
+          popup+= '<h3 class="mensaje ui-title">(mensaje)</h3>';
+          popup+= '<button class="dialogo_no ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">NO</button>';
+          popup+= '<button class="dialogo_si ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">SI</button>';
+          popup+= '</div>';
+          popup+= '</div><!-- -->';
+            /*
+            brand = target.find( "h2" ).html(),
+            model = target.find( "p" ).html(),
+            short = target.attr( "id" ),
+            closebtn = '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>',
+            header = '<div data-role="header"><h2>' + brand + ' ' + model + '</h2></div>',
+            img = '<img src="../_assets/img/' + short + '.jpg" alt="' + brand + '" class="photo">',
+            popup = '<div data-role="popup" id="popup-' + short + '" data-short="' + short +'" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15"></div>';
+            
+            // Create the popup.
+        $( header )
+            .appendTo( $( popup )
+                .appendTo( $.mobile.activePage )
+                .popup() )
+            .toolbar()
+            .before( closebtn )
+            .after( img );
+            */
+            
+            trace("");
+            //trace(popup);
+      $(popup).appendTo( $.mobile.activePage );
+      //.popup();
+      trace("popup "+$("#"+id).attr("id"));
+      //$("#"+id).popup();
+      return $("#"+id);
+    } /* /crearDialogoConfirmar */
+    ,
     ocultarSeccion : function (){
       trace('ocultarSeccion');
     //  $(".seccion").fadeOut(300);
