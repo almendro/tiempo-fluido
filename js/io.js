@@ -115,7 +115,7 @@ tiempoFluido.io = (function($){
       storage.set('tf.'+objetoStorage , datos );
       trace('tf.' + objetoStorage + " = " + datos );
       return callback();
-    1}; /* salvarDatos */
+    }; /* salvarDatos */
     
   }; /* var io */
 

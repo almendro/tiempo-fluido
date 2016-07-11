@@ -289,7 +289,8 @@ tiempoFluido.aplicacion = (function($,moment){
     var verGrilla = function(){
       trace("verGrilla");
     }
-  };
+   
+  };/* /aplicacion */
 
   return aplicacion;
 
