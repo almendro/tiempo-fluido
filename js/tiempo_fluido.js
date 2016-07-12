@@ -62,8 +62,10 @@ tiempoFluido.aplicacion = (function($,moment){
         ui = tiempoFluido.ui;
         ui.iniciar();
         
-        io = new tiempoFluido.io();
-
+        //io = new tiempoFluido.io();
+        io = tiempoFluido.io;
+        io.iniciar();
+        
         dev = tiempoFluido.dev;
         dev.iniciar();
         

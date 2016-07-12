@@ -14,23 +14,26 @@ input/output data
 var tiempoFluido = window.tiempoFluido || {};
 
 tiempoFluido.io = (function($){
-
-  var io = function(){
     
-    trace('creamos el objeto IO');
-    
-    var soyIo = this;
-    
-    $.alwaysUseJsonInStorage(true);
-    var storage = $.localStorage;
-    
-    this.borrarTodo = function(){
+  var storage, soyIo;
+  
+  var io = //function(){
+    {
+    //trace('creamos el objeto IO');
+    iniciar: function (){
+      soyIo = this;
+      trace('iniciar IO');
+      $.alwaysUseJsonInStorage(true);
+      storage = $.localStorage;
+    }
+    ,
+    borrarTodo : function(){
        trace('IO: borrarTodo');
        storage.removeAll();  
        return true;
-    };
-    
-    this.borrarObjeto = function (objeto){
+    }
+    ,
+    borrarObjeto : function (objeto){
         trace("IO: borrarObjeto "+objeto);
         if (storage.isSet("tf."+objeto)){
           storage.remove("tf."+objeto);
@@ -38,8 +41,8 @@ tiempoFluido.io = (function($){
         trace(objeto+"? "+storage.isSet("tf."+objeto));
         return true;
     }
-    
-    this.cargarPerfil = function(){
+    ,
+    cargarPerfil : function(){
 
        trace('IO: cargarPerfil');
        var perfil;
@@ -53,9 +56,9 @@ tiempoFluido.io = (function($){
        }
     
        return perfil;
-    };
-
-    this.cargarPreferencias = function(perfilId){
+    }
+    ,
+    cargarPreferencias : function(perfilId){
 
        trace('IO: cargarPreferencias');
        trace( 'perfilId = ' + perfilId );
@@ -69,9 +72,9 @@ tiempoFluido.io = (function($){
          preferencias = false;
        }
        return preferencias; // tmp
-     };
-
-    this.obtenerDatosFormulario = function ( formulario , callback ){
+     }
+     ,
+     obtenerDatosFormulario : function ( formulario , callback ){
       trace('IO: obtenerDatosFormulario ' + formulario);
       var datos = $("."+formulario+".propiedad" , $( "#" + formulario ));
       var salida = {};
@@ -101,21 +104,21 @@ tiempoFluido.io = (function($){
         trace ( propiedad + " = " + salida[propiedad]);
       }); /* datos.each */ 
       return ( callback )? callback( salida ) : salida;
-    }; /* obtenerDatosFormulario */
+    }, /* obtenerDatosFormulario */
     
-    this.obtenerDatosFormulario = function ( formulario , callback ){
+    obtenerDatosFormulario : function ( formulario , callback ){
        trace('IO: obtenerDatosFormulario (serializeJSON)' + formulario);
       var salida = $("#"+formulario).serializeJSON({checkboxUncheckedValue: false}); 
       return ( callback )? callback( salida ) : salida;
-    }; /* obtenerDatosFormulario */
+    }, /* obtenerDatosFormulario */
     
-    this.salvarDatos = function ( datos , objetoStorage , callback ){
+    salvarDatos : function ( datos , objetoStorage , callback ){
       trace('IO: salvarDatos datos ' + JSON.stringify(datos) );
       trace('IO: salvarDatos objetoStorage ' + objetoStorage );
       storage.set('tf.'+objetoStorage , datos );
       trace('tf.' + objetoStorage + " = " + datos );
       return callback();
-    }; /* salvarDatos */
+    } /* salvarDatos */
     
   }; /* var io */
 

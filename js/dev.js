@@ -35,7 +35,7 @@ tiempoFluido.dev = (function($){
         mensaje: "Borrar todos los datos ¿Estás seguro?",
         callbackSi: function(e){
           trace("Si");
-          tiempoFluido.aplicacion.io.borrarTodo();
+          tiempoFluido.io.borrarTodo();
           /*
           $( document ).on( 
             "popupafterclose", 
