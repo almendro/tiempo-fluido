@@ -29,7 +29,7 @@ tiempoFluido.aplicacion = (function($,moment){
     var io, ui;
 
     /* datos */
-    var libreria;
+    var biblioteca;
     var grillaJornada;
     var cargaActual;
     var jornadaActual;
@@ -49,20 +49,14 @@ tiempoFluido.aplicacion = (function($,moment){
     var $botonesEnviar;
 
     this.iniciar = function(){
-    
-        trace("*** cargamos configuracion guardada ***");
-        /*
-        tiempoPorDia,
-        tiempoIntercargas,
-        resevaContingencias;
-        */
         
-        /* iniciar módulos */
+        /*
+        Referenciar los módulos e inicializarlos
+        */
         
         ui = tiempoFluido.ui;
         ui.iniciar();
         
-        //io = new tiempoFluido.io();
         io = tiempoFluido.io;
         io.iniciar();
         
@@ -71,6 +65,13 @@ tiempoFluido.aplicacion = (function($,moment){
         
         /* fin iniciar módulos */
         
+        trace("*** cargamos configuracion guardada ***");
+        /*
+        tiempoPorDia,
+        tiempoIntercargas,
+        resevaContingencias;
+        */
+
         perfil = {
           id: "",
           nombre:"",
@@ -78,14 +79,17 @@ tiempoFluido.aplicacion = (function($,moment){
           email: ""
         };
         
-        configuracion = {};
+        configuracion = {
+            preferencias: {},
+            otras: {}
+        };
         
         preferenciasDefault = {
           tiempoPorJornada: 7*60, /* minutos */
           tiempoIntercargas: 5, /* minutos */
           reservaContingencias: 2*60, /* minutos */
           tiempoMinimo: 20, /* minutos */
-          diasDeSemana: /* [1,1,1,1,1,0,0] semana inicia lunes */
+          diasDeSemana: /* */
             {
                 lun: true,
                 mar: true,
@@ -101,17 +105,10 @@ tiempoFluido.aplicacion = (function($,moment){
           "lun", "mar", "mie", "jue", "vie", "sab", "dom"
         ];
 
-        
-        /* Dev  */
-        //var tmp = io.borrarTodo();
-
         $botonesEnviar = jQuery( "button.enviar" );
         //ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
 
         perfil = io.cargarPerfil();
-        
-        /*DEV*/
-        //var tmp = io.borrarObjeto(perfil.id+".preferencias");
         if ( perfil==false )
         {
           /*

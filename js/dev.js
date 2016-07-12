@@ -68,6 +68,10 @@ tiempoFluido.dev = (function($){
         }
       }); /* /mostrarDialogoConfirmar */
     } /* /borrarTodo */
+    ,
+    borrarObjeto: function (e){
+      // var tmp = io.borrarObjeto(perfil.id+".preferencias");  
+    } /* /borrarObjeto */
 
   }; /* /var dev */
 
