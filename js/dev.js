@@ -44,7 +44,14 @@ tiempoFluido.dev = (function($){
               $( this ).remove();
             }
           );*/
+          
           e.data.$dialogo.remove();
+          /*
+          tiempoFluido.ui.mostrarDialogoResultado({
+            target: e.data.soy,
+            mensaje: "Todos los datos locales fueron borrados."
+          })
+          */
         },
         callbackNo: function(e){
           trace("Cancelar");

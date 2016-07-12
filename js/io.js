@@ -104,14 +104,14 @@ tiempoFluido.io = (function($){
         trace ( propiedad + " = " + salida[propiedad]);
       }); /* datos.each */ 
       return ( callback )? callback( salida ) : salida;
-    }, /* obtenerDatosFormulario */
-    
+    } /* obtenerDatosFormulario */
+    ,
     obtenerDatosFormulario : function ( formulario , callback ){
        trace('IO: obtenerDatosFormulario (serializeJSON)' + formulario);
       var salida = $("#"+formulario).serializeJSON({checkboxUncheckedValue: false}); 
       return ( callback )? callback( salida ) : salida;
-    }, /* obtenerDatosFormulario */
-    
+    } /* obtenerDatosFormulario */
+    ,
     salvarDatos : function ( datos , objetoStorage , callback ){
       trace('IO: salvarDatos datos ' + JSON.stringify(datos) );
       trace('IO: salvarDatos objetoStorage ' + objetoStorage );

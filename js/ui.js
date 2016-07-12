@@ -87,7 +87,7 @@ tiempoFluido.ui = (function($){
           popup+= '<button class="dialogo_si ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">SI</button>';
           popup+= '</div>';
           popup+= '</div><!-- -->';
-            /*
+            /* ejemplo
             brand = target.find( "h2" ).html(),
             model = target.find( "p" ).html(),
             short = target.attr( "id" ),
@@ -106,8 +106,8 @@ tiempoFluido.ui = (function($){
             .after( img );
             */
             
-            trace("");
-            //trace(popup);
+      trace("");
+      //trace(popup);
       $(popup).appendTo( $.mobile.activePage );
       //.popup();
       trace("popup "+$("#"+id).attr("id"));
