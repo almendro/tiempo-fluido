@@ -32,7 +32,7 @@ tiempoFluido.dev = (function($){
       trace( "DEV: borrarTodo "+e.data.soy );
       tiempoFluido.ui.mostrarDialogoConfirmar({
         target: e.data.soy,
-        mensaje: "Borrar todos los datos ¿Estás seguro?",
+        mensaje: "Borrar todos los datos ¿Estás MUY seguro? ¡Esto no se puede deshacer!",
         callbackSi: function(e){
           trace("Si");
           tiempoFluido.io.borrarTodo();
