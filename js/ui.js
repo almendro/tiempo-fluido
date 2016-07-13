@@ -115,6 +115,19 @@ tiempoFluido.ui = (function($){
       return $("#"+id);
     } /* /crearDialogoConfirmar */
     ,
+    eliminarDialogo: function (p){
+      trace("eliminarDialogo "+p.$dialogo);
+          /*
+          $( document ).on( 
+            "popupafterclose", 
+            e.data.$dialogo, 
+            function() {
+              $( this ).remove();
+            }
+          );*/
+      p.$dialogo.remove();
+    } /* /eliminarDialogo */
+    ,
     ocultarSeccion : function (){
       trace('ocultarSeccion');
     //  $(".seccion").fadeOut(300);

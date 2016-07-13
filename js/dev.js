@@ -26,8 +26,7 @@ tiempoFluido.dev = (function($){
         this.borrarTodo
       );
     } /* /iniciar */
-    ,
-    
+    ,   
     borrarTodo: function(e){
       trace( "DEV: borrarTodo "+e.data.soy );
       tiempoFluido.ui.mostrarDialogoConfirmar({
@@ -35,17 +34,8 @@ tiempoFluido.dev = (function($){
         mensaje: "Borrar todos los datos ¿Estás MUY seguro? ¡Esto no se puede deshacer!",
         callbackSi: function(e){
           trace("Si");
-          tiempoFluido.io.borrarTodo();
-          /*
-          $( document ).on( 
-            "popupafterclose", 
-            e.data.$dialogo, 
-            function() {
-              $( this ).remove();
-            }
-          );*/
-          
-          e.data.$dialogo.remove();
+          tiempoFluido.io.borrarTodo();          
+          tiempoFluido.ui.eliminarDialogo({ $dialogo: e.data.$dialogo });
           /*
           tiempoFluido.ui.mostrarDialogoResultado({
             target: e.data.soy,
@@ -55,16 +45,7 @@ tiempoFluido.dev = (function($){
         },
         callbackNo: function(e){
           trace("Cancelar");
-          /*
-          $( document ).on( 
-            "popupafterclose", 
-            e.data.$dialogo, 
-            function() {
-              $( this ).remove();
-            }
-          );
-          */
-          e.data.$dialogo.remove();
+          tiempoFluido.ui.eliminarDialogo({ $dialogo: e.data.$dialogo });
         }
       }); /* /mostrarDialogoConfirmar */
     } /* /borrarTodo */
