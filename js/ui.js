@@ -66,8 +66,7 @@ tiempoFluido.ui = (function($){
       });
       trace("$dialogo id="+$dialogo.attr("id"));
       $(".mensaje",$dialogo).text(p.mensaje);
-      $(".dialogo_si",$dialogo).bind("click.misEventos",{$dialogo:$dialogo,callback:p.callbackSi},this.cerrarDialogo);
-      $(".dialogo_no",$dialogo).bind("click.misEventos",{$dialogo:$dialogo,callback:p.callbackNo},this.cerrarDialogo);
+      $dialogo.fadeIn(300);
     } /* /mostrarDialogoConfirmar */
     ,
     mostrarDialogoResultado: function (p){
@@ -83,7 +82,7 @@ tiempoFluido.ui = (function($){
       });
       trace("$dialogo id="+$dialogo.attr("id"));
       $(".mensaje",$dialogo).text(p.mensaje);
-      $(".dialogo_ok",$dialogo).bind("click.misEventos",{$dialogo:$dialogo,callback:p.callbackOk},this.cerrarDialogo);
+      $dialogo.fadeIn(300);
     } /* /mostrarDialogoResultado */
     ,
     crearDialogo : function (p){
@@ -111,29 +110,28 @@ tiempoFluido.ui = (function($){
             
       trace("");
       //trace(popup);
-      $(popup)
-        .appendTo( $.mobile.activePage )
-        .hide();
+      $(popup).appendTo( $.mobile.activePage );
       var $popup = $("#"+id);
-      /*
+      $popup.hide();
+      // agrega los eventos y callback a cada  botón
       for ( b in botones ){
         $("."+botones[b]["class"],$popup)
           .bind(
             "click.misEventos",
             {
-              $dialogo:$dialogo,
+              $dialogo:$popup,
               callback:botones[b]["callback"]
             },
             this.cerrarDialogo
           );
-      }*/
-      return $("#"+id);
+      }
+      return $popup;
     } /* /crearDialogoConfirmar */
     ,
     cerrarDialogo: function (p){
       p.data.callback();
       trace("cerrarDialogo "+p.data.$dialogo.attr("id"));
-      p.data.$dialogo.remove();
+      p.data.$dialogo.fadeOut(300).remove();
     }
     ,
     eliminarDialogo: function (p){
