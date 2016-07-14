@@ -36,12 +36,11 @@ tiempoFluido.dev = (function($){
           trace("Si");
           tiempoFluido.io.borrarTodo();          
           tiempoFluido.ui.eliminarDialogo({ $dialogo: e.data.$dialogo });
-          /*
           tiempoFluido.ui.mostrarDialogoResultado({
             target: e.data.soy,
             mensaje: "Todos los datos locales fueron borrados."
           })
-          */
+          
         },
         callbackNo: function(e){
           trace("Cancelar");

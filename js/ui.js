@@ -60,7 +60,16 @@ tiempoFluido.ui = (function($){
         .appendTo( $.mobile.activePage )
         .popup();
       */
-      var $dialogo = this.crearDialogoConfirmar({target: target});
+      var $dialogo = this.crearDialogo({
+        target: target,
+        botones: [{
+            class: "dialogo_si",
+            etiqueta: "SI"
+          },{
+            class: "dialogo_no",
+            etiqueta: "NO"
+          }]
+      });
       trace("$dialogo id="+$dialogo.attr("id"));
       //$dialogo.popup("open");
       $(".mensaje",$dialogo).text(mensaje);
@@ -68,12 +77,14 @@ tiempoFluido.ui = (function($){
       $(".dialogo_no",$dialogo).bind("click.misEventos",{$dialogo:$dialogo},callbackNo);
     } /* /mostrarDialogoConfirmar */
     ,
-    crearDialogoConfirmar : function (p){
+    crearDialogo : function (p){
       var target = p.target; // el #id boton que llama al dialogo
       var $target = $(target);
+      var botones = p.botones;
       var id = "dialogo_confirmar_"+$target.attr('id');
       trace("crearDialogoConfirmar "+target+" id="+id);
-      var popup = '<div id="'+id+'" ';
+      var popup;
+      popup = '<div id="'+id+'" ';
           popup+= 'data-role="popup" ';
           popup+= 'data-overlay-theme="b" ';
           popup+= 'data-theme="b" ';
@@ -83,37 +94,24 @@ tiempoFluido.ui = (function($){
           popup+= '</div>';
           popup+= '<div role="main" class="ui-content">';
           popup+= '<h3 class="mensaje ui-title">(mensaje)</h3>';
-          popup+= '<button class="dialogo_no ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">NO</button>';
-          popup+= '<button class="dialogo_si ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">SI</button>';
-          popup+= '</div>';
-          popup+= '</div><!-- -->';
-            /* ejemplo
-            brand = target.find( "h2" ).html(),
-            model = target.find( "p" ).html(),
-            short = target.attr( "id" ),
-            closebtn = '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>',
-            header = '<div data-role="header"><h2>' + brand + ' ' + model + '</h2></div>',
-            img = '<img src="../_assets/img/' + short + '.jpg" alt="' + brand + '" class="photo">',
-            popup = '<div data-role="popup" id="popup-' + short + '" data-short="' + short +'" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15"></div>';
-            
-            // Create the popup.
-        $( header )
-            .appendTo( $( popup )
-                .appendTo( $.mobile.activePage )
-                .popup() )
-            .toolbar()
-            .before( closebtn )
-            .after( img );
-            */
+      for ( b in botones ){
+        popup+= '<button class="'+botones[b]["class"]+' ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">'+botones[b]["etiqueta"]+'</button>'; 
+      }
+      popup+= '</div>';
+      popup+= '</div><!-- -->';
             
       trace("");
       //trace(popup);
       $(popup).appendTo( $.mobile.activePage );
       //.popup();
-      trace("popup "+$("#"+id).attr("id"));
+      //trace("popup "+$("#"+id).attr("id"));
       //$("#"+id).popup();
       return $("#"+id);
     } /* /crearDialogoConfirmar */
+    ,
+    mostrarDialogoResultado: function (p){
+      
+    } /* /mostrarDialogoResultado */
     ,
     eliminarDialogo: function (p){
       trace("eliminarDialogo "+p.$dialogo);
