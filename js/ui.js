@@ -167,8 +167,8 @@ tiempoFluido.ui = (function($){
     deshabilitarSeccion : function (seccion){
       seccion = listar(seccion);
       for ( s in seccion ){
-        //$("#"+seccion[s].hide();
-        $("#m_"+seccion[s]).addClass("ui-state-disable"),//.hide();
+        $("#"+seccion[s]).hide();
+        $("#m_"+seccion[s]).addClass("ui-state-disable").hide();
       }      
     } /* /deshabilitarSeccion */
     ,
@@ -220,8 +220,8 @@ $( ".selector" ).tabs( "option", "active", 1 );
         $seccion = prop.seccion;
         indice = prop.indice;
         $( "[data-role='tabs']",$seccion ).tabs("option","disabled",[indice]);
-        //$( "#"+subseccion[s], $seccion ).hide();
-        //$( "#a_"+subseccion[s], $seccion ).hide();
+        $( "#"+subseccion[s], $seccion ).hide();
+        $( "#a_"+subseccion[s], $seccion ).hide();
       }
     } /* /deshabilitarSubseccion */
     ,
@@ -234,7 +234,7 @@ $( ".selector" ).tabs( "option", "active", 1 );
       trace("indice "+indice);
       return {
         seccion: $seccion,
-        indice: indice
+        indice: indice,
       }
     } /* /subseccionProp */
     ,
