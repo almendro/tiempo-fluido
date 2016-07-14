@@ -125,6 +125,13 @@ tiempoFluido.aplicacion = (function($,moment){
 
           ui.mostrarSeccion( seccionActual );
           ui.deshabilitarSubseccion("preferencias");
+          ui.deshabilitarSubseccion("otras");
+          
+          ui.deshabilitarSeccion([
+            "agregar_carga",
+            "ver_jornada",
+            "ver_grilla"
+          ]);
           
           habilitarFormulario({
             formulario: subseccionActual , 
@@ -136,14 +143,24 @@ tiempoFluido.aplicacion = (function($,moment){
             
               (habría que poner un control para que no llegue false)
               */
-              // perfil = 
-              generarId(datosPerfil);
-              io.salvarDatos( datosPerfil , "perfil" , function(){ 
+              perfil = generarId(datosPerfil);
+              io.salvarDatos( perfil , "perfil" , function(){ 
                 /*
                 Mostrar pantalla de Bienvenida
                 */
                 configuracion['preferencias'] = false;
-                bienvenida("primeraVez");
+                
+                ui.habilitarSubseccion([
+                  "preferencias",
+                  "otras"
+                ]);
+                ui.habilitarSeccion([
+                 "agregar_carga",
+                 "ver_jornada",
+                 "ver_grilla"
+                ]);
+
+                bienvenida("primera_vez");
               }); /* io.salvarDatos */
             } /* / callback */
           }); /* habilitarFormulario */
@@ -194,13 +211,7 @@ tiempoFluido.aplicacion = (function($,moment){
                 div: "#valores_defecto",
                 prefijo: "valor_"
               });
-              if(primeraVez=="primeraVez"){
-                  $("#primeraVez").show();
-                  $("#noHayPreferencias").hide();
-              } else {
-                  $("#primeraVez").hide();
-                  $("#noHayPreferencias").show();
-              }
+              ui.mostrarMensajeSeccion("#bienvenida",primeraVez);
     }; /* bienvenida */
 
     var comenzarYa = function () {

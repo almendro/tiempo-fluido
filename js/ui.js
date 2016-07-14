@@ -157,6 +157,20 @@ tiempoFluido.ui = (function($){
     //  $("#"+seccion).fadeIn(300);
     $( ":mobile-pagecontainer" ).pagecontainer( "change", $("#"+seccion));
     },
+    habilitarSeccion : function (seccion){
+      seccion = objetivar(seccion);
+      for ( s in seccion ){
+        $("#m_"+seccion[s]).removeClass("ui-state-disable");
+      }      
+    } /* /habilitarSeccion */
+    ,
+    deshabilitarSeccion : function (seccion){
+      seccion = objetivar(seccion);
+      for ( s in seccion ){
+        $("#m_"+seccion[s]).addClass("ui-state-disable");
+      }      
+    } /* /deshabilitarSeccion */
+    ,
     ocultarSubsecciones : function (){
       trace('UI: ocultarSubsecciones');
     //  $(".subseccion").fadeOut(300);
@@ -188,12 +202,18 @@ $( ".selector" ).tabs( "option", "active", 1 );
       }); /* / each */
     } /* / mostrarSubseccion */
     ,
+    habilitarSubseccion : function (subseccion){
+      var prop = this.subseccionProp(subseccion);
+      var $seccion = prop.seccion;
+      var indice = prop.indice;
+      $( "[data-role='tabs']",$seccion ).tabs("option","disabled",[indice]); 
+    } /* /habilitarSubseccion */
+    ,
     deshabilitarSubseccion : function (subseccion){
       var prop = this.subseccionProp(subseccion);
       var $seccion = prop.seccion;
       var indice = prop.indice;
       $( "[data-role='tabs']",$seccion ).tabs("option","disabled",[indice]);
-      
     } /* /deshabilitarSubseccion */
     ,
     subseccionProp : function(subseccion){
@@ -208,6 +228,12 @@ $( ".selector" ).tabs( "option", "active", 1 );
           indice: indice
       }
     } /* /subseccionProp */
+    ,
+    mostrarMensajeSeccion : function (div,m)
+    {
+      $(".mensaje",$(div)).hide();
+      $("#"+m,$(div)).show();
+    }
     ,
     verPreferencias : function (p){
       trace('UI: verPreferencias '+p);
@@ -243,7 +269,7 @@ $( ".selector" ).tabs( "option", "active", 1 );
     */
     ponerDatos : function ( p ){
       trace('UI: ponerDatos '+p);
-      return populateForm (p);
+      return populateForm (p); // Asset externo
     } /* ponerDatos */
     
   };

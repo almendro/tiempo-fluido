@@ -6,3 +6,11 @@ var replaceAll = function( string, omit, place, prevstring ) {
  };
  /* http://stackoverflow.com/a/22870785  */
 
+ var objetivar = function (e){
+   /*
+   Devuelve una lista
+   */
+   if (typeof e === "object") return e;
+   if (typeof e === "string") return [e];
+   return false;
+ }
