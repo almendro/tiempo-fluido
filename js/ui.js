@@ -51,38 +51,47 @@ tiempoFluido.ui = (function($){
     },
     mostrarDialogoConfirmar : function (p){
       trace("mostrarDialogoConfirmar");
-      var target = p.target;
-      var mensaje = p.mensaje;
-      var callbackSi = p.callbackSi;
-      var callbackNo = p.callbackNo;
-      /*
-      $("#dialogo_confirmar")
-        .appendTo( $.mobile.activePage )
-        .popup();
-      */
       var $dialogo = this.crearDialogo({
-        target: target,
+        target: p.target,
+        class: "confirmar",
         botones: [{
             class: "dialogo_si",
-            etiqueta: "SI"
+            etiqueta: "SI",
+            callback: p.callbackSi
           },{
             class: "dialogo_no",
-            etiqueta: "NO"
+            etiqueta: "NO",
+            callback: p.callbackNo
           }]
       });
       trace("$dialogo id="+$dialogo.attr("id"));
-      //$dialogo.popup("open");
-      $(".mensaje",$dialogo).text(mensaje);
-      $(".dialogo_si",$dialogo).bind("click.misEventos",{$dialogo:$dialogo},callbackSi);
-      $(".dialogo_no",$dialogo).bind("click.misEventos",{$dialogo:$dialogo},callbackNo);
+      $(".mensaje",$dialogo).text(p.mensaje);
+      $(".dialogo_si",$dialogo).bind("click.misEventos",{$dialogo:$dialogo,callback:p.callbackSi},this.cerrarDialogo);
+      $(".dialogo_no",$dialogo).bind("click.misEventos",{$dialogo:$dialogo,callback:p.callbackNo},this.cerrarDialogo);
     } /* /mostrarDialogoConfirmar */
+    ,
+    mostrarDialogoResultado: function (p){
+      trace("mostrarDialogoResultado");
+      var $dialogo = this.crearDialogo({
+        target: p.target,
+        class: "resultado",
+        botones: [{
+          class: "dialogo_ok",
+          etiqueta: "OK",
+          callback: p.callbackOk
+        }]
+      });
+      trace("$dialogo id="+$dialogo.attr("id"));
+      $(".mensaje",$dialogo).text(p.mensaje);
+      $(".dialogo_ok",$dialogo).bind("click.misEventos",{$dialogo:$dialogo,callback:p.callbackOk},this.cerrarDialogo);
+    } /* /mostrarDialogoResultado */
     ,
     crearDialogo : function (p){
       var target = p.target; // el #id boton que llama al dialogo
       var $target = $(target);
       var botones = p.botones;
-      var id = "dialogo_confirmar_"+$target.attr('id');
-      trace("crearDialogoConfirmar "+target+" id="+id);
+      var id = "dialogo_"+p.class+"_"+$target.attr('id');
+      trace("crearDialogo "+target+" id="+id);
       var popup;
       popup = '<div id="'+id+'" ';
           popup+= 'data-role="popup" ';
@@ -102,19 +111,33 @@ tiempoFluido.ui = (function($){
             
       trace("");
       //trace(popup);
-      $(popup).appendTo( $.mobile.activePage );
-      //.popup();
-      //trace("popup "+$("#"+id).attr("id"));
-      //$("#"+id).popup();
+      $(popup)
+        .appendTo( $.mobile.activePage )
+        .hide();
+      var $popup = $("#"+id);
+      /*
+      for ( b in botones ){
+        $("."+botones[b]["class"],$popup)
+          .bind(
+            "click.misEventos",
+            {
+              $dialogo:$dialogo,
+              callback:botones[b]["callback"]
+            },
+            this.cerrarDialogo
+          );
+      }*/
       return $("#"+id);
     } /* /crearDialogoConfirmar */
     ,
-    mostrarDialogoResultado: function (p){
-      
-    } /* /mostrarDialogoResultado */
+    cerrarDialogo: function (p){
+      p.data.callback();
+      trace("cerrarDialogo "+p.data.$dialogo.attr("id"));
+      p.data.$dialogo.remove();
+    }
     ,
     eliminarDialogo: function (p){
-      trace("eliminarDialogo "+p.$dialogo);
+      trace("eliminarDialogo "+p.$dialogo.attr("id"));
           /*
           $( document ).on( 
             "popupafterclose", 

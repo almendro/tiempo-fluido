@@ -29,19 +29,23 @@ tiempoFluido.dev = (function($){
     ,   
     borrarTodo: function(e){
       trace( "DEV: borrarTodo "+e.data.soy );
+      var target = e.data.soy;
       tiempoFluido.ui.mostrarDialogoConfirmar({
-        target: e.data.soy,
+        target: target,
         mensaje: "Borrar todos los datos ¿Estás MUY seguro? ¡Esto no se puede deshacer!",
         callbackSi: function(e){
           trace("Si");
           tiempoFluido.io.borrarTodo();          
           tiempoFluido.ui.eliminarDialogo({ $dialogo: e.data.$dialogo });
           tiempoFluido.ui.mostrarDialogoResultado({
-            target: e.data.soy,
-            mensaje: "Todos los datos locales fueron borrados."
+            target: target,
+            mensaje: "Todos los datos locales fueron borrados.",
+            callbackOk: function(e){
+              trace("callbackOk");
+            } /* /callbackOk */
           })
-          
-        },
+        } /* /callbackSi */
+        ,
         callbackNo: function(e){
           trace("Cancelar");
           tiempoFluido.ui.eliminarDialogo({ $dialogo: e.data.$dialogo });
