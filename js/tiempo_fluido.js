@@ -124,14 +124,19 @@ tiempoFluido.aplicacion = (function($,moment){
           subseccionActual = "perfil";
 
           ui.mostrarSeccion( seccionActual );
-          ui.deshabilitarSubseccion("preferencias");
-          ui.deshabilitarSubseccion("otras");
+          
+          ui.deshabilitarSubseccion([
+            "preferencias",
+            "otras"
+          ]);
           
           ui.deshabilitarSeccion([
             "agregar_carga",
             "ver_jornada",
             "ver_grilla"
           ]);
+          
+          ui.mostrarMensajeSeccion("#bienvenida","primera_vez_sin_perfil");
           
           habilitarFormulario({
             formulario: subseccionActual , 

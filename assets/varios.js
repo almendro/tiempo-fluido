@@ -6,7 +6,7 @@ var replaceAll = function( string, omit, place, prevstring ) {
  };
  /* http://stackoverflow.com/a/22870785  */
 
- var objetivar = function (e){
+ var listar = function (e){
    /*
    Devuelve una lista
    */

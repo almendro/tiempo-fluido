@@ -165,9 +165,10 @@ tiempoFluido.ui = (function($){
     } /* /habilitarSeccion */
     ,
     deshabilitarSeccion : function (seccion){
-      seccion = objetivar(seccion);
+      seccion = listar(seccion);
       for ( s in seccion ){
-        $("#m_"+seccion[s]).addClass("ui-state-disable");
+        //$("#"+seccion[s].hide();
+        $("#m_"+seccion[s]).addClass("ui-state-disable"),//.hide();
       }      
     } /* /deshabilitarSeccion */
     ,
@@ -206,14 +207,22 @@ $( ".selector" ).tabs( "option", "active", 1 );
       var prop = this.subseccionProp(subseccion);
       var $seccion = prop.seccion;
       var indice = prop.indice;
-      $( "[data-role='tabs']",$seccion ).tabs("option","disabled",[indice]); 
+      $( "[data-role='tabs']",$seccion ).tabs("option","enabled",[indice]); 
     } /* /habilitarSubseccion */
     ,
     deshabilitarSubseccion : function (subseccion){
-      var prop = this.subseccionProp(subseccion);
-      var $seccion = prop.seccion;
-      var indice = prop.indice;
-      $( "[data-role='tabs']",$seccion ).tabs("option","disabled",[indice]);
+      trace("deshabilitarSubseccion");
+      subseccion = listar(subseccion);
+      var prop, $seccion, indice;
+      for ( s in subseccion) {
+        trace("deshabilitar subseccion: "+subseccion[s]);
+        prop = this.subseccionProp(subseccion[s]);
+        $seccion = prop.seccion;
+        indice = prop.indice;
+        $( "[data-role='tabs']",$seccion ).tabs("option","disabled",[indice]);
+        //$( "#"+subseccion[s], $seccion ).hide();
+        //$( "#a_"+subseccion[s], $seccion ).hide();
+      }
     } /* /deshabilitarSubseccion */
     ,
     subseccionProp : function(subseccion){
@@ -224,8 +233,8 @@ $( ".selector" ).tabs( "option", "active", 1 );
       var indice = ($subsecciones.filter("#"+subseccion).index())-1;
       trace("indice "+indice);
       return {
-          seccion: $seccion,
-          indice: indice
+        seccion: $seccion,
+        indice: indice
       }
     } /* /subseccionProp */
     ,
