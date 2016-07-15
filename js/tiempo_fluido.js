@@ -212,6 +212,7 @@ tiempoFluido.aplicacion = (function($,moment){
           );
           trace( "configuracion = " + JSON.stringify(configuracion) );
           
+          trace( "Popular formularios ..." );
           ui.ponerDatos ({
             form: "#perfil",
             data: perfil 
@@ -234,13 +235,6 @@ tiempoFluido.aplicacion = (function($,moment){
             comenzar();
           }
         }
-        
-        
-        /* tiempoFluido.io.init(); */
-        
-/*        $('#btn_agregar_carga').bind('click',agregarCarga);
-        $('#btn_ver_grilla').bind('click',verGrilla);
-*/
     }; /* this.iniciar */
     
     var estado = function(p) {
@@ -248,12 +242,12 @@ tiempoFluido.aplicacion = (function($,moment){
         return miEstado;
       }
       if (miEstado==undefined){
-          var miEstado;
+        var miEstado;
       }
       if ( typeof p === "string" ){
-          var miEstado = p;
-          trace ("estado: "+miEstado);
-          return;
+        var miEstado = p;
+        trace ("estado: "+miEstado);
+        return;
       }
       trace("estado: Fruta!!");
       return false;
@@ -266,7 +260,7 @@ tiempoFluido.aplicacion = (function($,moment){
       trace(" generarId: "+id);
       datosPerfil[ "id" ] = id;
       return datosPerfil;
-    };
+    }; /* /generarId */
 
     /* control de pantallas */
     
@@ -307,12 +301,22 @@ tiempoFluido.aplicacion = (function($,moment){
              valoresPorDefecto.preferencias : configuracion['preferencias'] 
        });
        */
-       habilitarFormulario( "preferencias" , "configuracion" , function( datosPreferencias ){
-         /*
-         salvamos los datos en el objeto del 
-         id del perfil actual.
-         */
-         io.salvarDatos( datosPreferencias , perfil.id+".preferencias" , function(){ 
+       habilitarFormulario({
+         formulario: "preferencias" ,
+         seccion: "configuracion" ,
+         callback: function( datosPreferencias ){
+           /*
+           datosPreferencias es la devolucion
+           del formulario cuando el usuario
+           presiona el boton de ENVIAR
+           
+           salvamos los datos en el objeto del 
+           id del perfil actual.
+           */
+           configuracion["preferencias"] = datosPreferencias;
+           configuracion["otras"] = io.obtenerDatosFormulario( "otras" );
+         
+           io.salvarDatos( datosPreferencias , perfil.id+".preferencias" , function(){ 
               /*
               Mostrar pantalla de inicio
               */
