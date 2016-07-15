@@ -58,20 +58,20 @@ tiempoFluido.io = (function($){
        return perfil;
     }
     ,
-    cargarPreferencias : function(perfilId){
+    cargarConfiguracion : function(perfilId){
 
-       trace('IO: cargarPreferencias');
+       trace('IO: cargarConfiguracion');
        trace( 'perfilId = ' + perfilId );
 
-       var preferencias;
-       if ( storage.isSet( 'tf.' + perfilId + '.preferencias' ) ) {
-         trace('hay datos de preferencias');
-         preferencias = storage.get( 'tf.' + perfilId + '.preferencias' );
+       var configuracion;
+       if ( storage.isSet( 'tf.' + perfilId + '.configuracion' ) ) {
+         trace('hay datos de configuracion');
+         configuracion = storage.get( 'tf.' + perfilId + '.configuracion' );
        } else {
-         trace('NO hay datos de preferencias guardados');
-         preferencias = false;
+         trace('NO hay datos de configuracion guardados');
+         configuracion = false;
        }
-       return preferencias; // tmp
+       return configuracion; // tmp
      }
      ,
      obtenerDatosFormulario : function ( formulario , callback ){

@@ -23,7 +23,7 @@ tiempoFluido.aplicacion = (function($,moment){
     /* configuracion */
     var perfil,
         configuracion,
-        preferenciasDefault;
+        valoresPorDefecto;
   
     /* data input/output e interfaz usuario */
     var io, ui;
@@ -40,6 +40,8 @@ tiempoFluido.aplicacion = (function($,moment){
         subseccionActual , 
         seccionSiguiente , 
         subseccionSiguiente ;
+        
+    var estado;
     
     var dev; /* Opciones de desarrollador */
     
@@ -47,6 +49,8 @@ tiempoFluido.aplicacion = (function($,moment){
     para capturar todos los botones de los formularios
     */
     var $botonesEnviar;
+    
+    var TF_MODO_FLUIDO = 0;
 
     this.iniciar = function(){
         
@@ -84,13 +88,15 @@ tiempoFluido.aplicacion = (function($,moment){
             otras: {}
         };
         
-        preferenciasDefault = {
-          tiempoPorJornada: 7*60, /* minutos */
-          tiempoIntercargas: 5, /* minutos */
-          reservaContingencias: 2*60, /* minutos */
-          tiempoMinimo: 20, /* minutos */
-          diasDeSemana: /* */
-            {
+        valoresPorDefecto = {
+          configuracion : {
+            preferencias : {
+              tiempoPorJornada: 7*60, /* minutos */
+              tiempoIntercargas: 5, /* minutos */
+              reservaContingencias: 2*60, /* minutos */
+              tiempoMinimo: 20, /* minutos */
+              diasDeSemana: /* */
+              {
                 lun: true,
                 mar: true,
                 mie: true,
@@ -98,8 +104,14 @@ tiempoFluido.aplicacion = (function($,moment){
                 vie: true,
                 sab: false,
                 dom: false
+              }
+            },
+            otras : {
+              modo: TF_MODO_FLUIDO
             }
+          } /* /configuracion */
         };
+        
         
         diasDeSemanaNombresCortos = [
           "lun", "mar", "mie", "jue", "vie", "sab", "dom"
@@ -108,8 +120,14 @@ tiempoFluido.aplicacion = (function($,moment){
         $botonesEnviar = jQuery( "button.enviar" );
         //ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
 
+        
+        // ACA COMIENZA LA POSTA
+        
+        
         perfil = io.cargarPerfil();
-        if ( perfil==false )
+        estado( perfil==false ? "SIN_PERFIL" : "PERFIL" );
+        
+        if ( estado() == "SIN_PERFIL"; ) // COMPROBAR CONTRA perfil.id
         {
           /*
           En este punto no hay definido un perfil 
@@ -136,7 +154,7 @@ tiempoFluido.aplicacion = (function($,moment){
             "ver_grilla"
           ]);
           
-          ui.mostrarMensajeSeccion("#bienvenida","primera_vez_sin_perfil");
+          ui.mostrarMensajeSeccion( "#bienvenida", estado() );
           
           habilitarFormulario({
             formulario: subseccionActual , 
@@ -153,35 +171,67 @@ tiempoFluido.aplicacion = (function($,moment){
                 /*
                 Mostrar pantalla de Bienvenida
                 */
-                configuracion['preferencias'] = false;
+                
+                estado( "SIN_CONFIGURACION" );
                 
                 ui.habilitarSubseccion([
                   "preferencias",
                   "otras"
                 ]);
+                /*
                 ui.habilitarSeccion([
                  "agregar_carga",
                  "ver_jornada",
                  "ver_grilla"
                 ]);
-
-                bienvenida("primera_vez");
+                */
+                bienvenida();
               }); /* io.salvarDatos */
             } /* / callback */
           }); /* habilitarFormulario */
         } 
         else 
         {
+          /*
+          En este punto hay definido un perfil,
+          pero comprobamos si están definidas
+          las preferencias generales de tiempo.
+          Si hay preferencias arrancamos normal.
+          Populamos los formularios con los datos.
+          */
           trace( "presentamos el perfil: " + perfil.id + " " + perfil.nombre + " " + perfil.alias + " " + perfil.email );
-          configuracion['preferencias'] = io.cargarPreferencias( perfil.id );
-          trace( "configuracion['preferencias'] = " + JSON.stringify(configuracion.preferencias) );
-          if (configuracion.preferencias==false){
-            trace('mostrar aviso de no configuracion');
+          
+          configuracion = io.cargarConfiguracion( perfil.id );
+          
+          estado( configuracion==false ? "SIN_CONFIGURACION" : "CONFIGURADO" );
+          
+          configuracion = $.extend(
+            {},
+            valoresPorDefecto.configuracion,
+            configuracion
+          );
+          trace( "configuracion = " + JSON.stringify(configuracion) );
+          
+          ui.ponerDatos ({
+            form: "#perfil",
+            data: perfil 
+          });
+          ui.ponerDatos ({
+            form: "#preferencias",
+            data: configuracion['preferencias']
+          });
+          ui.ponerDatos ({
+            form: "#otras",
+            data: configuracion['otras']
+          });
+          
+          if ( estado()=="SIN_CONFIGURACION" ){
+            trace('mostrar aviso de SIN_CONFIGURACION');
             bienvenida();
-          }
+          }        
           else
           {
-            comenzarYa();
+            comenzar();
           }
         }
         
@@ -192,6 +242,22 @@ tiempoFluido.aplicacion = (function($,moment){
         $('#btn_ver_grilla').bind('click',verGrilla);
 */
     }; /* this.iniciar */
+    
+    var estado = function(p) {
+      if (p==undefined) {
+        return miEstado;
+      }
+      if (miEstado==undefined){
+          var miEstado;
+      }
+      if ( typeof p === "string" ){
+          var miEstado = p;
+          trace ("estado: "+miEstado);
+          return;
+      }
+      trace("estado: Fruta!!");
+      return false;
+    }; /* /estado */
     
     var generarId = function ( datosPerfil ) {
       var id = datosPerfil.email;
@@ -204,35 +270,43 @@ tiempoFluido.aplicacion = (function($,moment){
 
     /* control de pantallas */
     
-    var bienvenida = function (primeraVez) {
-              ui.mostrarSeccion ( "inicio" );
-              ui.mostrarSubseccion ( "bienvenida" );
-              $( '.valor.nombre' ).text( perfil.nombre );
-              $( '.valor.id' ).text( perfil.id );
-              $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
-              $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
-              ui.verPreferencias ({
-                datos: preferenciasDefault,
-                div: "#valores_defecto",
-                prefijo: "valor_"
-              });
-              ui.mostrarMensajeSeccion("#bienvenida",primeraVez);
+    var bienvenida = function () {
+      ui.mostrarSeccion ( "inicio" );
+      ui.mostrarSubseccion ( "bienvenida" );
+      $( '.valor.perfil.nombre' ).text( perfil.nombre );
+      $( '.valor.perfil.id' ).text( perfil.id );
+      $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
+      $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
+      /*
+      ui.verPreferencias ({
+        datos: valoresPorDefecto.preferencias,
+        div: "#valores_defecto",
+        prefijo: "valor_"
+      });
+      */
+      ui.mostrarMensajeSeccion("#bienvenida", estado() );
     }; /* bienvenida */
 
     var comenzarYa = function () {
       trace("comenzarYa: ");
     }; /* comenzarYa */
  
+    var comenzar = function () {
+      trace("comenzar: ");
+    }; /* comenzarYa */
+
        
     var configurarPreferencias = function () {
-       trace("configurarPreferencias: ");
+       trace("configurarPreferencias: ");      
        ui.mostrarSeccion( "configuracion" );
+       /*
        ui.ponerDatos ({
            form: "#preferencias",
            data: 
              configuracion['preferencias'] == false ? 
-             preferenciasDefault : configuracion['preferencias'] 
+             valoresPorDefecto.preferencias : configuracion['preferencias'] 
        });
+       */
        habilitarFormulario( "preferencias" , "configuracion" , function( datosPreferencias ){
          /*
          salvamos los datos en el objeto del 
@@ -250,7 +324,7 @@ tiempoFluido.aplicacion = (function($,moment){
               $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
               $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
               ui.verPreferencias ({
-                datos: preferenciasDefault,
+                datos: valoresPorDefecto.preferencias,
                 div: "#valores_defecto",
                 prefijo: "valor_"
               });

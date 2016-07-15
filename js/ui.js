@@ -153,14 +153,17 @@ tiempoFluido.ui = (function($){
     },
     mostrarSeccion : function (seccion){
       trace('UI: mostrarSeccion'+seccion);
-    //  this.ocultarSeccion();
-    //  $("#"+seccion).fadeIn(300);
-    $( ":mobile-pagecontainer" ).pagecontainer( "change", $("#"+seccion));
-    },
+      //  this.ocultarSeccion();
+      //  $("#"+seccion).fadeIn(300);
+      $( ":mobile-pagecontainer" ).pagecontainer( "change", $("#"+seccion));
+    } /* /mostrarSeccion */
+    ,
     habilitarSeccion : function (seccion){
       seccion = objetivar(seccion);
       for ( s in seccion ){
         $("#m_"+seccion[s]).removeClass("ui-state-disable");
+        $("#m_"+seccion[s]).show();
+        //$("#"+seccion[s]).show();
       }      
     } /* /habilitarSeccion */
     ,
@@ -207,7 +210,9 @@ $( ".selector" ).tabs( "option", "active", 1 );
       var prop = this.subseccionProp(subseccion);
       var $seccion = prop.seccion;
       var indice = prop.indice;
-      $( "[data-role='tabs']",$seccion ).tabs("option","enabled",[indice]); 
+      $( "[data-role='tabs']",$seccion ).tabs("option","enabled",[indice]);
+      $( "#a_"+subseccion, $seccion ).show();
+      // $( "#"+subseccion, $seccion ).show();
     } /* /habilitarSubseccion */
     ,
     deshabilitarSubseccion : function (subseccion){
@@ -241,7 +246,7 @@ $( ".selector" ).tabs( "option", "active", 1 );
     mostrarMensajeSeccion : function (div,m)
     {
       $(".mensaje",$(div)).hide();
-      $("#"+m,$(div)).show();
+      $("."+m,$(div)).show();
     }
     ,
     verPreferencias : function (p){
