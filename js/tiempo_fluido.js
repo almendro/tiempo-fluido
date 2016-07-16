@@ -167,7 +167,10 @@ tiempoFluido.aplicacion = (function($,moment){
               (habría que poner un control para que no llegue false)
               */
               perfil = generarId(datosPerfil);
-              io.salvarDatos( perfil , "perfil" , function(){ 
+              io.salvarDatos({
+                datos: perfil , 
+                objetoStorage: "perfil" ,
+                callback: function(){ 
                 /*
                 Mostrar pantalla de Bienvenida
                 */
@@ -186,9 +189,10 @@ tiempoFluido.aplicacion = (function($,moment){
                 ]);
                 */
                 bienvenida();
-              }); /* io.salvarDatos */
-            } /* / callback */
-          }); /* habilitarFormulario */
+                } /* /callback */
+              }); /* /io.salvarDatos */
+            } /* /callback */
+          }); /* /habilitarFormulario */
         } 
         else 
         {
@@ -314,9 +318,12 @@ tiempoFluido.aplicacion = (function($,moment){
            id del perfil actual.
            */
            configuracion["preferencias"] = datosPreferencias;
-           configuracion["otras"] = io.obtenerDatosFormulario( "otras" );
+           //configuracion["otras"] = io.obtenerDatosFormulario( "otras" );
          
-           io.salvarDatos( datosPreferencias , perfil.id+".preferencias" , function(){ 
+           io.salvarDatos({
+             datos: datosPreferencias , 
+             objetoStorage: perfil.id+".preferencias" ,
+             callback: function(){ 
               /*
               Mostrar pantalla de inicio
               */
@@ -333,7 +340,9 @@ tiempoFluido.aplicacion = (function($,moment){
                 prefijo: "valor_"
               });
               */
-        }); /* io.salvarDatos */
+            }/* /callback */
+          }); /* io.salvarDatos */
+        }/* /callback */
       }); /* habilitarFormulario */
     }; /* configurarPreferencias */
     

@@ -112,12 +112,13 @@ tiempoFluido.io = (function($){
       return ( callback )? callback( salida ) : salida;
     } /* obtenerDatosFormulario */
     ,
-    salvarDatos : function ( datos , objetoStorage , callback ){
-      trace('IO: salvarDatos datos ' + JSON.stringify(datos) );
-      trace('IO: salvarDatos objetoStorage ' + objetoStorage );
-      storage.set('tf.'+objetoStorage , datos );
-      trace('tf.' + objetoStorage + " = " + datos );
-      return callback();
+    salvarDatos : function (p) {
+      //datos , objetoStorage , callback
+      trace('IO: salvarDatos datos ' + JSON.stringify(p.datos) );
+      trace('IO: salvarDatos objetoStorage ' + p.objetoStorage );
+      storage.set('tf.'+p.objetoStorage , p.datos );
+      //trace('tf.' + p.objetoStorage + " = " + p.datos );
+      return (p.callback ) ? p.callback(true) : true;
     } /* salvarDatos */
     
   }; /* var io */
