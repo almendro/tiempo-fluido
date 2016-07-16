@@ -5,8 +5,8 @@
 
     <meta charset="utf-8">
 
-    <!-- <link rel="stylesheet" type="text/css" href="styles.css" media="screen" /> -->
-
+    <link rel="stylesheet" type="text/css" href="assets/dev/style.css" media="screen" />
+   
     <script src="assets/jquery-2.2.3.min.js"></script>
     
     <!--
@@ -14,24 +14,17 @@
     http://momentjs.com/ via http://stackoverflow.com/questions/7763327/how-to-calculate-date-difference-in-javascript
     -->
     <script src="assets/jquery.serializejson.min.js"></script>
-    
+    <script src="assets/populateform.js"></script>
     
     <script>
       $(function(){
-      /*
-      var consola = {
-        div : $("html").append("<div id='consola'></div>"),
-        log : function (e){
-          consola.div.append("<pre>"+e+"</pre>");
-        });
-      */  
-      var consola = $("html").append("<div id='consola'></div>");
-      var log = function (e){
-          consola.append("<pre>"+e+"</pre>");
+      
+        $("html").append("<div id='consola' style='width:98%;border:1px solid #0f0;color:#0f0;background-color:#111;padding:.5%;font-size:1em;'></div>");
+        var consola = $("#consola");
+        var log = function (e){
+          consola.append("<p>"+e+"</p>");
         }
-        log("hola");
-        
-        
+              
         var pre = {
           tiempoPorJornada: 7*60, /* minutos */
           tiempoIntercargas: 5, /* minutos */
@@ -52,12 +45,18 @@
         var mostrar = function(){
           log("vamos");
           dame = $("#preferencias").serializeJSON({checkboxUncheckedValue: false});
-          log(dame);
+          //log(dame);
           log(JSON.stringify(dame));
-        }
+        };
         
         $("#preferencias .enviar").click(mostrar);
-      
+        
+        /* precargar form */
+        populateForm({
+          form: "#preferencias",
+          data: pre
+        });
+
       });
     </script>
   </head>

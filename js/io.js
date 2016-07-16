@@ -14,23 +14,26 @@ input/output data
 var tiempoFluido = window.tiempoFluido || {};
 
 tiempoFluido.io = (function($){
-
-  var io = function(){
     
-    trace('creamos el objeto IO');
-    
-    var soyIo = this;
-    
-    $.alwaysUseJsonInStorage(true);
-    var storage = $.localStorage;
-    
-    this.borrarTodo = function(){
+  var storage, soyIo;
+  
+  var io = //function(){
+    {
+    //trace('creamos el objeto IO');
+    iniciar: function (){
+      soyIo = this;
+      trace('iniciar IO');
+      $.alwaysUseJsonInStorage(true);
+      storage = $.localStorage;
+    }
+    ,
+    borrarTodo : function(){
        trace('IO: borrarTodo');
        storage.removeAll();  
        return true;
-    };
-    
-    this.borrarObjeto = function (objeto){
+    }
+    ,
+    borrarObjeto : function (objeto){
         trace("IO: borrarObjeto "+objeto);
         if (storage.isSet("tf."+objeto)){
           storage.remove("tf."+objeto);
@@ -38,40 +41,40 @@ tiempoFluido.io = (function($){
         trace(objeto+"? "+storage.isSet("tf."+objeto));
         return true;
     }
-    
-    this.cargarPerfil = function(){
+    ,
+    cargarPerfil : function(){
 
        trace('IO: cargarPerfil');
        var perfil;
        if ( storage.isSet('tf.perfil')){
          trace('hay datos de perfil');
          perfil = storage.get('tf.perfil');
-         trace('perfil='+perfil);
+         trace('perfil='+JSON.stringify(perfil));
        } else {
          trace('NO hay datos de perfil guardados');
          perfil = false;
        }
     
        return perfil;
-    };
+    }
+    ,
+    cargarConfiguracion : function(perfilId){
 
-    this.cargarPreferencias = function(perfilId){
-
-       trace('IO: cargarPreferencias');
+       trace('IO: cargarConfiguracion');
        trace( 'perfilId = ' + perfilId );
 
-       var preferencias;
-       if ( storage.isSet( 'tf.' + perfilId + '.preferencias' ) ) {
-         trace('hay datos de preferencias');
-         preferencias = storage.get( 'tf.' + perfilId + '.preferencias' );
+       var configuracion;
+       if ( storage.isSet( 'tf.' + perfilId + '.configuracion' ) ) {
+         trace('hay datos de configuracion');
+         configuracion = storage.get( 'tf.' + perfilId + '.configuracion' );
        } else {
-         trace('NO hay datos de preferencias guardados');
-         preferencias = false;
+         trace('NO hay datos de configuracion guardados');
+         configuracion = false;
        }
-       return preferencias; // tmp
-     };
-
-    this.obtenerDatosFormulario = function ( formulario , callback ){
+       return configuracion; // tmp
+     }
+     ,
+     obtenerDatosFormulario : function ( formulario , callback ){
       trace('IO: obtenerDatosFormulario ' + formulario);
       var datos = $("."+formulario+".propiedad" , $( "#" + formulario ));
       var salida = {};
@@ -101,15 +104,22 @@ tiempoFluido.io = (function($){
         trace ( propiedad + " = " + salida[propiedad]);
       }); /* datos.each */ 
       return ( callback )? callback( salida ) : salida;
-    }; /* obtenerDatosFormulario */
-
-    this.salvarDatos = function ( datos , objetoStorage , callback ){
-      trace('IO: salvarDatos datos ' + datos );
-      trace('IO: salvarDatos objetoStorage ' + objetoStorage );
-      storage.set('tf.'+objetoStorage , datos );
-      trace('tf.' + objetoStorage + " = " + datos );
-      return callback();
-    }; /* salvarDatos */
+    } /* obtenerDatosFormulario */
+    ,
+    obtenerDatosFormulario : function ( formulario , callback ){
+       trace('IO: obtenerDatosFormulario (serializeJSON)' + formulario);
+      var salida = $("#"+formulario).serializeJSON({checkboxUncheckedValue: false}); 
+      return ( callback )? callback( salida ) : salida;
+    } /* obtenerDatosFormulario */
+    ,
+    salvarDatos : function (p) {
+      //datos , objetoStorage , callback
+      trace('IO: salvarDatos datos ' + JSON.stringify(p.datos) );
+      trace('IO: salvarDatos objetoStorage ' + p.objetoStorage );
+      storage.set('tf.'+p.objetoStorage , p.datos );
+      //trace('tf.' + p.objetoStorage + " = " + p.datos );
+      return (p.callback ) ? p.callback(true) : true;
+    } /* salvarDatos */
     
   }; /* var io */
 

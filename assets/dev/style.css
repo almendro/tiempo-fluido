@@ -1,0 +1,27 @@
+﻿/* 
+
+Tiempo Fluido
+-------------
+
+Martín Ochoa
+2016-03-17
+
+
+*/
+#consola #log{
+  position: relative;
+  color:#0f0;
+  font-size: 1em;
+}
+
+#consola p
+{
+  width: 100%;
+  margin:0;
+  padding:0;
+  color:#0f0;
+  font-size: 1em;
+  font-family: mono;
+  word-wrap: break-word;
+}
+/* fin css */
