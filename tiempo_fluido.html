@@ -25,7 +25,13 @@
     <script>
       
       var $log, trace;
-      //trace=function(e){alert(e);}
+      trace=function(e){
+        if (console.log){
+          console.log(e);
+        } else {
+          alert(e);
+        }
+      };
       
       Modernizr.load([
         {

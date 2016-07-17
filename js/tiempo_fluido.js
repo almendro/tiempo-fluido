@@ -41,7 +41,7 @@ tiempoFluido.aplicacion = (function($,moment){
         seccionSiguiente , 
         subseccionSiguiente ;
         
-    var estado;
+    var estado, miEstado;
     
     var dev; /* Opciones de desarrollador */
     
@@ -127,7 +127,7 @@ tiempoFluido.aplicacion = (function($,moment){
         perfil = io.cargarPerfil();
         estado( perfil==false ? "SIN_PERFIL" : "PERFIL" );
         
-        if ( estado() == "SIN_PERFIL"; ) // COMPROBAR CONTRA perfil.id
+        if ( estado() == "SIN_PERFIL" ) // COMPROBAR CONTRA perfil.id
         {
           /*
           En este punto no hay definido un perfil 
@@ -243,17 +243,15 @@ tiempoFluido.aplicacion = (function($,moment){
     
     var estado = function(p) {
       if (p==undefined) {
+        trace ("consulta estado: "+miEstado);
         return miEstado;
       }
-      if (miEstado==undefined){
-        var miEstado;
-      }
       if ( typeof p === "string" ){
-        var miEstado = p;
-        trace ("estado: "+miEstado);
+        miEstado = p;
+        trace ("establece estado: "+miEstado);
         return;
       }
-      trace("estado: Fruta!!");
+      trace("estado: ¡¡¡Fruta!!!");
       return false;
     }; /* /estado */
     
