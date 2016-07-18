@@ -27,6 +27,9 @@ tiempoFluido.aplicacion = (function($,moment){
   
     /* data input/output e interfaz usuario */
     var io, ui;
+    
+    /* referencias a las class objects */
+    var Carga, Jornada, Grilla;
 
     /* datos */
     var biblioteca;
@@ -66,6 +69,8 @@ tiempoFluido.aplicacion = (function($,moment){
         
         dev = tiempoFluido.dev;
         dev.iniciar();
+        
+        Carga = tiempoFluido.Carga;
         
         /* fin iniciar módulos */
         

@@ -13,18 +13,23 @@ Carga
 
 var tiempoFluido = window.tiempoFluido || {};
 
-tiempoFluido.carga = (function($){
+tiempoFluido.Carga = (function($){
 
-  var carga = fuction(){
+  var Carga = fuction(id){
+    var soy = this;
+    this.obtenerCarga = function(){
+      return id;
+    }
   };
 
-  carga.crear = function(){
-
+  Carga.crear = function(p){
     trace('crear carga');
+    var carga = new Carga(p);
+    return carga;
   };
 
 
-  return carga;
+  return Carga;
 
 })(jQuery);
 
