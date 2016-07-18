@@ -15,19 +15,14 @@ var tiempoFluido = window.tiempoFluido || {};
 
 tiempoFluido.carga = (function($){
 
-  var carga = {
-
-    init : function(){
-
-       trace('iniciamos la CARGA');
-    },
-
-    hideDialog : function (){
-
-       trace('hideDialog');
-      $(".dialog").fadeOut(300);
-    }
+  var carga = fuction(){
   };
+
+  carga.crear = function(){
+
+    trace('crear carga');
+  };
+
 
   return carga;
 
