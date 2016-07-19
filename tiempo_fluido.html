@@ -111,6 +111,15 @@
     <header id="mi_cabecera" data-role="header" data-theme="b" data-position="fixed">
       <h1>Tiempo Fluido</h1>
       <a href="#consola" id="dev" class="ui-btn ui-btn-right ui-icon-eye ui-btn-icon-notext ui-corner-all" >DEV</a>
+      <nav data-role="navbar" id="menu_principal">
+        <ul>
+          <li><a data-icon="home" data-transition="fade" id="m_inicio" href="#inicio" >Inicio</a></li>
+          <li><a data-icon="shop" data-transition="fade" id="m_ver_cargas" href="#ver_cargas" >Ver cargas</a></li>
+          <li><a data-icon="bars" data-transition="fade" id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
+          <li><a data-icon="grid" data-transition="fade" id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
+          <li><a data-icon="gear" data-transition="fade" id="m_configuracion" href="#configuracion" >Configuración</a></li>
+        </ul>
+      </nav>
     </header><!-- /#mi_cabecera -->
 
 <!-- ------------------ -->
@@ -157,9 +166,9 @@
 
 <!-- ------------------ -->
 
-    <section id="agregar_carga" data-role="page" class="seccion">
+    <section id="ver_cargas" data-role="page" class="seccion">
       <header data-role="header">
-        <h1>Agregar carga</h1>
+        <h1>Ver cargas</h1>
       </header>
 
       <form class="form-horizontal">
@@ -365,13 +374,9 @@
  
     <footer data-role="footer" data-theme="b" data-position="fixed">
       <!-- navegación -->
-      <nav data-role="navbar" id="menu_principal">
+      <nav data-role="navbar" id="menu_accion">
         <ul>
-          <li><a data-icon="home" data-transition="fade" id="m_inicio" href="#inicio" >Inicio</a></li>
           <li><a data-icon="plus" data-transition="fade" id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a></li>
-          <li><a data-icon="clock" data-transition="fade" id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
-          <li><a data-icon="calendar" data-transition="fade" id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
-          <li><a data-icon="gear" data-transition="fade" id="m_configuracion" href="#configuracion" >Configuración</a></li>
         </ul>
       </nav>
     </footer>
