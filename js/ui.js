@@ -33,12 +33,12 @@ tiempoFluido.ui = (function($){
         $( "#menu_principal a.ui-btn-active" ).removeClass( "ui-btn-active" );
         // Add active class to current nav button
         $( "#menu_principal a" ).each(function() {
-          trace(current+" text  ="+ $(this).text());
+          //trace(current+" text  ="+ $(this).text());
           if ( $( this ).text() === current ) {
             $( this ).addClass( "ui-btn-active" );
           }
         });
-      });
+      }); /* /on.pagecontainerchange */
       
       $( "body>[data-role='panel']" ).panel();
       
@@ -159,7 +159,7 @@ tiempoFluido.ui = (function($){
     } /* /mostrarSeccion */
     ,
     habilitarSeccion : function (seccion){
-      seccion = objetivar(seccion);
+      seccion = listar(seccion);
       for ( s in seccion ){
         $("#m_"+seccion[s]).removeClass("ui-state-disable");
         $("#m_"+seccion[s]).show();

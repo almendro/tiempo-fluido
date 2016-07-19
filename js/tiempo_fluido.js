@@ -294,7 +294,7 @@ tiempoFluido.aplicacion = (function($,moment){
  
     var comenzar = function () {
       trace("comenzar: ");
-    }; /* comenzarYa */
+    }; /* comenzar */
 
        
     var configurarPreferencias = function () {
