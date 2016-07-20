@@ -137,16 +137,9 @@ tiempoFluido.aplicacion = (function($,moment){
           trace("seccion "+$soy.attr("id"));
           if ( $soy.attr("data-plantilla") ){
             trace( "hay plantilla" );
-            $miPlantilla = $( "[data-plantilla-id='"+$soy.attr("data-plantilla")+"']" ).clone();
-            $miPlantilla.
-              removeAttr("data-plantilla-id").
-              removeClass("plantilla_html");
-            $enviar = $( ".enviar", $miPlantilla );
-            $enviar.text(
-              $soy.attr("data-plantilla-enviar")
-            );
-            $soy.append($miPlantilla);
-            $miPlantilla.collapsible();
+            $miPlantilla = ui.aplicarPlantilla({
+              $subseccion: $soy
+            });
           }
         });
         // ACA COMIENZA LA POSTA

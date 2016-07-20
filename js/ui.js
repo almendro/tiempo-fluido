@@ -243,6 +243,40 @@ $( ".selector" ).tabs( "option", "active", 1 );
       }
     } /* /subseccionProp */
     ,
+    aplicarPlantilla : function (p){
+      /*
+      Aplica una plantilla html, por lo general
+      un formulario que se repite, a una subsección
+      que tiene una acción diferente sobre
+      un mismo conjunto de datos. Ej. ABM CARGAS
+      
+      aplicarPlantilla({
+        $subseccion: jQuery
+      });
+      
+      */
+      var salida,
+          $miPlantilla,
+          $enviar;
+      
+      $miPlantilla = $( "[data-plantilla-id='"+p.$subseccion.attr( "data-plantilla" )+"']" ).clone();
+      $miPlantilla.
+        removeAttr("data-plantilla-id").
+        removeClass("plantilla_html");
+      $enviar = $( ".enviar", $miPlantilla );
+      $enviar.text(
+        p.$subseccion.attr("data-plantilla-enviar")
+      );
+      p.$subseccion.append($miPlantilla);
+      
+      /* jQuery.mobile */
+      $( ".acordion", $miPlantilla ).collapsible();
+      
+      salida = $miPlantilla;
+      
+      return (p.callback) ? p.callback( salida ) : salida;
+    } /* /aplicarPlantilla */
+    ,
     mostrarMensajeSeccion : function (div,m)
     {
       $(".mensaje",$(div)).hide();
