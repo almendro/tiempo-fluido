@@ -39,22 +39,24 @@ tiempoFluido.aplicacion = (function($,moment){
     
     var dias_nombres;
 
-    var seccionActual , 
-        subseccionActual , 
-        seccionSiguiente , 
-        subseccionSiguiente ;
-        
     var estado, miEstado;
-    
-    var dev; /* Opciones de desarrollador */
     
     /* botones enviar 
     para capturar todos los botones de los formularios
     */
-    var $botonesEnviar;
-    
+    var $botonesEnviar,
+        $secciones,
+        $subsecciones;
+        
+    var seccionActual , 
+        subseccionActual , 
+        seccionSiguiente , 
+        subseccionSiguiente ;
+           
     var TF_MODO_FLUIDO = 0;
-
+    
+    var dev; /* Opciones de desarrollador */
+    
     this.iniciar = function(){
         
         /*
@@ -122,10 +124,31 @@ tiempoFluido.aplicacion = (function($,moment){
           "lun", "mar", "mie", "jue", "vie", "sab", "dom"
         ];
 
-        $botonesEnviar = jQuery( "button.enviar" );
+        $secciones = $( "#seccion" );
+        $subsecciones = $( ".subseccion" );
+        $botonesEnviar = $( ".enviar" );
         //ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
 
-        
+        trace( "Preprocesamos las subsecciones ..." );
+        $subsecciones.each(function(e){
+          var $soy = $(this);
+          var $miPlantilla;
+          var $enviar;
+          trace("seccion "+$soy.attr("id"));
+          if ( $soy.attr("data-plantilla") ){
+            trace( "hay plantilla" );
+            $miPlantilla = $( "[data-plantilla-id='"+$soy.attr("data-plantilla")+"']" ).clone();
+            $miPlantilla.
+              removeAttr("data-plantilla-id").
+              removeClass("plantilla_html");
+            $enviar = $( ".enviar", $miPlantilla );
+            $enviar.text(
+              $soy.attr("data-plantilla-enviar")
+            );
+            $soy.append($miPlantilla);
+            $miPlantilla.collapsible();
+          }
+        });
         // ACA COMIENZA LA POSTA
         
         
@@ -325,7 +348,7 @@ tiempoFluido.aplicacion = (function($,moment){
          
            io.salvarDatos({
              datos: datosPreferencias , 
-             objetoStorage: perfil.id+".preferencias" ,
+             objetoStorage: perfil.id+".configuracion.preferencias" ,
              callback: function(){ 
               /*
               Mostrar pantalla de inicio
@@ -351,14 +374,16 @@ tiempoFluido.aplicacion = (function($,moment){
     
     
     var habilitarFormulario = function(p){
-        
+      /*
+      Establece las acciones del boton enviar
+      */
       trace('habilitarFormulario: '+p.formulario+" "+p.seccion);
       
-      deshabilitarBotonesEnviar();
-      ui.mostrarSubseccion(p.formulario);
-      jQuery( 
+      //deshabilitarBotonesEnviar();
+      //ui.mostrarSubseccion(p.formulario);
+      $( 
         ".enviar" , 
-        jQuery( "#"+p.formulario ) 
+        $( "#"+p.formulario ) 
       ).bind( 
         'click.misEventos', 
         { /* parametros para enviarDatos */

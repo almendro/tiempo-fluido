@@ -175,6 +175,7 @@
         <div data-role="navbar">
           <ul>
             <li><a id="a_agregar_carga" href="#agregar_carga" data-icon="plus">Agregar carga</a></li>
+            <li><a id="a_modificar_carga" href="#modificar_carga" data-icon="edit">Modificar carga</a></li>
             <li><a id="a_listar_cargas" href="#listar_cargas" data-icon="bullets">Listar cargas</a></li>
             <!--
             <li><a id="a_agregar_plantilla" href="#agregar_plantilla" data-icon="plus">Agregar plantilla</a></li>
@@ -182,27 +183,46 @@
             -->
           </ul>
         </div><!-- navbar -->
-        <form id="agregar_carga" class="subseccion ui-content">
-          <fieldset>
-            <legend>Agregar carga</legend>
-            <div class="form-group">
-              <label for="titulo" class="col-md-2 control-label">Título</label>
-              <div class="col-md-10">
-                <input type="titulo" class="form-control" id="inputCargaTitulo" placeholder="Título">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-10 col-md-offset-2">
-                <button type="button" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </div>
-          </fieldset>
-        </form><!-- /#agregar_carga -->
+        
+        <div id="agregar_carga" 
+             class="subseccion ui-content"
+             data-plantilla="abm_carga" 
+             data-plantilla-enviar="Agregar">
+          <p>ABM Carga: Agregar</p>
+        </div><!-- /#agregar_carga -->
+        
+        <div id="modificar_carga" 
+             class="subseccion ui-content" 
+             data-plantilla="abm_carga" 
+             data-plantilla-enviar="Guardar">
+          <p>ABM Carga: Modificar</p>
+        </div><!-- /#modificar_carga -->
+        
         <div id="listar_cargas" class="subseccion ui-content">
           <p>Listar cargas</p>
         </div><!-- /#listar_cargas -->
       </div><!-- /tabs -->
+      
+      
+      <form data-plantilla-id="abm_carga" data-role="collapsible" class="plantilla_html" data-collapsed="false">
+        <h2>Básico</h2>
+        <fieldset>
+          <legend>Los datos mínimos.</legend>
+          <div class="form-group">
+            <label for="titulo" class="col-md-2 control-label">Título</label>
+            <div class="col-md-10">
+              <input type="titulo" class="form-control" id="inputCargaTitulo" placeholder="Título">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+              <button type="button" class="btn btn-default">Cancel</button>
+              <button type="submit" class="btn btn-primary enviar">(acción)</button>
+            </div>
+          </div>
+        </fieldset>
+      </form><!-- /#abm_carga -->
+      
     </section><!-- /#ver_cargas -->
 
 <!-- ------------------ -->
