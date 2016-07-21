@@ -141,6 +141,13 @@ tiempoFluido.aplicacion = (function($,moment){
               $subseccion: $soy
             });
           }
+          /*
+          $enviar = $( ".enviar", $miPlantilla );
+          $enviar.bind
+          */
+          io.habilitarFormulario({
+            $subseccion: $soy
+          });
         });
         // ACA COMIENZA LA POSTA
         
@@ -176,6 +183,7 @@ tiempoFluido.aplicacion = (function($,moment){
           ]);
           
           ui.mostrarMensajeSeccion( "#bienvenida", estado() );
+          
           
           habilitarFormulario({
             formulario: subseccionActual , 
@@ -368,38 +376,75 @@ tiempoFluido.aplicacion = (function($,moment){
     
     var habilitarFormulario = function(p){
       /*
-      Establece las acciones del boton enviar
+      Establece las acciones del boton enviar,
+      recibe el objeto jQuery de subseccion
+      y el callback de la funcion
+      para cuando el botón es presionado
       */
-      trace('habilitarFormulario: '+p.formulario+" "+p.seccion);
-      
-      //deshabilitarBotonesEnviar();
-      //ui.mostrarSubseccion(p.formulario);
-      $( 
-        ".enviar" , 
-        $( "#"+p.formulario ) 
-      ).bind( 
-        'click.misEventos', 
-        { /* parametros para enviarDatos */
-          formulario: p.formulario, 
-          callback: p.callback 
-        },
-        enviarDatos 
-      );
-      //return true; // tmp
-    };
+      trace('habilitarFormulario: '+p.$subseccion.attr("id"));
+      var enviar_callback = 
+        (p.enviar_callback) ? 
+        p.enviar_callback :
+        habilitarFormularioCallbackGeneral;
+      $( ".enviar", p.$subseccion )
+      .bind( 
+        'click.misEventos',
+        function (){
+          trace( "enviarDatos: " + p.$subseccion.attr("id") );
+          io.obtenerDatosFormulario({
+            $subseccion: p.$subseccion,
+            callback: enviar_callback
+          });
+        } /* /function */
+      ); /* /.bind */
+    }; /* /habilitarFormulario */
     
-    var enviarDatos = function (evento){
-      deshabilitarBotonesEnviar();
-      var formulario = evento.data.formulario;
-      var callback = evento.data.callback;
-      trace( "enviarDatos: " + formulario );
-      //trace( "callback " + callback );
-      //var objeto = eval(evento.data.form);
-      //trace('objeto.ID = '+objeto["id"]);
-      //return
-      io.obtenerDatosFormulario( formulario , callback );
-      // io.salvarDatos( formulario , callback );
-    };
+    var habilitarFormularioCallbackGeneral = function( datosDelFormulario ){
+      /* 
+      Recibimos de io.obtenerDatosFormulario
+      los datos para ser ingresados y salvados         
+      (habría que poner un control 
+      para que no llegue vacio)
+      */
+      var datos;
+      
+      /* preprocesa segun la subseccion */
+      datos = preprocesarDatosASalvar({
+        datos: datosDelFormulario.datos,
+        subseccion: datosDelFormulario.$subseccion.attr("id")
+      });
+              
+      io.salvarDatos({
+        datos: datos.datos , 
+        objetoStorage: datos.objetoStorage ,
+        subseccionSiguiente: datos.subseccionSiguiente,
+        callback: function(p){ 
+          /*
+          Mostrar resultado de salvar y subseccionSiguente
+          */
+          resultadoFormulario ({
+            subseccionSiguiente: p.subseccionSiguiente
+          });
+        } /* /callback */
+      }); /* /io.salvarDatos */
+    } /* /habilitarFormularioCallback */
+
+    var preprocesarDatosASalvar = function(p){
+      trace( "preprocesarDatosASalvar "+p.subseccion);
+      var salida ={
+        datos: {},
+        objetoStorage: "",
+        subseccionSiguiente: ""
+      }
+      
+      // ATENCION AQUI PROCESAR X SECTOR
+      
+      return ( p.callback )? p.callback( salida ) : salida;
+    }; /* /preprocesarDatosASalvar */
+    
+    var resultadoFormulario = function(p){
+      trace( "resultadoFormulario subseccionSiguiente "+p.subseccionSiguiente );
+    }; /* /resultadoFormulario */
     
     var deshabilitarBotonesEnviar = function(){
       $botonesEnviar.unbind("click.misEventos");

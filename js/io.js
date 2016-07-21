@@ -106,19 +106,23 @@ tiempoFluido.io = (function($){
       return ( callback )? callback( salida ) : salida;
     } /* obtenerDatosFormulario */
     ,
-    obtenerDatosFormulario : function ( formulario , callback ){
-       trace('IO: obtenerDatosFormulario (serializeJSON)' + formulario);
-      var salida = $("#"+formulario).serializeJSON({checkboxUncheckedValue: false}); 
-      return ( callback )? callback( salida ) : salida;
+    obtenerDatosFormulario : function ( p ){
+       trace('IO: obtenerDatosFormulario (serializeJSON)' + p.$subseccion);
+      var salida = {};
+      salida["datos"] = p.$subseccion.serializeJSON({checkboxUncheckedValue: false});
+      salida["$subseccion"] = p.$subseccion;
+      return ( p.callback )? p.callback( salida ) : salida;
     } /* obtenerDatosFormulario */
     ,
     salvarDatos : function (p) {
       //datos , objetoStorage , callback
       trace('IO: salvarDatos datos ' + JSON.stringify(p.datos) );
       trace('IO: salvarDatos objetoStorage ' + p.objetoStorage );
+      var salida;
       storage.set('tf.'+p.objetoStorage , p.datos );
       //trace('tf.' + p.objetoStorage + " = " + p.datos );
-      return (p.callback ) ? p.callback(true) : true;
+      salida["subseccionSiguiente"] = p.subseccionSiguiente;
+      return (p.callback ) ? p.callback( salida ) : salida;
     } /* salvarDatos */
     
   }; /* var io */

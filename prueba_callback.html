@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Título</title>
+
+    <meta charset="utf-8">
+
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css" media="screen" /> -->
+        
+    <!--
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/desbichador/desbichador.css" />
+    <script src="assets/desbichador/desbichador.js"></script>
+    -->
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/nicealert/style.css" />
+    <script src="assets/nicealert/nice_alert.js"></script>
+    
+    <script src="assets/jquery-2.2.3.min.js"></script>
+    
+    <!--
+    Moment 
+    http://momentjs.com/ via http://stackoverflow.com/questions/7763327/how-to-calculate-date-difference-in-javascript
+    - ->
+    <script src="js/moment.min.js"></script>
+    -->
+    
+    <script>
+      alert("prueba iniciada...");
+      
+      $(function(){
+        
+        alert("... uQuery ...");
+        
+        var links = ["uno","dos","tres","cuatro"];
+        var $links;
+        var saludo;
+        
+        $links = $( "nav li" );
+        
+       var hola = function(p){
+          alert("mensaje 'hola' de:" + p.data.$soy.index());
+          var indice = p.data.$soy.index();
+          var n = links[indice];
+          chau(function(e){
+            alert("se acabó para "+n);
+          });
+        };
+        var chau = function(callback){
+          alert("chau");
+          return callback();
+        };
+       
+        $links.each( function (e) {
+          var $soy = $(this);
+          alert ("e= "+e+" / index= "+$soy.index());
+          $( "a", $soy ).bind("click",{$soy:$soy},hola);
+        });  
+      });
+      
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Prueba de callback y variables enclosure</h1>
+    </header>
+    <nav>
+    <!-- navegación -->
+      <ul>
+        <li><a href="#" >link</a></li>
+        <li><a href="#" >link</a></li>
+        <li><a href="#" >link</a></li>
+      </ul>
+    </nav>
+    <section id="intro">
+    <!-- introduccion -->
+      <header>
+        <h2>Título de sección introductoria</h2>
+      </header>
+      <p>Texto de la sección de introducción</p>
+    </section>
+    
+    <div id="content">
+    
+      <div id="main-content">    
+
+      </div><!-- #main-content -->
+    
+    </div><!-- #content -->
+    
+    <footer>
+    <!-- pie -->
+    </footer>
+  </body>
+</html>
