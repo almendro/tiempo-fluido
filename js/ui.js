@@ -179,24 +179,24 @@ tiempoFluido.ui = (function($){
       trace('UI: ocultarSubsecciones');
     //  $(".subseccion").fadeOut(300);
     },
+    
     mostrarSubseccion : function (subseccion){
       trace('UI: mostrarSubseccion '+subseccion);
-    //  this.ocultarSubsecciones();
-    //  $("#"+subseccion).fadeIn(300);
-    /*
-    // Getter
-var active = $( ".selector" ).tabs( "option", "active" );
- 
-// Setter
-$( ".selector" ).tabs( "option", "active", 1 );
-
-    */
+      //  this.ocultarSubsecciones();
+      //  $("#"+subseccion).fadeIn(300);
+      
+      // jQuery.mobile way
       var prop = this.subseccionProp(subseccion);
-      var $seccion = prop.seccion;
+      var $seccion = prop.$seccion;
       var indice = prop.indice;
-      trace("prop "+indice+" "+$seccion.attr("id"));
-      $( "[data-role='tabs']",$seccion ).tabs("option","active",indice);
-      /* establecer estado activo */
+      trace("indice "+indice+" de seccion "+$seccion.attr("id"));
+      
+      $( ":mobile-pagecontainer" ).pagecontainer( "change", $seccion );
+
+      var $subsecciones = $( "[data-role='tabs']",$seccion );
+      
+      $subsecciones.tabs("option","active",indice);
+      // establecer estado activo
       $( "[data-role='tabs'] a",$seccion ).each( function(e) {
         $(this).removeClass("ui-tabs-active");
         trace("e="+e+" i="+$(this).index()+" "+$(this).attr("href")+" | indice "+indice);
@@ -222,7 +222,7 @@ $( ".selector" ).tabs( "option", "active", 1 );
       for ( s in subseccion) {
         trace("deshabilitar subseccion: "+subseccion[s]);
         prop = this.subseccionProp(subseccion[s]);
-        $seccion = prop.seccion;
+        $seccion = prop.$seccion;
         indice = prop.indice;
         $( "[data-role='tabs']",$seccion ).tabs("option","disabled",[indice]);
         $( "#"+subseccion[s], $seccion ).hide();
@@ -233,13 +233,15 @@ $( ".selector" ).tabs( "option", "active", 1 );
     subseccionProp : function(subseccion){
       /* devuelve el indice y seccion */
       var $seccion = $("#"+subseccion).parents(".seccion");
-      trace("sec "+ $seccion.attr("id"));
+      //trace("UI.subseccionProp seccion ="+ $seccion.attr("id"));
       var $subsecciones = $(".subseccion",$seccion);
       var indice = ($subsecciones.filter("#"+subseccion).index())-1;
-      trace("indice "+indice);
+      //trace(subseccion+" indice= "+indice);
       return {
-        seccion: $seccion,
+        $seccion: $seccion,
+        seccion: $seccion.attr( "id" ),
         indice: indice,
+        subseccion: subseccion
       }
     } /* /subseccionProp */
     ,

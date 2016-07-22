@@ -72,7 +72,7 @@ tiempoFluido.aplicacion = (function($,moment){
         dev = tiempoFluido.dev;
         dev.iniciar();
         
-        Carga = tiempoFluido.Carga;
+        //Carga = tiempoFluido.Carga;
         
         /* fin iniciar módulos */
         
@@ -129,14 +129,16 @@ tiempoFluido.aplicacion = (function($,moment){
         $botonesEnviar = $( ".enviar" );
         //ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
 
+        // *** PREPROCESOS ***
+        
         trace( "Preprocesamos las subsecciones ..." );
         $subsecciones.each(function(e){
           var $soy = $(this);
           var $miPlantilla;
           var $enviar;
-          trace("seccion "+$soy.attr("id"));
+          trace("subseccion "+$soy.attr("id"));
           if ( $soy.attr("data-plantilla") ){
-            trace( "hay plantilla" );
+           trace( "hay plantilla" );
             $miPlantilla = ui.aplicarPlantilla({
               $subseccion: $soy
             });
@@ -145,12 +147,17 @@ tiempoFluido.aplicacion = (function($,moment){
           $enviar = $( ".enviar", $miPlantilla );
           $enviar.bind
           */
-          io.habilitarFormulario({
-            $subseccion: $soy
-          });
+          if( $("form", $soy).length > 0 ){
+            trace("hay form...");
+            habilitarFormulario({
+              $subseccion: $soy
+            });
+          } else {
+            trace("sin form. Siguiente...");
+          }
         });
-        // ACA COMIENZA LA POSTA
         
+        trace(" *** ACA COMIENZA LA POSTA *** ");
         
         perfil = io.cargarPerfil();
         estado( perfil==false ? "SIN_PERFIL" : "PERFIL" );
@@ -166,10 +173,12 @@ tiempoFluido.aplicacion = (function($,moment){
           */
           trace("crear perfil");
           
+          estoy_en = ir_a_subseccion( "perfil" );
+          /*
           seccionActual = "configuracion";
           subseccionActual = "perfil";
-
-          ui.mostrarSeccion( seccionActual );
+          */
+          
           
           ui.deshabilitarSubseccion([
             "preferencias",
@@ -177,51 +186,20 @@ tiempoFluido.aplicacion = (function($,moment){
           ]);
           
           ui.deshabilitarSeccion([
-            "agregar_carga",
+            "ver_cargas",
             "ver_jornada",
             "ver_grilla"
           ]);
           
           ui.mostrarMensajeSeccion( "#bienvenida", estado() );
-          
-          
+                   
           habilitarFormulario({
-            formulario: subseccionActual , 
-            seccion: seccionActual , 
-            callback: function( datosPerfil ){
-              /* 
-              Obtener datos para generar el perfil 
-              y luego salvarlos
-            
-              (habría que poner un control para que no llegue false)
-              */
-              perfil = generarId(datosPerfil);
-              io.salvarDatos({
-                datos: perfil , 
-                objetoStorage: "perfil" ,
-                callback: function(){ 
-                /*
-                Mostrar pantalla de Bienvenida
-                */
-                
-                estado( "SIN_CONFIGURACION" );
-                
-                ui.habilitarSubseccion([
-                  "preferencias",
-                  "otras"
-                ]);
-                /*
-                ui.habilitarSeccion([
-                 "agregar_carga",
-                 "ver_jornada",
-                 "ver_grilla"
-                ]);
-                */
-                bienvenida();
-                } /* /callback */
-              }); /* /io.salvarDatos */
-            } /* /callback */
+            formulario: estoy_en.subseccion,
+            callback: function(){
+              estado( "SIN_CONFIGURACION" );
+            }
           }); /* /habilitarFormulario */
+          
         } 
         else 
         {
@@ -283,6 +261,19 @@ tiempoFluido.aplicacion = (function($,moment){
       trace("estado: ¡¡¡Fruta!!!");
       return false;
     }; /* /estado */
+    
+    var ir_a_subseccion = function(p){
+      trace("ir_a_subseccion :"+p);
+      ui.mostrarSubseccion(p);
+      var salida;
+      salida = ui.subseccionProp(p);
+      salida["subseccion"] = p;
+      
+      //$("#m_"+salida.seccion).click();
+      //$("#a_"+salida.subseccion).click();
+            
+      return (p.callback ) ? p.callback( salida ) : salida;
+    }; /* /ir_a_subseccion */
     
     var generarId = function ( datosPerfil ) {
       var id = datosPerfil.email;
@@ -382,6 +373,7 @@ tiempoFluido.aplicacion = (function($,moment){
       para cuando el botón es presionado
       */
       trace('habilitarFormulario: '+p.$subseccion.attr("id"));
+      var salida;
       var enviar_callback = 
         (p.enviar_callback) ? 
         p.enviar_callback :
@@ -397,6 +389,9 @@ tiempoFluido.aplicacion = (function($,moment){
           });
         } /* /function */
       ); /* /.bind */
+      
+      return (p.callback ) ? p.callback( salida ) : salida;
+      
     }; /* /habilitarFormulario */
     
     var habilitarFormularioCallbackGeneral = function( datosDelFormulario ){
@@ -417,14 +412,15 @@ tiempoFluido.aplicacion = (function($,moment){
       io.salvarDatos({
         datos: datos.datos , 
         objetoStorage: datos.objetoStorage ,
-        subseccionSiguiente: datos.subseccionSiguiente,
         callback: function(p){ 
           /*
           Mostrar resultado de salvar y subseccionSiguente
           */
+          trace("DATOS salvados...");
+          /*
           resultadoFormulario ({
             subseccionSiguiente: p.subseccionSiguiente
-          });
+          });*/
         } /* /callback */
       }); /* /io.salvarDatos */
     } /* /habilitarFormularioCallback */
@@ -433,12 +429,20 @@ tiempoFluido.aplicacion = (function($,moment){
       trace( "preprocesarDatosASalvar "+p.subseccion);
       var salida ={
         datos: {},
-        objetoStorage: "",
-        subseccionSiguiente: ""
+        objetoStorage: ""
       }
       
       // ATENCION AQUI PROCESAR X SECTOR
-      
+      switch( p.subseccion ){
+        case "perfil" :
+          salida["datos"] = generarId(p.datos);
+          salida["objetoStorage"]= "perfil";
+          break;
+        case "preferencias" :
+          break;
+        default:
+          break;
+      }
       return ( p.callback )? p.callback( salida ) : salida;
     }; /* /preprocesarDatosASalvar */
     

@@ -13,7 +13,7 @@ Martín Ochoa
 .seccion,
 .subseccion
 {
- /* display: none;*/
+ /**/ display: none; /**/
 }
 
 .plantilla_html

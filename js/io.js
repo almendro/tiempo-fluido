@@ -107,9 +107,9 @@ tiempoFluido.io = (function($){
     } /* obtenerDatosFormulario */
     ,
     obtenerDatosFormulario : function ( p ){
-       trace('IO: obtenerDatosFormulario (serializeJSON)' + p.$subseccion);
+      trace('IO: obtenerDatosFormulario (serializeJSON)' + p.$subseccion.attr("id"));
       var salida = {};
-      salida["datos"] = p.$subseccion.serializeJSON({checkboxUncheckedValue: false});
+      salida["datos"] = $("form",p.$subseccion).serializeJSON({checkboxUncheckedValue: false});
       salida["$subseccion"] = p.$subseccion;
       return ( p.callback )? p.callback( salida ) : salida;
     } /* obtenerDatosFormulario */
@@ -120,8 +120,6 @@ tiempoFluido.io = (function($){
       trace('IO: salvarDatos objetoStorage ' + p.objetoStorage );
       var salida;
       storage.set('tf.'+p.objetoStorage , p.datos );
-      //trace('tf.' + p.objetoStorage + " = " + p.datos );
-      salida["subseccionSiguiente"] = p.subseccionSiguiente;
       return (p.callback ) ? p.callback( salida ) : salida;
     } /* salvarDatos */
     
