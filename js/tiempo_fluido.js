@@ -37,7 +37,7 @@ tiempoFluido.aplicacion = (function($,moment){
     var cargaActual;
     var jornadaActual;
     
-    var dias_nombres;
+    var diasNombres;
 
     var estado, miEstado;
     
@@ -48,12 +48,12 @@ tiempoFluido.aplicacion = (function($,moment){
         $secciones,
         $subsecciones;
         
-    var estoy_en,
+    var estoyEn,
         seccionActual , 
         subseccionActual , 
         seccionSiguiente , 
         subseccionSiguiente ;
-           
+        
     var TF_MODO_FLUIDO = 0;
     
     var dev; /* Opciones de desarrollador */
@@ -121,7 +121,7 @@ tiempoFluido.aplicacion = (function($,moment){
         };
         
         
-        diasDeSemanaNombresCortos = [
+        diasNombresCortos = [
           "lun", "mar", "mie", "jue", "vie", "sab", "dom"
         ];
 
@@ -158,12 +158,13 @@ tiempoFluido.aplicacion = (function($,moment){
           }
         });
         
+        /* Interaccion con el usuario */
         trace(" *** ACA COMIENZA LA POSTA *** ");
         
         perfil = io.cargarPerfil();
         estado( perfil==false ? "SIN_PERFIL" : "PERFIL" );
         
-        if ( estado() == "SIN_PERFIL" ) // COMPROBAR CONTRA perfil.id
+        if ( estado() == "SIN_PERFIL" )
         {
           /*
           En este punto no hay definido un perfil 
@@ -174,13 +175,9 @@ tiempoFluido.aplicacion = (function($,moment){
           */
           trace("crear perfil");
           
-          estoy_en = ir_a_subseccion( "perfil" );
-          /*
-          seccionActual = "configuracion";
-          subseccionActual = "perfil";
-          */
+          estoyEn = irA( "perfil" );
           
-          
+          /* dehabilitamos cualquier otra opcion */
           ui.deshabilitarSubseccion([
             "preferencias",
             "otras"
@@ -195,7 +192,7 @@ tiempoFluido.aplicacion = (function($,moment){
           ui.mostrarMensajeSeccion( "#bienvenida", estado() );
                    
           habilitarFormulario({
-            formulario: estoy_en.subseccion,
+            formulario: estoyEn.subseccion,
             callback: function(){
               estado( "SIN_CONFIGURACION" );
             }
@@ -263,8 +260,8 @@ tiempoFluido.aplicacion = (function($,moment){
       return false;
     }; /* /estado */
     
-    var ir_a_subseccion = function(p){
-      trace("ir_a_subseccion :"+p);
+    var irA = function(p){
+      trace("irA :"+p);
       ui.mostrarSubseccion(p);
       var salida;
       salida = ui.subseccionProp(p);
@@ -274,7 +271,7 @@ tiempoFluido.aplicacion = (function($,moment){
       //$("#a_"+salida.subseccion).click();
             
       return (p.callback ) ? p.callback( salida ) : salida;
-    }; /* /ir_a_subseccion */
+    }; /* /irA */
     
     var generarId = function ( datosPerfil ) {
       var id = datosPerfil.email;
@@ -290,7 +287,7 @@ tiempoFluido.aplicacion = (function($,moment){
     var bienvenida = function () {
       //ui.mostrarSeccion ( "inicio" );
       //ui.mostrarSubseccion ( "bienvenida" );
-      estoy_en = ir_a_subseccion( "bienvenida" );
+      estoyEn = irA( "bienvenida" );
       $( '.valor.perfil.nombre' ).text( perfil.nombre );
       $( '.valor.perfil.id' ).text( perfil.id );
       /*
@@ -318,7 +315,7 @@ tiempoFluido.aplicacion = (function($,moment){
     var configurarPreferencias = function () {
        
        trace("configurarPreferencias: ");
-       estoy_en = ir_a_subseccion( "preferencias" );
+       estoyEn = irA( "preferencias" );
        //ui.mostrarSeccion( "configuracion" );
        /*
        ui.ponerDatos ({
