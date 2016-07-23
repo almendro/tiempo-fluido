@@ -48,7 +48,8 @@ tiempoFluido.aplicacion = (function($,moment){
         $secciones,
         $subsecciones;
         
-    var seccionActual , 
+    var estoy_en,
+        seccionActual , 
         subseccionActual , 
         seccionSiguiente , 
         subseccionSiguiente ;
@@ -287,10 +288,12 @@ tiempoFluido.aplicacion = (function($,moment){
     /* control de pantallas */
     
     var bienvenida = function () {
-      ui.mostrarSeccion ( "inicio" );
-      ui.mostrarSubseccion ( "bienvenida" );
+      //ui.mostrarSeccion ( "inicio" );
+      //ui.mostrarSubseccion ( "bienvenida" );
+      estoy_en = ir_a_subseccion( "bienvenida" );
       $( '.valor.perfil.nombre' ).text( perfil.nombre );
       $( '.valor.perfil.id' ).text( perfil.id );
+      /*
       $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
       $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
       /*
@@ -313,8 +316,10 @@ tiempoFluido.aplicacion = (function($,moment){
 
        
     var configurarPreferencias = function () {
-       trace("configurarPreferencias: ");      
-       ui.mostrarSeccion( "configuracion" );
+       
+       trace("configurarPreferencias: ");
+       estoy_en = ir_a_subseccion( "preferencias" );
+       //ui.mostrarSeccion( "configuracion" );
        /*
        ui.ponerDatos ({
            form: "#preferencias",
@@ -322,7 +327,7 @@ tiempoFluido.aplicacion = (function($,moment){
              configuracion['preferencias'] == false ? 
              valoresPorDefecto.preferencias : configuracion['preferencias'] 
        });
-       */
+       * /
        habilitarFormulario({
          formulario: "preferencias" ,
          seccion: "configuracion" ,
@@ -334,7 +339,7 @@ tiempoFluido.aplicacion = (function($,moment){
            
            salvamos los datos en el objeto del 
            id del perfil actual.
-           */
+           * /
            configuracion["preferencias"] = datosPreferencias;
            //configuracion["otras"] = io.obtenerDatosFormulario( "otras" );
          
@@ -344,7 +349,7 @@ tiempoFluido.aplicacion = (function($,moment){
              callback: function(){ 
               /*
               Mostrar pantalla de inicio
-              */
+              * /
               
               trace("mostrar pantalla de inicio" );
               ui.mostrarSeccion ( "inicio" );
@@ -357,10 +362,10 @@ tiempoFluido.aplicacion = (function($,moment){
                 div: "#valores_defecto",
                 prefijo: "valor_"
               });
-              */
-            }/* /callback */
-          }); /* io.salvarDatos */
-        }/* /callback */
+              * /
+            }/* /callback * /
+          }); /* io.salvarDatos * /
+        }/* /callback * /
       }); /* habilitarFormulario */
     }; /* configurarPreferencias */
     
@@ -417,10 +422,9 @@ tiempoFluido.aplicacion = (function($,moment){
           Mostrar resultado de salvar y subseccionSiguente
           */
           trace("DATOS salvados...");
-          /*
-          resultadoFormulario ({
-            subseccionSiguiente: p.subseccionSiguiente
-          });*/
+          resultadoPostSalvarFormulario ({
+            subseccion: datosDelFormulario.$subseccion.attr("id")
+          });
         } /* /callback */
       }); /* /io.salvarDatos */
     } /* /habilitarFormularioCallback */
@@ -446,9 +450,21 @@ tiempoFluido.aplicacion = (function($,moment){
       return ( p.callback )? p.callback( salida ) : salida;
     }; /* /preprocesarDatosASalvar */
     
-    var resultadoFormulario = function(p){
-      trace( "resultadoFormulario subseccionSiguiente "+p.subseccionSiguiente );
-    }; /* /resultadoFormulario */
+    var resultadoPostSalvarFormulario = function(p){
+      trace( "resultadoPostSalvarFormulario: subseccion "+p.subseccion );
+      ui.mostrarDialogoResultado({
+        target: target,
+        mensaje: "Los datos del formulario <strong>"+p.subseccion+"</strong> fueron salvados.",
+        callbackOk: function(e){
+          trace("callbackOk");
+          
+          if ( estado()=="SIN_CONFIGURACION" && p.subseccion=="perfil" ){
+            trace('mostrar aviso de SIN_CONFIGURACION');
+            bienvenida();
+          }
+        } /* /callbackOk */
+      });
+    }; /* /resultadoPostSalvarFormulario */
     
     var deshabilitarBotonesEnviar = function(){
       $botonesEnviar.unbind("click.misEventos");
