@@ -175,52 +175,71 @@ tiempoFluido.ui = (function($){
       }      
     } /* /deshabilitarSeccion */
     ,
-    ocultarSubsecciones : function (){
-      trace('UI: ocultarSubsecciones');
-    //  $(".subseccion").fadeOut(300);
-    },
+    
+    /* --- Manejo de SUBSECCIONES --- */
     
     mostrarSubseccion : function (subseccion){
       trace('UI: mostrarSubseccion '+subseccion);
-      //  this.ocultarSubsecciones();
-      //  $("#"+subseccion).fadeIn(300);
       
-      // jQuery.mobile way
+      /* modo comun */
+      //this.ocultarSubsecciones();
+      //$("#"+subseccion).fadeIn(300);
+      
+      /* modo jQM */
       var prop = this.subseccionProp(subseccion);
       var $seccion = prop.$seccion;
       var indice = prop.indice;
       trace("indice "+indice+" de seccion "+$seccion.attr("id"));
       
+      /*
+      activamos la seccion y 
+      establecer estado activo
+      del boton de subseccion
+      */
       $( ":mobile-pagecontainer" ).pagecontainer( "change", $seccion );
-
       var $subsecciones = $( "[data-role='tabs']",$seccion );
-      
       $subsecciones.tabs("option","active",indice);
-      // establecer estado activo
       $( "[data-role='tabs'] a",$seccion ).each( function(e) {
         $(this).removeClass("ui-tabs-active");
-        trace("e="+e+" i="+$(this).index()+" "+$(this).attr("href")+" | indice "+indice);
+        //trace("e="+e+" i="+$(this).index()+" "+$(this).attr("href")+" | indice "+indice);
         if(e == indice){
           $(this).addClass("ui-tabs-active");
         }
       }); /* / each */
     } /* / mostrarSubseccion */
     ,
+    
+    ocultarSubsecciones : function (){
+      trace('UI: ocultarSubsecciones');
+      //$(".subseccion").fadeOut(300);
+    } /* /ocultarSubsecciones */
+    ,
+    
     habilitarSubseccion : function (subseccion){
+      trace( "UI: habilitarSubseccion "+subseccion);
+      /*
+      modo jQM 
+      establecemos propiedad enabled del botón
+      y mostramos el <a>
+      */
       var prop = this.subseccionProp(subseccion);
-      var $seccion = prop.seccion;
+      var $seccion = prop.$seccion;
       var indice = prop.indice;
       $( "[data-role='tabs']",$seccion ).tabs("option","enabled",[indice]);
       $( "#a_"+subseccion, $seccion ).show();
-      // $( "#"+subseccion, $seccion ).show();
+      
     } /* /habilitarSubseccion */
     ,
     deshabilitarSubseccion : function (subseccion){
-      trace("deshabilitarSubseccion");
+      /*
+      subseccion puede ser un STRING o ARRAY de STRINGS
+      */
+      trace("UI: deshabilitarSubseccion "+subseccion);
+      
       subseccion = listar(subseccion);
       var prop, $seccion, indice;
       for ( s in subseccion) {
-        trace("deshabilitar subseccion: "+subseccion[s]);
+        trace("..."+subseccion[s]);
         prop = this.subseccionProp(subseccion[s]);
         $seccion = prop.$seccion;
         indice = prop.indice;
