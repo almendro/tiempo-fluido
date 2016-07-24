@@ -15,7 +15,7 @@ var tiempoFluido = window.tiempoFluido || {};
 
 tiempoFluido.Carga = (function($){
 
-  var Carga = fuction(id){
+  var Carga = function(id){
     var soy = this;
     this.obtenerCarga = function(){
       return id;
