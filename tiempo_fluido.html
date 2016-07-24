@@ -82,7 +82,7 @@
               }
               
               var miTiempoFluido = new tiempoFluido.aplicacion();
-              //miTiempoFluido.iniciar();
+              miTiempoFluido.iniciar();
             }
           }/* /complete */
         }
@@ -197,30 +197,31 @@
       </div><!-- /tabs -->
       
       <div data-plantilla-id="abm_carga" class="plantilla_html">
-      <form>
-        <fieldset>
-          <div class="acordion">
-          <h2>Básico</h2>
-          <legend>Los datos mínimos.</legend>
-          <div class="form-group">
-            <label for="titulo" class="">Título</label>
-            <div class="">
-              <input type="titulo" class="form-control" name="titulo" placeholder="Título">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="">
-              <!--<button type="button" data-accion="cancelar" class="">Cancelar</button>-->
-              <button type="submit" data-accion="enviar" class="enviar">(acción)</button>
-            </div>
-          </div>
-          </div><!-- /.acordion -->
-        </fieldset>
-      </form><!-- /#abm_carga -->
-      </div>
-    </section><!-- /#ver_cargas -->
+        <form>
+          <fieldset>
+            <div class="acordion">
+              <h2>Básico</h2>
+              <legend>Los datos mínimos.</legend>
+              <div class="form-group">
+                <label for="titulo" class="">Título</label>
+                <div class="">
+                  <input type="titulo" class="form-control" name="titulo" placeholder="Título">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="">
+                  <!--<button type="button" data-accion="cancelar" class="">Cancelar</button>-->
+                  <button type="submit" data-accion="enviar" class="enviar">(acción)</button>
+                </div>
+              </div>
+            </div><!-- /.acordion -->
+          </fieldset>
+        </form>
+      </div><!-- /#abm_carga -->
+      
+    </section><!-- /#ver_cargas.seccion -->
 
-<!-- ------------------ -->
+  <!-- ------------------ -->
 
     <section id="ver_jornada" class="seccion">
       <header>
@@ -231,7 +232,7 @@
       </div>      
     </section><!-- /#ver_jornada -->
 
-<!-- ------------------ -->
+  <!-- ------------------ -->
 
     <section id="ver_grilla" class="seccion">
       <header>
@@ -384,47 +385,39 @@
       
     </section><!-- /#configuracion.seccion -->
  
- <!-- ------------------ -->
+  <!-- ------------------ -->
  
-    <footer data-role="footer" data-theme="b" data-position="fixed">
+    <footer>
       <!-- navegación -->
       <nav id="menu_accion">
         <ul>
-          <li><a data-icon="plus" data-transition="fade" id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a></li>
+          <li>
+            <a id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a>
+          </li>
         </ul>
       </nav>
     </footer>
-    <!-- 
-    <div id="dialogo_confirmar" 
-      data-role="popup" 
-      data-overlay-theme="b" 
-      data-theme="b" 
-      data-dismissible="false"
-    >
-      <div data-theme="a">
-        <h1>Confirmar</h1>
-      </div>
-      <div role="main" class="ui-content">
-        <h3 class="ui-title">(mensaje)</p>
-        <button id="dialogo_no" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">NO</button>
-        <button id="dialogo_si" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">SI</a>
-      </div>
-    </div><!-- -->
     
-    <div data-role="panel" data-position="right" data-display="overlay" data-theme="b" id="consola">
-    <!-- panel content goes here -->
+  <!-- ------------------ -->
+  
+    <div id="dialogo_confirmar" data-plantilla-id="dialogo_confirmar" class="plantilla_html">
+      <header>
+        <h1>Confirmar</h1>
+      </header>
+      <div class="contenido">
+        <h3 class="mensaje">(mensaje)</p>
+        <button class="dialogo_no" >NO</button>
+        <button class="dialogo_si" >SI</button>
+      </div><!-- /.contenido -->
+    </div><!-- /#dialogo_confirmar -->
+    
+    <div id="consola">
+      <button id="panel" >CONSOLA</button>
       <h3>CONSOLA</h3>
-      <!-- no funcuona por ahora el boton de cerrar consola
-      <a 
-        href="#mi_cabecera" 
-        data-rel="close" 
-        class="ui-btn ui-btn-right ui-icon-delete ui-btn-icon-notext ui-corner-all" 
-        >
-        cerrar
-      </a>
-      -->
-      <div id="log"></div>
-    </div><!-- /panel -->
+      <div id="log">
+      </div><!-- /#log -->
+    </div><!-- /#consola -->
+    
     <!-- /* DEV */ - ->
     <div id="clearAllNiceAlert" style="display:block;position:fixed;top:0;left:40%;" class="btn btn-raised btn-danger btn-xs">
     Clear All NiceAlerts
