@@ -13,11 +13,13 @@ Martín Ochoa
 .seccion,
 .subseccion
 {
- /**/ display: none; /**/
+ /** / display: none; /**/
 }
 
 .plantilla_html
 {
-  display:none;
+  /** /display:none;/**/
+  border: 1px solid #f00;
+  margin: 1em;
 }
 /* fin css */
