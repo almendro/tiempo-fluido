@@ -50,8 +50,8 @@ Martín Ochoa
 
 #consola.abierta
 {
-  background-color: #222;
-  color: #0b0;
+  background-color: #000;
+  color: #0f0;
   top: 0;
   right: 0;
   width: 33%;
@@ -67,8 +67,9 @@ Martín Ochoa
   right: 10px;
   width: 32px;
   height: 32px;
-  background: #0b0 url("../img/iconos/consola.svg") no-repeat 0 0;
+  background: #0f0 url("../img/iconos/consola.svg") no-repeat 0 0;
   background-size: contain;
+  box-shadow: 0 2px 2px rgba(0,0,0,.5);
 }
 #consola.abierta #consola_btn
 {
@@ -80,13 +81,19 @@ Martín Ochoa
   display: none;
 }
 
+#consola h3
+{
+  font-size: 1em;
+  margin: .25em;
+}
+
 #consola #log
 {
   position: relative;
   color:#0f0;
-  font-size: 1em;
+  font-size: .8em;
   overflow: auto;
-  height: 
+  margin: .25em;
 }
 
 #consola p
