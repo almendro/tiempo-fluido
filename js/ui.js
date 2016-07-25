@@ -19,12 +19,14 @@ tiempoFluido.ui = (function($){
 
     iniciar : function(){
       trace('iniciamos la UI');
-      
+
+      /*
       trace('elementos jQuery mobile');
       $( "#menu_principal" ).navbar();
       $( "[data-role='header'], [data-role='footer']" ).toolbar();
+      */
       //$( "[data-role='footer']" ).toolbar();
-
+      /*
       $( document ).on( "pagecontainerchange", function() {
         var current = $( ".ui-page-active" ).jqmData( "title" );
         // Change the heading
@@ -40,7 +42,9 @@ tiempoFluido.ui = (function($){
         });
       }); /* /on.pagecontainerchange */
       
+      /*
       $( "body>[data-role='panel']" ).panel();
+      */
       
     } /* iniciar */
     , 
