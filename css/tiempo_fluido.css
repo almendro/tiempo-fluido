@@ -10,6 +10,12 @@ Martín Ochoa
 */
 
 
+.btn
+{
+  border: 0;
+  border-radius: 16px;
+  cursor: pointer;
+}
 .seccion,
 .subseccion
 {
@@ -22,4 +28,79 @@ Martín Ochoa
   border: 1px solid #f00;
   margin: 1em;
 }
+
+/* INI DEV */
+
+#consola
+{
+  position: fixed;
+  z-index: 9999;
+  top: 0px;
+  right: 0px;
+  width: 42px;
+  height: 0px;
+  margin: 0;
+  padding: 0;
+  padding-top: 42px;
+  overflow: hidden;
+  background-color: transparent;
+  font-size: 1em;
+  font-family: mono;
+}
+
+#consola.abierta
+{
+  background-color: #222;
+  color: #0b0;
+  top: 0;
+  right: 0;
+  width: 33%;
+  min-width: 240px;
+  height: auto;
+  bottom: 0;
+}
+
+#consola_btn
+{
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: #0b0 url("../img/iconos/consola.svg") no-repeat 0 0;
+  background-size: contain;
+}
+#consola.abierta #consola_btn
+{
+  background-image: url("../img/iconos/consola_cerrar.svg");
+}
+
+#consola_btn span
+{
+  display: none;
+}
+
+#consola #log
+{
+  position: relative;
+  color:#0f0;
+  font-size: 1em;
+  overflow: auto;
+  height: 
+}
+
+#consola p
+{
+  width: 100%;
+  margin:0;
+  padding:0;
+  color:#0f0;
+  font-size: 1em;
+  font-family: mono;
+  word-wrap: break-word;
+}
+
+/* FIN DEV */
+
+/* --------------------------------- */
 /* fin css */
