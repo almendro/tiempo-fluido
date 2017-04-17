@@ -43,9 +43,9 @@ tiempoFluido.ui = (function($){
         var current = $( ".ui-page-active" ).jqmData( "title" );
         // Change the heading
         //$( "[data-role='header'] h1" ).text( current );
-        // Remove active class from nav buttons
+        // Remove active classCss from nav buttons
         $( "#menu_principal a.ui-btn-active" ).removeClass( "ui-btn-active" );
-        // Add active class to current nav button
+        // Add active classCss to current nav button
         $( "#menu_principal a" ).each(function() {
           //trace(current+" text  ="+ $(this).text());
           if ( $( this ).text() === current ) {
@@ -70,13 +70,13 @@ tiempoFluido.ui = (function($){
     mostrarDialogoConfirmar : function (p){
       trace("mostrarDialogoConfirmar");
       var $dialogo = ui.crearDialogo({
-        class: "confirmar",
+        classCss: "confirmar",
         botones: [{
-            class: "dialogo_si",
+            classCss: "dialogo_si",
             etiqueta: "SI",
             callback: p.callbackSi
           },{
-            class: "dialogo_no",
+            classCss: "dialogo_no",
             etiqueta: "NO",
             callback: p.callbackNo,
             terminar: true
@@ -91,9 +91,9 @@ tiempoFluido.ui = (function($){
     mostrarDialogoResultado: function (p){
       trace("mostrarDialogoResultado");
       var $dialogo = ui.crearDialogo({
-        class: "resultado",
+        classCss: "resultado",
         botones: [{
-          class: "dialogo_ok",
+          classCss: "dialogo_ok",
           etiqueta: "OK",
           callback: p.callbackOk,
           terminar: true
@@ -108,7 +108,7 @@ tiempoFluido.ui = (function($){
     crearDialogo : function (p){
       var botones = p.botones;
       
-      var id = "dialogo_"+p.class;
+      var id = "dialogo_"+p.classCss;
       trace("crearDialogo id="+id);
       var popup;
       popup = '<div id="'+id+'" ';
@@ -143,7 +143,7 @@ tiempoFluido.ui = (function($){
           );
       }
       return $popup;
-    } /* /crearDialogoConfirmar */
+    } /* /crearDialogo */
     ,
     cerrarDialogo: function (p){
       p.data.callback();
@@ -350,6 +350,7 @@ tiempoFluido.ui = (function($){
       var salida,
           $miPlantilla,
           $enviar;
+      trace("aplicarPlantilla $subseccion"+p.$subseccion.attr("id"));
       
       $miPlantilla = $( "[data-plantilla-id='"+p.$subseccion.attr( "data-plantilla" )+"']" ).clone();
       $miPlantilla.
@@ -367,11 +368,10 @@ tiempoFluido.ui = (function($){
     } /* /aplicarPlantilla */
     ,
     
-    mostrarMensajeSeccion : function (div,m)
-    {
+    mostrarMensajeSeccion : function (div,m){
       $(".mensaje",$(div)).hide();
       $("."+m,$(div)).show();
-    }
+    } /* /mostrarMensajeSeccion */
     ,
     
     verPreferencias : function (p){
@@ -398,11 +398,13 @@ tiempoFluido.ui = (function($){
     crearHtmlItemCarga: function(p){
       //var $modeloFila = $("[data-plantilla-id='filaCarga']").clone;
       var filaHtml = ""; // <tr>
+      /*
       var opciones = $.extend(
       {},
-      {  etiqueta : "td" },
+      {  etiqueta : "td",
       p.
-      }
+      });
+      */
       var carga = p.carga;
       for( v in p.carga ){
         trace("v = "+v);
@@ -412,7 +414,7 @@ tiempoFluido.ui = (function($){
       }
       //filaHtml += "</tr>";
       return filaHtml;
-    }
+    } /* /crearHtmlItemCarga */
     ,
     listarCargas : function(p){
       var datos = p.datos;
@@ -463,7 +465,7 @@ tiempoFluido.ui = (function($){
           $(this).show();
         }
       });
-    }
+    } /* /filtrarListado */
   };
   
   return ui;

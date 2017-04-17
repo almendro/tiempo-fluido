@@ -24,3 +24,7 @@ var replaceAll = function( string, omit, place, prevstring ) {
    }
    return salida 
  }
+ 
+ trace("cargado varios.js");
+ 
+ /* fin varios.js */

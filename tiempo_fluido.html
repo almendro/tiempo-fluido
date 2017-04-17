@@ -28,12 +28,15 @@
       
       var $consola, $log, trace;
       trace=function(e){
-        /**/
+        /** /
         if (console.log){
           console.log(e);
-        } else { /**/
+        } else {
+        /**/
           alert(e);
-        /**/} // */
+        /** /
+        }
+        // */
       };
       
       Modernizr.load([
@@ -75,7 +78,7 @@
                 $("#nice_alert alertbox").hide();
               });
               */
-              trace("cargó tiempo_fluido.js");
+              trace("cargó con éxito tiempo_fluido.js");
               $log = $("#consola #log");
               $consola = $("#consola");
               $consola_fondo = $("#consola_fondo");
