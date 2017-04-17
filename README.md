@@ -55,3 +55,6 @@ Todo el sistema puede funcionar independiente y sin conexión. Se puede configur
 También ser puede gestionar el tiempo para equipos. Los usuarios pueden compartir su estado para que otros vean primero si solicitar algo o no, o si pueden interrumpir.
 
 Principalmente tiene que tener funciones mínimas para uso sencillo, luego el usuario conforme vaya ganando experiencia puede ir sumando funciones. Modo simple, modo avanzado, modo equipo. Sincronizar con calendarios iCalc, gestores de tareas, sistemas de tickets. Seleccionar que momentos del día puede concentrar más tiempo a cargas fijas, o que días de la semana a tal o cual carga según su experiencia laboral. Configurar para horas extras.
+
+
+v1.01 17.04.17
