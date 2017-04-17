@@ -14,12 +14,24 @@ User interface
 var tiempoFluido = window.tiempoFluido || {};
 
 tiempoFluido.ui = (function($){
-
+    
+  var $secciones, $subsecciones,
+      $dialogosDiv;
+      
+  var $celdasCargas;
+  
   var ui = {
-
+    
     iniciar : function(){
+      trace("---");
       trace('iniciamos la UI');
-
+      
+      $secciones = $( ".seccion" );
+      $subsecciones = $( ".subseccion" );
+      $dialogosDiv = $( "#dialogos_div" );
+      
+      trace("secciones: "+$secciones.length);
+      trace("subsecciones: "+$subsecciones.length);
       /*
       trace('elementos jQuery mobile');
       $( "#menu_principal" ).navbar();
@@ -45,6 +57,7 @@ tiempoFluido.ui = (function($){
       /*
       $( "body>[data-role='panel']" ).panel();
       */
+      $celdasCargas = $("table.listado tr > *");
       
     } /* iniciar */
     , 
@@ -52,11 +65,11 @@ tiempoFluido.ui = (function($){
     ocultarDialogos : function (){
       trace('ocultarDialogos');
     //  $(".dialogo").fadeOut(300);
-    },
+    }
+    ,
     mostrarDialogoConfirmar : function (p){
       trace("mostrarDialogoConfirmar");
-      var $dialogo = this.crearDialogo({
-        target: p.target,
+      var $dialogo = ui.crearDialogo({
         class: "confirmar",
         botones: [{
             class: "dialogo_si",
@@ -65,42 +78,41 @@ tiempoFluido.ui = (function($){
           },{
             class: "dialogo_no",
             etiqueta: "NO",
-            callback: p.callbackNo
+            callback: p.callbackNo,
+            terminar: true
           }]
       });
       trace("$dialogo id="+$dialogo.attr("id"));
-      $(".mensaje",$dialogo).text(p.mensaje);
+      $(".mensaje",$dialogo).html(p.mensaje);
+      $dialogosDiv.fadeIn(100);
       $dialogo.fadeIn(300);
     } /* /mostrarDialogoConfirmar */
     ,
     mostrarDialogoResultado: function (p){
       trace("mostrarDialogoResultado");
-      var $dialogo = this.crearDialogo({
-        target: p.target,
+      var $dialogo = ui.crearDialogo({
         class: "resultado",
         botones: [{
           class: "dialogo_ok",
           etiqueta: "OK",
-          callback: p.callbackOk
+          callback: p.callbackOk,
+          terminar: true
         }]
       });
       trace("$dialogo id="+$dialogo.attr("id"));
-      $(".mensaje",$dialogo).text(p.mensaje);
+      $(".mensaje",$dialogo).html(p.mensaje);
+      $dialogosDiv.fadeIn(100);
       $dialogo.fadeIn(300);
     } /* /mostrarDialogoResultado */
     ,
     crearDialogo : function (p){
-      var target = p.target; // el #id boton que llama al dialogo
-      var $target = $(target);
       var botones = p.botones;
-      var id = "dialogo_"+p.class+"_"+$target.attr('id');
-      trace("crearDialogo "+target+" id="+id);
+      
+      var id = "dialogo_"+p.class;
+      trace("crearDialogo id="+id);
       var popup;
       popup = '<div id="'+id+'" ';
-          popup+= 'data-role="popup" ';
-          popup+= 'data-overlay-theme="b" ';
-          popup+= 'data-theme="b" ';
-          popup+= 'data-dismissible="false" >';
+          popup+= 'class="dialogo" >';
           popup+= '<div data-role="header" data-theme="a">';
           popup+= '<h1>Confirmar</h1>';
           popup+= '</div>';
@@ -114,7 +126,7 @@ tiempoFluido.ui = (function($){
             
       trace("");
       //trace(popup);
-      $(popup).appendTo( $.mobile.activePage );
+      $(popup).appendTo( $dialogosDiv );
       var $popup = $("#"+id);
       $popup.hide();
       // agrega los eventos y callback a cada  botón
@@ -123,10 +135,11 @@ tiempoFluido.ui = (function($){
           .bind(
             "click.misEventos",
             {
-              $dialogo:$popup,
-              callback:botones[b]["callback"]
+              $dialogo: $popup,
+              callback: botones[b]["callback"],
+              terminar: botones[b]["terminar"]
             },
-            this.cerrarDialogo
+            ui.cerrarDialogo
           );
       }
       return $popup;
@@ -136,6 +149,9 @@ tiempoFluido.ui = (function($){
       p.data.callback();
       trace("cerrarDialogo "+p.data.$dialogo.attr("id"));
       p.data.$dialogo.fadeOut(300).remove();
+      if (p.data.terminar == true ){
+        $dialogosDiv.fadeOut(100);
+      }
     }
     ,
     eliminarDialogo: function (p){
@@ -149,33 +165,50 @@ tiempoFluido.ui = (function($){
             }
           );*/
       p.$dialogo.remove();
+      $dialogosDiv.fadeOut(100);
     } /* /eliminarDialogo */
     ,
-    ocultarSeccion : function (){
-      trace('ocultarSeccion');
-    //  $(".seccion").fadeOut(300);
-    },
+    
+    /* --- MANEJO DE SECCIONES --- */
+    
     mostrarSeccion : function (seccion){
-      trace('UI: mostrarSeccion'+seccion);
-      //  this.ocultarSeccion();
-      //  $("#"+seccion).fadeIn(300);
-      $( ":mobile-pagecontainer" ).pagecontainer( "change", $("#"+seccion));
+      trace('UI: mostrarSeccion '+seccion);
+      ui.ocultarSecciones();
+
+      $secciones
+        .filter($("#"+seccion))
+        .fadeIn(300)
+        .addClass("actual");
+        
+      $("#menu_principal a" )
+        .removeClass("actual")
+        .filter("#m_"+seccion)
+        .addClass("actual");
+        
     } /* /mostrarSeccion */
+    ,
+    ocultarSecciones : function (){
+      trace('UI: ocultarSecciones');
+      $secciones
+        .hide()
+        .removeClass("actual");
+    } /* /ocultarSecciones */
     ,
     habilitarSeccion : function (seccion){
       seccion = listar(seccion);
       for ( s in seccion ){
-        $("#m_"+seccion[s]).removeClass("ui-state-disable");
-        $("#m_"+seccion[s]).show();
-        //$("#"+seccion[s]).show();
+        $("#m_"+seccion[s])
+          .removeClass("deshabilitada")
+          .show();
       }      
     } /* /habilitarSeccion */
     ,
     deshabilitarSeccion : function (seccion){
       seccion = listar(seccion);
       for ( s in seccion ){
-        $("#"+seccion[s]).hide();
-        $("#m_"+seccion[s]).addClass("ui-state-disable").hide();
+        $("#m_"+seccion[s])
+          .addClass("deshabilitada")
+          .hide();
       }      
     } /* /deshabilitarSeccion */
     ,
@@ -185,21 +218,39 @@ tiempoFluido.ui = (function($){
     mostrarSubseccion : function (subseccion){
       trace('UI: mostrarSubseccion '+subseccion);
       
-      /* modo comun */
-      //this.ocultarSubsecciones();
-      //$("#"+subseccion).fadeIn(300);
+      ui.ocultarSubsecciones();
       
-      /* modo jQM */
-      var prop = this.subseccionProp(subseccion);
+      var prop = ui.subseccionProp(subseccion);
       var $seccion = prop.$seccion;
       var indice = prop.indice;
-      trace("indice "+indice+" de seccion "+$seccion.attr("id"));
       
+      //trace("indice "+indice+" de seccion "+$seccion.attr("id"));
+      
+      $(".subseccion", $seccion)
+        .removeClass("activada");
+
+      var $subseccion =
+        $subsecciones
+        .filter($("#"+subseccion));
+        
+      $subseccion
+        .fadeIn(300)
+        .addClass("actual")
+        .addClass("activada");      
+     
+      $(".barra a", $seccion )
+        .removeClass("actual")
+        .filter("#a_"+subseccion)
+        .addClass("actual");
+
+      if( prop.seccion != $secciones.filter(".actual").attr("id") ){
+        ui.mostrarSeccion(prop.seccion);
+      }
       /*
       activamos la seccion y 
       establecer estado activo
       del boton de subseccion
-      */
+      * /
       $( ":mobile-pagecontainer" ).pagecontainer( "change", $seccion );
       var $subsecciones = $( "[data-role='tabs']",$seccion );
       $subsecciones.tabs("option","active",indice);
@@ -215,7 +266,10 @@ tiempoFluido.ui = (function($){
     
     ocultarSubsecciones : function (){
       trace('UI: ocultarSubsecciones');
-      //$(".subseccion").fadeOut(300);
+      
+      $subsecciones
+        .hide()
+        .removeClass("actual");
     } /* /ocultarSubsecciones */
     ,
     
@@ -225,12 +279,14 @@ tiempoFluido.ui = (function($){
       modo jQM 
       establecemos propiedad enabled del botón
       y mostramos el <a>
-      */
+      *
       var prop = this.subseccionProp(subseccion);
       var $seccion = prop.$seccion;
       var indice = prop.indice;
       $( "[data-role='tabs']",$seccion ).tabs("option","enabled",[indice]);
-      $( "#a_"+subseccion, $seccion ).show();
+      */
+      
+      $( "#a_"+subseccion).show();
       
     } /* /habilitarSubseccion */
     ,
@@ -244,19 +300,23 @@ tiempoFluido.ui = (function($){
       var prop, $seccion, indice;
       for ( s in subseccion) {
         trace("..."+subseccion[s]);
+        /*
         prop = this.subseccionProp(subseccion[s]);
         $seccion = prop.$seccion;
         indice = prop.indice;
         $( "[data-role='tabs']",$seccion ).tabs("option","disabled",[indice]);
         $( "#"+subseccion[s], $seccion ).hide();
+        */
+        
         $( "#a_"+subseccion[s], $seccion ).hide();
       }
     } /* /deshabilitarSubseccion */
     ,
+     
     subseccionProp : function(subseccion){
       /* devuelve el indice y seccion */
       var $seccion = $("#"+subseccion).parents(".seccion");
-      //trace("UI.subseccionProp seccion ="+ $seccion.attr("id"));
+      trace("UI: subseccionProp seccion ="+ $seccion.attr("id"));
       var $subsecciones = $(".subseccion",$seccion);
       var indice = ($subsecciones.filter("#"+subseccion).index())-1;
       //trace(subseccion+" indice= "+indice);
@@ -268,6 +328,13 @@ tiempoFluido.ui = (function($){
       }
     } /* /subseccionProp */
     ,
+    
+    subseccionActivada: function(p){
+      trace("subseccionActivada en seccion "+p.seccion);
+      return $( ".activada", $("#"+p.seccion) ).attr("id");
+    }
+    ,
+    
     aplicarPlantilla : function (p){
       /*
       Aplica una plantilla html, por lo general
@@ -293,21 +360,20 @@ tiempoFluido.ui = (function($){
         p.$subseccion.attr("data-plantilla-enviar")
       );
       p.$subseccion.append($miPlantilla);
-      
-      /* jQuery.mobile */
-      $( ".acordion", $miPlantilla ).collapsible();
-      
+            
       salida = $miPlantilla;
       
       return (p.callback) ? p.callback( salida ) : salida;
     } /* /aplicarPlantilla */
     ,
+    
     mostrarMensajeSeccion : function (div,m)
     {
       $(".mensaje",$(div)).hide();
       $("."+m,$(div)).show();
     }
     ,
+    
     verPreferencias : function (p){
       trace('UI: verPreferencias '+p);
       var $div = $(p.div);
@@ -324,27 +390,80 @@ tiempoFluido.ui = (function($){
     } /* verPreferencias */
     ,
     
-    /*
-    ponerDatos : function ( p ){
-      trace('UI: verPreferencias '+p);
-      AAAAAAAAASQQQQQWUUUUUIIIIII
-      var $div = $(p.div);
-      var $propiedades = $( ".propiedad" , $div ).each( function (e) { 
-        var soy = $(this);
-        var $valor = $(".valor", soy);
-        var id_propiedad = soy.attr("id");
-        var propiedad = id_propiedad.replace(p.prefijo,"");
-        //trace(propiedad+" = "+soy.val());
-        $valor.text(p.datos[propiedad]);
-        trace (propiedad+" = "+p.datos[propiedad]);
-      });
-    }
-    */
     ponerDatos : function ( p ){
       trace('UI: ponerDatos '+p);
       return populateForm (p); // Asset externo
     } /* ponerDatos */
-    
+    ,
+    crearHtmlItemCarga: function(p){
+      //var $modeloFila = $("[data-plantilla-id='filaCarga']").clone;
+      var filaHtml = ""; // <tr>
+      var opciones = $.extend(
+      {},
+      {  etiqueta : "td" },
+      p.
+      }
+      var carga = p.carga;
+      for( v in p.carga ){
+        trace("v = "+v);
+        filaHtml += "<td data-id=\""+v+"\" class=\""+v+"\" >";
+        filaHtml += p.carga[v];
+        filaHtml += "</td>";
+      }
+      //filaHtml += "</tr>";
+      return filaHtml;
+    }
+    ,
+    listarCargas : function(p){
+      var datos = p.datos;
+      var subseccion = p.subseccion;
+      var $subseccion = $subsecciones.filter("#"+subseccion);
+      var filasHtml, filaHtml, filaHead;
+      var $tbody = $("tbody",$subseccion);
+      var $thead = $("thead",$subseccion);
+      filasHtml = "";
+      for( d in datos ){
+        trace("d = "+d);
+        filaHtml = ui.crearListaCarga({
+          carga: datos[d]
+        });
+        filaHtml = '<tr><td class="acciones"><button class="modificarCarga">M</button></td>' + filaHtml;
+        filaHtml +='<td class="acciones"><button class="borrarCarga">X</button></td></tr>';
+        
+        filasHtml += filaHtml;
+      }
+      $tbody.append(filasHtml);
+      
+      filaHead =  ui.crearListaCarga({
+        carga: p.texto.carga
+      });
+      filaHead = replaceAll(filaHead, "<td","<th");
+      filaHead = replaceAll(filaHead, "</td","</th");
+      filaHead = '<tr><th class="acciones">M</th>' + filaHead;
+      filaHead +='<th class="acciones">X</th></tr>';
+
+      $thead.append(filaHead);
+      
+      
+      /**/
+      trace("listo");
+    } /* /listarCargas */
+    ,
+    filtrarListado: function(p){
+      trace( "UI: filtrarListado" );
+      $celdasCargas = $("table.listado tr > *");
+      var vista = p.vista;
+      $celdasCargas.each(function(e){
+        if( vista[ $(this).attr("data-id") ] == false )
+        {
+          $(this).hide();
+        } 
+        else
+        {
+          $(this).show();
+        }
+      });
+    }
   };
   
   return ui;

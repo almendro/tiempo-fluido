@@ -15,17 +15,20 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/nicealert/style.css" />
     <script src="assets/nicealert/nice_alert.js"></script>
     
-    <script src="js/jquery-1.8.0.min.js"></script>
+    <script src="assets/jquery-2.2.3.min.js"></script>
     
     <!--
     Moment 
     http://momentjs.com/ via http://stackoverflow.com/questions/7763327/how-to-calculate-date-difference-in-javascript
     -->
-    <script src="js/moment.min.js"></script>
+    <script src="assets/moment.min.js"></script>
     
     
     <script>
-    
+
+    alert("prueba iniciada...");
+      
+    $(function(){
     var jornada = [];
     jornada[20150513] = "hoy";
     jornada[20150514] = "mañana";
@@ -35,9 +38,14 @@
     for (d in jornada){
      alert("jornada "+d+" "+jornada[d]);
     }
+    
     var hoy = moment();
     alert(" hoy = "+hoy);
     
+    hoy = moment().format("YYYYMMDD");
+    alert(" hoy format = "+hoy);
+    //hoy = hoy.format("YYYYMMDD");
+    //alert(" hoy formateado = "+hoy);
     var fecha_ini = new Date (2016,5,15);
     var fecha_fin = new Date (2016,5,25);
     
@@ -47,57 +55,15 @@
     alert("moment b = "+b.format("YYYYMMDD"));
     var c = b.clone().diff(a,'days');
     alert("moment c diff = "+c);
-
-    var saludo;
-    var chau = function(){
-      alert("chau");
-    }
-var hola = function(m,f){
-alert("mensaje de 'hola':" + m);
-    (f)();
-    return m
-};
-    saludo = hola( "hola", chau);
-    alert("saludo = "+saludo);
-
-    /*
-    alert("jquery");
-    var titulo;
-    $("#intro h2").each();
-alert(titulo);
-*/
-
-  var pre = {
-          tiempoPorJornada: 7*60, /* minutos */
-          tiempoIntercargas: 5, /* minutos */
-          reservaContingencias: 2*60, /* minutos */
-          tiempoMinimo: 20, /* minutos */
-          diasDeSemana: /* [1,1,1,1,1,0,0] semana inicia lunes */
-            {
-                lun: true,
-                mar: true,
-                mie: true,
-                jue: true,
-                vie: true,
-                sab: false,
-                dom: false
-            }
-        };
-        var dame = function ( obj ) {
-          return obj;
-        }
-        var pre2 = dame(pre);
-        
-        pre.tiempoMinimo = 55;
-        alert ("pre"+pre.tiempoMinimo);
-        alert ("pre2 "+pre2.tiempoMinimo);
+    });
     </script>
   </head>
   <body>
     <header>
+      <h1>Prueba moment</h1>
     </header>
     <nav>
-    <!-- navegación -->
+    <!-- navegación - ->
       <ul>
         <li><a href="#" >link</a></li>
         <li><a href="#" >link</a></li>
@@ -105,13 +71,13 @@ alert(titulo);
       </ul>
     </nav>
     <section id="intro">
-    <!-- introduccion -->
+    <!-- introduccion - ->
       <header>
-        <h2>Título de sección introductoria</h2>
+        <h2></h2>
       </header>
-      <p>Texto de la sección de introducción</p>
+      <p></p>
     </section>
-    
+    <!-- -->
     <div id="content">
     
       <div id="main-content">    

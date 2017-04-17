@@ -16,28 +16,30 @@ tiempoFluido.aplicacion = (function($,moment){
 
   var aplicacion = function(){
 
-    trace('iniciamos la aplicación');
+    trace('aplicación');
     
-    var tf; /* objeto con toda la data de usuario */
-    
-    /* configuracion */
+    /* principales */
     var perfil,
         configuracion,
         valoresPorDefecto;
-  
+    
+    var datos; /* objeto con toda la data de usuario */
+    
     /* data input/output e interfaz usuario */
     var io, ui;
     
     /* referencias a las class objects */
-    var Carga, Jornada, Grilla;
+    //var Carga, Jornada, Grilla;
 
     /* datos */
     var biblioteca;
-    var grillaJornada;
+    var grillaActual;
     var cargaActual;
     var jornadaActual;
+    var hoy;
     
     var diasNombres;
+    var texto;
 
     var estado, miEstado;
     
@@ -56,10 +58,10 @@ tiempoFluido.aplicacion = (function($,moment){
         
     var TF_MODO_FLUIDO = 0;
     
-    var dev; /* Opciones de desarrollador */
+    //var dev; /* Opciones de desarrollador */
     
     this.iniciar = function(){
-        
+        trace('iniciamos la aplicación');
         /*
         Referenciar los módulos e inicializarlos
         */
@@ -70,8 +72,8 @@ tiempoFluido.aplicacion = (function($,moment){
         io = tiempoFluido.io;
         io.iniciar();
         
-        dev = tiempoFluido.dev;
-        dev.iniciar();
+        //dev = tiempoFluido.dev;
+        //dev.iniciar();
         
         //Carga = tiempoFluido.Carga;
         
@@ -92,9 +94,12 @@ tiempoFluido.aplicacion = (function($,moment){
         };
         
         configuracion = {
-            preferencias: {},
-            otras: {}
+          preferencias: {},
+          otras: {}
         };
+        
+        hoy = moment().format("YYYYMMDD");
+        //hoy=0;
         
         valoresPorDefecto = {
           configuracion : {
@@ -117,15 +122,89 @@ tiempoFluido.aplicacion = (function($,moment){
             otras : {
               modo: TF_MODO_FLUIDO
             }
+            ,
+            vista: {
+              cargas:{
+                id: true,
+                titulo: true,
+                cantidad: true,
+                duracion: true,
+                fechaIni: true,
+                fechaFin: true,
+                fija: true,
+            uniforme: false,
+            continua: false,
+            distribucion: false,
+            patron: false,
+            contenedor: false,
+            contenidos: false,
+            prioridad: false,
+            recurrente: false,
+            responsable: false,
+            equipo: false,
+            resto: true
+              }
+            }
           } /* /configuracion */
+          ,
+          carga : {
+            id: "0",
+            titulo: "",
+            cantidad: 20,
+            duracion: 1,
+            fechaIni: "",
+            fechaFin: "",
+            fija: false,
+            uniforme: true,
+            continua: true,
+            distribucion: [0],
+            patron: [0],
+            contenedor: "", // string 
+            contenidos: [], // array
+            prioridad: 5,
+            recurrente: false,
+            responsable: "", // string
+            equipo: [], // array
+            resto: 20
+          },
+          datos : {
+            cargas: {},
+            idClaveCarga: -1,
+            jornadas: {},
+            grillas: {}
+          }
         };
         
+        texto = {
+          carga: {
+            id: "ID",
+            titulo: "Título",
+            cantidad: "Cantidad",
+            duracion: "Duración",
+            fechaIni: "Fecha Inicio",
+            fechaFin: "Fecha Fin",
+            fija: "Fija",
+            uniforme: "Uniforme",
+            continua: "Contínua",
+            distribucion: "Distribución",
+            patron: "Patrón",
+            contenedor: "Contenedor",
+            contenidos: "Contenidos",
+            prioridad: "Prioridad",
+            recurrente: "Recurrente",
+            responsable: "Responsable",
+            equipo: "Equipo",
+            resto: "Resto"
+          }
+          ,
+          dias: {
+            cortos: [
+              "lun", "mar", "mie", "jue", "vie", "sab", "dom"
+            ]
+          }
+        }; /*/texto */
         
-        diasNombresCortos = [
-          "lun", "mar", "mie", "jue", "vie", "sab", "dom"
-        ];
-
-        $secciones = $( "#seccion" );
+        $secciones = $( ".seccion" );
         $subsecciones = $( ".subseccion" );
         $botonesEnviar = $( ".enviar" );
         //ui.ocultarSeccion(); /* CAMBIAR a ocultarSecciones */
@@ -137,7 +216,7 @@ tiempoFluido.aplicacion = (function($,moment){
           var $soy = $(this);
           var $miPlantilla;
           var $enviar;
-          trace("subseccion "+$soy.attr("id"));
+          trace("subseccion: "+$soy.attr("id"));
           if ( $soy.attr("data-plantilla") ){
            trace( "hay plantilla" );
             $miPlantilla = ui.aplicarPlantilla({
@@ -158,6 +237,33 @@ tiempoFluido.aplicacion = (function($,moment){
           }
         });
         
+        trace("---");
+        trace( "Procesamos las barras de navegacion..." );
+        trace("");
+        $( "a", $( ".barra" )).each( function(i){
+          var $a = $(this);
+          var $barra = $a.parents( ".barra" );
+          var tipoObjetivo = $barra.attr( "data-tipo-objetivo" );
+          
+          $a.bind("click.misEventos", function(){
+            var id = $a.attr("href").replace("#","");
+            irA({
+              id: id,
+              tipo: tipoObjetivo,
+              preprocesarIrA: preprocesarIrA[id]
+            });
+          });
+        });
+        
+      $("#dev_borrar_todo").bind(
+        "click.misEventos",
+        borrarTodo
+      );
+      $("#dev_borrar_cargas").bind(
+        "click.misEventos",
+        borrarCargas
+      );
+        
         /* Interaccion con el usuario */
         trace(" *** ACA COMIENZA LA POSTA *** ");
         
@@ -175,7 +281,7 @@ tiempoFluido.aplicacion = (function($,moment){
           */
           trace("crear perfil");
           
-          estoyEn = irA( "perfil" );
+          estoyEn = irA("perfil");
           
           /* dehabilitamos cualquier otra opcion */
           ui.deshabilitarSubseccion([
@@ -235,6 +341,70 @@ tiempoFluido.aplicacion = (function($,moment){
             data: configuracion['otras']
           });
           
+          datos = io.cargarDatos( perfil.id );
+          
+          if( datos == false )
+          {
+            trace( "... generar datos por defecto..." );
+            datos = $.extend(
+              {},
+              valoresPorDefecto.datos,
+              datos
+            );
+            io.salvarDatos({
+              datos: datos,
+              objetoStorage: perfil.id+".datos" ,
+              callback: function(p){
+                trace("DATOS iniciales salvados...");
+              } /* /callback */
+            }); /* /io.salvarDatos */
+            carga = $.extend(
+              {},
+              valoresPorDefecto.carga,
+              {
+                id: idCargaSiguiente(),
+                cantidad: configuracion.tiempoMinimo,
+                fechaIni: hoy,
+                fechaFin: hoy,
+                resto: configuracion.tiempoMinimo,
+              }
+            );
+          }
+          else
+          {
+            trace( "Actualizamos estado con los datos cargados..." );
+            // aquí plantillas preferidas.
+            carga = $.extend(
+              {},
+              valoresPorDefecto.carga,
+              {
+                id: datos.idClaveCarga,
+                cantidad: configuracion.tiempoMinimo,
+                fechaIni: hoy,
+                fechaFin: hoy,
+                resto: configuracion.tiempoMinimo,
+              }
+            );
+          }
+          
+          
+          
+          if ( contar(datos.cargas) > 0 )
+          {
+            trace("popular listado de cargas");
+            ui.listarCargas({
+              datos: datos.cargas,
+              subseccion: "listarCargas",
+              texto: texto
+            });
+            
+            ui.filtrarListado({
+              vista: configuracion.vista.cargas
+            });
+            
+          }
+          
+          
           if ( estado()=="SIN_CONFIGURACION" ){
             trace('mostrar aviso de SIN_CONFIGURACION');
             bienvenida();
@@ -262,14 +432,38 @@ tiempoFluido.aplicacion = (function($,moment){
     
     var irA = function(p){
       trace("irA :"+p);
-      ui.mostrarSubseccion(p);
-      var salida;
-      salida = ui.subseccionProp(p);
-      salida["subseccion"] = p;
+      var tipo, id;
+      trace("typeof p: "+typeof(p));
+      if (typeof(p)==="string"){
+        id=p;
+        tipo = $secciones.filter("#"+id).length == 1 ?
+          "seccion" : "subseccion";
+      } else {
+        id = p.id;
+        tipo = p.tipo;
+      }
       
-      //$("#m_"+salida.seccion).click();
-      //$("#a_"+salida.subseccion).click();
-            
+      if( p.preprocesarIrA != undefined ){
+        trace( "preprocesarIrA ...");
+        var tmp = p.preprocesarIrA();
+        trace( "tmp="+tmp);
+      }
+      var uiMetodo = ui.mostrarSubseccion; 
+      if (tipo=="seccion"){
+        uiMetodo = ui.mostrarSeccion;
+      }
+      uiMetodo(id);
+      
+      var salida;
+      /*
+      if(p.tipo=="seccion"){
+        salida["seccion"] = id;
+        salida["subseccion"] = ui.subseccionActivada({seccion:id});
+      } else {
+        salida = ui.subseccionProp(id);
+        salida["subseccion"] = id;
+      }
+      */
       return (p.callback ) ? p.callback( salida ) : salida;
     }; /* /irA */
     
@@ -282,17 +476,27 @@ tiempoFluido.aplicacion = (function($,moment){
       return datosPerfil;
     }; /* /generarId */
 
+    var idCargaSiguiente = function(){
+      trace( "idCargaSiguiente: ");
+      datos["idClaveCarga"]++;
+      trace( "datos.idClaveCarga= "+datos.idClaveCarga);
+      return datos.idClaveCarga;
+    }; /* /idCargaSiguiente */
     /* control de pantallas */
     
     var bienvenida = function () {
-      //ui.mostrarSeccion ( "inicio" );
-      //ui.mostrarSubseccion ( "bienvenida" );
+
+      trace("");
+      trace(" --- LA BIENVENIDA ---");
+      trace("");
+      
       estoyEn = irA( "bienvenida" );
+      
       $( '.valor.perfil.nombre' ).text( perfil.nombre );
       $( '.valor.perfil.id' ).text( perfil.id );
-      /*
+      
       $( '#btn_comenzar_ya' ).bind( 'click.misEventos' , comenzarYa );
-      $( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
+      //$( '#btn_configurar_preferencias' ).bind( 'click.misEventos' , configurarPreferencias );
       /*
       ui.verPreferencias ({
         datos: valoresPorDefecto.preferencias,
@@ -403,17 +607,19 @@ tiempoFluido.aplicacion = (function($,moment){
       (habría que poner un control 
       para que no llegue vacio)
       */
-      var datos;
+      var datosASalvar;
       
       /* preprocesa segun la subseccion */
-      datos = preprocesarDatosASalvar({
+      datosASalvar = preprocesarDatosASalvar({
         datos: datosDelFormulario.datos,
         subseccion: datosDelFormulario.$subseccion.attr("id")
       });
-              
+      trace("...");
+      trace(JSON.stringify(datosASalvar));
+      trace("...");
       io.salvarDatos({
-        datos: datos.datos , 
-        objetoStorage: datos.objetoStorage ,
+        datos: datosASalvar.datos , 
+        objetoStorage: datosASalvar.objetoStorage ,
         callback: function(p){ 
           /*
           Mostrar resultado de salvar y subseccionSiguente
@@ -430,16 +636,36 @@ tiempoFluido.aplicacion = (function($,moment){
       trace( "preprocesarDatosASalvar "+p.subseccion);
       var salida ={
         datos: {},
-        objetoStorage: ""
-      }
+        objetoStorage: {}
+      };
       
       // ATENCION AQUI PROCESAR X SECTOR
       switch( p.subseccion ){
         case "perfil" :
-          salida["datos"] = generarId(p.datos);
-          salida["objetoStorage"]= "perfil";
+          salida["datos"][0] = generarId(p.datos);
+          salida["objetoStorage"][0]= "perfil";
           break;
         case "preferencias" :
+          salida["datos"][0] = p.datos;
+          salida["objetoStorage"][0]= perfil.id+".configuracion.preferencias";
+          break;
+        case "otras" :
+          salida["datos"][0] = p.datos;
+          salida["objetoStorage"][0]= perfil.id+".configuracion.otras";
+          break;
+        case "agregarCarga" :
+          salida["datos"][0] = $.extend(
+            {},
+            carga,
+            p.datos
+          );
+          salida["objetoStorage"][0] = perfil.id+".datos.cargas."+p.datos.id;
+          salida["datos"][1] = idCargaSiguiente();
+          salida["objetoStorage"][1] = perfil.id+".datos.idClaveCarga";
+          break;
+        case "modificarCarga" :
+          salida["datos"][0] = p.datos;
+          salida["objetoStorage"][0] = perfil.id+".datos.cargas."+p.datos.id;
           break;
         default:
           break;
@@ -450,11 +676,10 @@ tiempoFluido.aplicacion = (function($,moment){
     var resultadoPostSalvarFormulario = function(p){
       trace( "resultadoPostSalvarFormulario: subseccion "+p.subseccion );
       ui.mostrarDialogoResultado({
-        target: target,
+        target: p.subseccion,
         mensaje: "Los datos del formulario <strong>"+p.subseccion+"</strong> fueron salvados.",
         callbackOk: function(e){
           trace("callbackOk");
-          
           if ( estado()=="SIN_CONFIGURACION" && p.subseccion=="perfil" ){
             trace('mostrar aviso de SIN_CONFIGURACION');
             bienvenida();
@@ -464,17 +689,101 @@ tiempoFluido.aplicacion = (function($,moment){
     }; /* /resultadoPostSalvarFormulario */
     
     var deshabilitarBotonesEnviar = function(){
-      $botonesEnviar.unbind("click.misEventos");
+      trace("deshabilitarBotonesEnviar");
+      //$botonesEnviar.unbind("click.misEventos");
     };
     
-    var agregarCarga = function(){
-      trace("agregarCarga");
-    }
+    var preprocesarIrA = {
+      verGrilla : function(){
+        trace("verGrilla");
+        return "verGrilla";
+      }
+      ,
+      agregarCarga : function(){
+        trace("agregarCarga");
+        ui.ponerDatos ({
+          form: "#agregarCarga",
+          data: carga
+        });
+        return "agregarCarga";
+      }
+    };
     
-    var verGrilla = function(){
-      trace("verGrilla");
-    }
-   
+    var callbacksPorDefecto = {
+      verGrilla : function(){
+        trace("verGrilla");
+      }
+      ,
+      agregarCarga : function(){
+        trace("agregarCarga");
+      }
+    };
+    
+    borrarTodo = function(e){
+      trace( "borrarTodo "+e);
+      ui.mostrarDialogoConfirmar({
+        mensaje: "Borrar todos los datos ¿Estás MUY seguro? ¡Esto no se puede deshacer!",
+        callbackSi: function(e){
+          trace("Si");
+          io.borrarTodo();          
+          ui.mostrarDialogoResultado({
+            mensaje: "Todos los datos locales fueron borrados.",
+            callbackOk: function(e){
+              trace("callbackOk");
+            } /* /callbackOk */
+          })
+        } /* /callbackSi */
+        ,
+        callbackNo: function(e){
+          trace("Cancelar");
+        }
+      }); /* /mostrarDialogoConfirmar */
+    }; /* /borrarTodo */
+    
+    borrarCargas = function(e){
+      trace( "DEV: borrarCargas "+e.data.soy );
+      var target = e.data.soy;
+      tiempoFluido.ui.mostrarDialogoConfirmar({
+        target: target,
+        mensaje: "Borrar todas las cargas y reiniciar el contador de IDs ¿Estás MUY seguro? ¡Esto no se puede deshacer!",
+        callbackSi: function(e){
+          trace("Si");
+          /*
+                    tiempoFluido["datos"]["cargas"] = {};
+          tiempoFluido["datos"]["idClaveCarga"] = 0;
+          trace('tiempoFluido["datos"]["cargas"] = '+tiempoFluido["datos"]["cargas"]);
+          tiempoFluido.io.salvarDatos({
+            datos: [ 
+              tiempoFluido.datos.cargas,
+              tiempoFluido.datos.idClaveCarga
+            ],
+            objetoStorage: [
+              tiempoFluido.perfil.id+".datos.cargas",
+              tiempoFluido.perfil.id+".datos.idClaveCargas"
+            ]
+          }); 
+          tiempoFluido.io.borrarCargas();
+          */
+          
+          tiempoFluido.ui.mostrarDialogoResultado({
+            target: target,
+            mensaje: "Todos las datos locales de las cargas fueron borrados y se reinició el contador de IDs.",
+            callbackOk: function(e){
+              trace("callbackOk");
+            } /* /callbackOk */
+          })
+        } /* /callbackSi */
+        ,
+        callbackNo: function(e){
+          trace("Cancelar");
+        }
+      }); /* /mostrarDialogoConfirmar */
+    }; /* /borrarTodo */
+    
+    borrarObjeto = function (e){
+      // var tmp = io.borrarObjeto(perfil.id+".preferencias");  
+    }; /* /borrarObjeto */
+
   };/* /aplicacion */
 
   return aplicacion;

@@ -32,7 +32,10 @@
               //log("type "+$elemento.attr("type"));
               switch($elemento.attr("type"))  
               {  
-                case "text":   case "hidden":  case "textarea":  
+                case "text":
+                case "hidden":
+                case "textarea":
+                case "number":
                   $elemento.val(data[d]);   
                 break;   
                 case "checkbox":

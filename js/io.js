@@ -74,6 +74,24 @@ tiempoFluido.io = (function($){
        return configuracion; // tmp
      }
      ,
+     cargarDatos : function (perfilId){
+       trace('IO: cargarDatos');
+       trace( 'perfilId = ' + perfilId );
+
+       var salida;
+       if ( storage.isSet( 'tf.' + perfilId + '.datos' ) ) {
+         trace('HAY DATOS');
+         salida = storage.get( 'tf.' + perfilId + '.datos' );
+         trace( "datos: "+JSON.stringify(salida) );
+         trace("cargas.length: "+contar(salida.cargas));
+       } else {
+         trace('NO hay datos guardados');
+         salida = false;
+       }
+       //return ( callback )? callback( salida ) : salida;
+       return salida;
+     } /* /cargarDatos */
+     ,
      obtenerDatosFormulario : function ( formulario , callback ){
       trace('IO: obtenerDatosFormulario ' + formulario);
       var datos = $("."+formulario+".propiedad" , $( "#" + formulario ));
@@ -117,9 +135,14 @@ tiempoFluido.io = (function($){
     salvarDatos : function (p) {
       //datos , objetoStorage , callback
       trace('IO: salvarDatos datos ' + JSON.stringify(p.datos) );
-      trace('IO: salvarDatos objetoStorage ' + p.objetoStorage );
+      trace('IO: salvarDatos objetoStorage ' + JSON.stringify(p.objetoStorage) );
       var salida;
-      storage.set('tf.'+p.objetoStorage , p.datos );
+      var datos = listar(p.datos);
+      var objetoStorage = listar(p.objetoStorage);
+      for (d in datos){
+        storage.set('tf.'+objetoStorage[d] , datos[d] );
+        trace( "... salvado "+objetoStorage[d]+" ..." );
+      }
       return (p.callback ) ? p.callback( salida ) : salida;
     } /* salvarDatos */
     

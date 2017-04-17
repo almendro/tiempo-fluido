@@ -10,7 +10,17 @@ var replaceAll = function( string, omit, place, prevstring ) {
    /*
    Devuelve una lista
    */
-   if (typeof e === "object") return e;
+   if (typeof e === "object"
+   || typeof e === "array" ) return e;
    if (typeof e === "string") return [e];
    return false;
+ }
+ 
+ var contar = function (e){
+   var c, salida;
+   salida = 0;
+   for(c in e) {
+     salida++;
+   }
+   return salida 
  }

@@ -28,11 +28,12 @@
       
       var $consola, $log, trace;
       trace=function(e){
+        /**/
         if (console.log){
           console.log(e);
-        } else {
+        } else { /**/
           alert(e);
-        }
+        /**/} // */
       };
       
       Modernizr.load([
@@ -60,7 +61,7 @@
         "js/jornada.js",
         "js/grilla.js",
         "js/io.js",
-        "js/dev.js",
+        //"js/dev.js",
         {
           load: "js/tiempo_fluido.js",
           complete: function (){
@@ -74,15 +75,25 @@
                 $("#nice_alert alertbox").hide();
               });
               */
-              
+              trace("cargó tiempo_fluido.js");
               $log = $("#consola #log");
               $consola = $("#consola");
+              $consola_fondo = $("#consola_fondo");
+              $consola_btn = $("#consola_btn");
               trace = function (e){
                 $log.append("<p>"+e+"</p>");
               }
-              $("#consola_btn").bind("click",function(){
-                var $soy = $(this);
+              $consola_btn.bind("click",function(){
                 $consola.toggleClass("abierta");
+                if($consola.hasClass("abierta")){
+                  $consola_fondo.show();
+                  $consola_fondo.bind("click", function(){
+                    $consola_btn.click();
+                  });
+                } else {
+                  $consola_fondo.hide();
+                  $consola_fondo.unbind("click");
+                }
               });
 
               var miTiempoFluido = new tiempoFluido.aplicacion();
@@ -109,12 +120,12 @@
 
     <header id="mi_cabecera">
       <h1>Tiempo Fluido</h1>
-      <nav id="menu_principal">
+      <nav id="menu_principal" class="barra" data-tipo-objetivo="seccion" >
         <ul>
           <li><a id="m_inicio" href="#inicio" >Inicio</a></li>
-          <li><a id="m_ver_cargas" href="#ver_cargas" >Ver cargas</a></li>
-          <li><a id="m_ver_jornada" href="#ver_jornada" >Ver jornada</a></li>
-          <li><a id="m_ver_grilla" href="#ver_grilla" >Ver grilla</a></li>
+          <li><a id="m_verCargas" href="#verCargas" >Ver cargas</a></li>
+          <li><a id="m_verJornada" href="#verJornada" >Ver jornada</a></li>
+          <li><a id="m_verGrilla" href="#verGrilla" >Ver grilla</a></li>
           <li><a id="m_configuracion" href="#configuracion" >Configuración</a></li>
         </ul>
       </nav><!-- /#menu_principal -->
@@ -163,49 +174,82 @@
 
   <!-- ------------------ -->
 
-    <section id="ver_cargas" class="seccion">
+    <section id="verCargas" class="seccion">
       <header>
         <h1>Cargas</h1>
       </header>
       <p>Administrador de cargas.</p>
       <div>
-        <div class="barra_acciones">
+        <div class="barra_acciones barra">
           <ul>
-            <li><a id="a_agregar_carga" href="#agregar_carga" data-icon="plus">Agregar carga</a></li>
-            <li><a id="a_modificar_carga" href="#modificar_carga" data-icon="edit">Modificar carga</a></li>
-            <li><a id="a_listar_cargas" href="#listar_cargas" data-icon="bullets">Listar cargas</a></li>
+            <li><a id="a_agregarCarga" href="#agregarCarga" data-icon="plus">Agregar carga</a></li>
+            <li><a id="a_modificarCarga" href="#modificarCarga" data-icon="edit">Modificar carga</a></li>
+            <li><a id="a_listarCargas" href="#listarCargas" data-icon="bullets">Listar cargas</a></li>
             <!--
-            <li><a id="a_agregar_plantilla" href="#agregar_plantilla" data-icon="plus">Agregar plantilla</a></li>
+            <li><a id="a_agregarPlantilla" href="#agregarPlantilla" data-icon="plus">Agregar plantilla</a></li>
             <li><a id="a_biblioteca" href="#biblioteca" data-icon="bullets">Biblioteca</a></li>
             -->
           </ul>
         </div><!-- .barra_acciones -->
         
-        <div id="agregar_carga" 
+        <div id="agregarCarga" 
           class="subseccion"
           data-plantilla="abm_carga" 
           data-plantilla-enviar="Agregar">
           <p>ABM Carga: Agregar</p>
         </div><!-- /#agregar_carga -->
         
-        <div id="modificar_carga" 
+        <div id="modificarCarga" 
              class="subseccion ui-content" 
              data-plantilla="abm_carga" 
              data-plantilla-enviar="Guardar">
           <p>ABM Carga: Modificar</p>
-        </div><!-- /#modificar_carga -->
+        </div><!-- /#modificarCarga -->
         
-        <div id="listar_cargas" class="subseccion ui-content">
+        <div id="listarCargas" class="subseccion ui-content">
           <p>Listar cargas</p>
-        </div><!-- /#listar_cargas -->
+          <div class="filtros">
+            <button class="">Todas</button>
+          </div>
+          <table class="listado">
+            <thead>
+              <!--
+              <tr>
+                <th class="acciones"><button class="modificarCarga">M</button></th>
+                <th data-id="id" data-class="valor" >ID</th>
+                <th data-id="titulo" data-class="valor" >Título</th>
+                <th data-id="cantidad" data-class="valor" >Cantidad</th>
+                <th class="acciones"><button class="borrarCarga">X</button></th>
+              </tr>
+              -->
+            </thead>
+            <tbody>
+              <tr data-plantilla-id="filaCarga" class="plantilla_html">
+                <td class="acciones"><button class="modificarCarga">M</button></td>
+                <td data-id="id" data-class="valor" >ID</td>
+                <td data-id="titulo" data-class="valor" >Título</td>
+                <td data-id="cantidad" data-class="valor" >Cantidad</td>
+                <td class="acciones"><button class="borrarCarga">X</button></td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div><!-- /#listarCargas -->
       </div><!-- /tabs -->
       
-      <div data-plantilla-id="abm_carga" class="plantilla_html">
+      <div data-plantilla-id="abm_carga" class="plantilla_html abm_carga">
         <form>
           <fieldset>
             <div class="acordion">
-              <h2>Básico</h2>
-              <legend>Los datos mínimos.</legend>
+              <h2>Carga</h2>
+              <legend></legend>
+              <div class="form-group">
+                <label for="id" class="">ID</label>
+                <div class="">
+                  <input type="hidden" name="id">
+                  <input type="text" name="id">
+                </div>
+              </div>
               <div class="form-group">
                 <label for="titulo" class="">Título</label>
                 <div class="">
@@ -225,15 +269,15 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="fecha_ini" class="">Fecha Inicial</label>
+                <label for="fechaIni" class="">Fecha Inicial</label>
                 <div class="">
-                  <input type="text" class="form-control" name="fecha_ini" placeholder="Fecha Inicial">
+                  <input type="text" class="form-control" name="fechaIni" placeholder="Fecha Inicial">
                 </div>
               </div>
               <div class="form-group">
-                <label for="fecha_fin" class="">Fecha Final</label>
+                <label for="fechaFin" class="">Fecha Final</label>
                 <div class="">
-                  <input type="text" class="form-control" name="fecha_fin" placeholder="Fecha Final">
+                  <input type="text" class="form-control" name="fechaFin" placeholder="Fecha Final">
                 </div>
               </div>
               <div class="form-group">
@@ -251,7 +295,20 @@
               <div class="form-group">
                 <label for="continua" class="">Continua</label>
                 <div class="">
-                  <input type="text" class="form-control" name="continua" placeholder="Continua">
+                  <input type="checkbox" class="form-control" name="continua" placeholder="Continua">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="distribucion" class="">Distribución</label>
+                <div class="especial array">
+                  <input type="text" class="form-control" name="distribucion" placeholder="distribucion">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="resto" class="">Resto</label>
+                <div class="">
+                  <input type="text" class="form-control" name="resto" placeholder="resto">
                 </div>
               </div>
 <!--
@@ -267,41 +324,47 @@ resto: se actualiza con lo que queda por terminar
 
 Metodos:
 Escurrirse - distribuir una carga en los huecos
--->>
+-->
               <div class="form-group">
                 <div class="">
                   <!--<button type="button" data-accion="cancelar" class="">Cancelar</button>-->
-                  <button type="submit" data-accion="enviar" class="enviar">(acción)</button>
+                  <button type="button" data-accion="enviar" class="enviar">(acción)</button>
                 </div>
               </div>
             </div><!-- /.acordion -->
+            <!-- - ->
+            <div class="control">
+              <button type="button" class="control btn paginado siguiente">sig.</button>
+              <button type="button" class="control btn paginado anterior">ant.</button>
+            </div>
+            <!-- -->
           </fieldset>
         </form>
       </div><!-- /#abm_carga -->
       
-    </section><!-- /#ver_cargas.seccion -->
+    </section><!-- /#verCargas.seccion -->
 
   <!-- ------------------ -->
 
-    <section id="ver_jornada" class="seccion">
+    <section id="verJornada" class="seccion">
       <header>
         <h1>Ver jornada</h1>
       </header>
       <div role="main" class="ui-content">
         <p>Hola!</p>
       </div>      
-    </section><!-- /#ver_jornada -->
+    </section><!-- /#verJornada -->
 
   <!-- ------------------ -->
 
-    <section id="ver_grilla" class="seccion">
+    <section id="verGrilla" class="seccion">
       <header>
         <h1>Ver grilla</h1>
       </header>
       <div role="main" class="ui-content">
         <p>Hola!</p>
       </div>      
-    </section><!-- /#ver_grilla -->
+    </section><!-- /#verGrilla -->
 
   <!-- ------------------ -->
 
@@ -438,6 +501,11 @@ Escurrirse - distribuir una carga en los huecos
               class="icon-alert">
               BORRAR TODO
             </button>
+            <button 
+              id="dev_borrar_cargas" 
+              class="icon-alert">
+              BORRAR CARGAS
+            </button>
           </section>
         </div><!-- /#dev.subseccion -->
         
@@ -449,10 +517,10 @@ Escurrirse - distribuir una carga en los huecos
  
     <footer>
       <!-- navegación -->
-      <nav id="menu_accion">
+      <nav id="menu_accion" class="barra_acciones barra">
         <ul>
           <li>
-            <a id="m_agregar_carga" href="#agregar_carga" >Agregar carga</a>
+            <a id="m_agregarCarga" class="" href="#agregarCarga" ><span>Agregar carga</span></a>
           </li>
         </ul>
       </nav>
@@ -460,6 +528,8 @@ Escurrirse - distribuir una carga en los huecos
     
   <!-- ------------------ -->
   
+    <div id="dialogos_div"></div>
+    
     <div id="dialogo_confirmar" data-plantilla-id="dialogo_confirmar" class="plantilla_html">
       <header>
         <h1>Confirmar</h1>
@@ -471,12 +541,16 @@ Escurrirse - distribuir una carga en los huecos
       </div><!-- /.contenido -->
     </div><!-- /#dialogo_confirmar -->
     
+    <div id="consola_fondo"></div>
     <div id="consola">
-      <button id="consola_btn" class="btn btn-fab"><span>>CONSOLA</span></button>
-      <h3>CONSOLA</h3>
+      <header class="cabecera">
+        <button id="consola_btn" class="btn btn-fab"><span>>CONSOLA</span></button>
+        <h3>CONSOLA</h3>
+      </header>
       <div id="log">
       </div><!-- /#log -->
     </div><!-- /#consola -->
+    
     
     <!-- /* DEV */ - ->
     <div id="clearAllNiceAlert" style="display:block;position:fixed;top:0;left:40%;" class="btn btn-raised btn-danger btn-xs">
