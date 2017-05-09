@@ -28,13 +28,13 @@
       
       var $consola, $log, trace;
       trace=function(e){
-        /** /
+        /* * /
         if (console.log){
           console.log(e);
         } else {
-        /**/
+        /* */
           alert(e);
-        /** /
+        /* * /
         }
         // */
       };
@@ -84,7 +84,7 @@
               $consola_fondo = $("#consola_fondo");
               $consola_btn = $("#consola_btn");
               trace = function (e){
-                $log.append("<p>"+e+"</p>");
+                $log.append("<li>"+e+"</li>");
               }
               $consola_btn.bind("click",function(){
                 $consola.toggleClass("abierta");
@@ -550,13 +550,13 @@ Escurrirse - distribuir una carga en los huecos
         <button id="consola_btn" class="btn btn-fab"><span>>CONSOLA</span></button>
         <h3>CONSOLA</h3>
       </header>
-      <div id="log">
-      </div><!-- /#log -->
+      <ol id="log">
+      </ol><!-- /#log -->
     </div><!-- /#consola -->
     
     
     <!-- /* DEV */ -->
-    <div id="clearAllNiceAlert" style="display:block;position:fixed;top:0;left:40%;" class="btn btn-raised btn-danger btn-xs">
+    <div id="clearAllNiceAlert" style="display:block;position:fixed;top:10px;left:40%;padding:.25em;background-color:#f00;border-radius:.25em;z-index:9100" class="btn btn-raised btn-danger btn-xs">
     Clear All NiceAlerts
     </div>
     <!-- -->

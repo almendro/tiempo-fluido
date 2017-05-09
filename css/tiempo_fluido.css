@@ -191,17 +191,19 @@ table.listado
 #consola
 {
   position: fixed;
-  z-index: 9999;
+  z-index: 9000;
   top: 0px;
   right: 0px;
-  width: 68px;
+  width: 75%;
+  min-width: 240px;
+  max-width: 600px;
   height: 0px;
   margin: 0;
   padding: 0;
   padding-top: 90px;
   overflow: hidden;
   background-color: transparent;
-  font-size: 1em;
+  font-size: .9em;
   font-family: mono;
   display:block;
 }
@@ -210,8 +212,9 @@ table.listado
 {
   background-color: #000;
   color: #0f0;
-  width: 33%;
+  width: 75%;
   min-width: 240px;
+  max-width: 600px;
   height: auto;
   bottom: 0;
   overflow: auto;
@@ -278,7 +281,7 @@ table.listado
 {
   position: relative;
   color:#0f0;
-  font-size: .95em;
+  font-size: 14px;
   margin: .25em;
   height: auto;
   display: none;
@@ -289,14 +292,14 @@ table.listado
 {
   display: block;
 }
-#consola p
+#consola li
 {
   width: 100%;
   margin:0;
   padding:0;
   color:#0f0;
   font-size: 1em;
-  font-family: mono;
+  font-family: monospace;
   word-wrap: break-word;
 }
 
@@ -309,7 +312,7 @@ table.listado
   bottom:0;
   left:0;
   right:0;
-  z-index:9998;
+  z-index:8900;
 }
 /* FIN DEV */
 
