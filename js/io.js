@@ -22,7 +22,7 @@ tiempoFluido.io = (function($){
     //trace('creamos el objeto IO');
     iniciar: function (){
       soyIo = this;
-      trace('iniciar IO');
+      trace('iniciar la IO (input/output data)');
       $.alwaysUseJsonInStorage(true);
       storage = $.localStorage;
     }
@@ -35,11 +35,16 @@ tiempoFluido.io = (function($){
     ,
     borrarObjeto : function (objeto){
         trace("IO: borrarObjeto "+objeto);
+        trace("existe? "+storage.isSet("tf."+objeto));
         if (storage.isSet("tf."+objeto)){
           storage.remove("tf."+objeto);
+          trace(objeto+"? "+storage.isSet("tf."+objeto));
+          trace("borrado ok");
+          return true;
+        } else {
+          trace("no existe para borrar");
+          return false;
         }
-        trace(objeto+"? "+storage.isSet("tf."+objeto));
-        return true;
     }
     ,
     cargarPerfil : function(){

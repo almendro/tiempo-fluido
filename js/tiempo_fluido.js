@@ -16,7 +16,8 @@ tiempoFluido.aplicacion = (function($,moment){
 
   var aplicacion = function(){
 
-    trace('aplicación');
+    trace('instancia: aplicación');
+    trace('variables y objetos');
     
     /* principales */
     var perfil,
