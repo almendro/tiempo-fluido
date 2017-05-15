@@ -5,20 +5,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2">
-      
-    <!--
-    <link rel="stylesheet" type="text/css" href="assets/jquery.mobile.1.4.5/jquery.mobile-1.4.5.min.css" media="screen" />
-    -->
-<!--
-   <link rel="stylesheet" type="text/css" href="assets/jquery.mobile.1.4.5/jquery.mobile.theme-1.4.5.min.css" media="screen" />
--->    
+
     <link rel="stylesheet" type="text/css" href="css/tiempo_fluido.css" media="screen" />
-    <!--
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.min.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="css/ripples.min.css" media="screen" />
-    -->
+
     <script src="assets/modernizr.js"></script>
     <!--<script src="assets/.js"></script>-->
     
@@ -28,15 +17,11 @@
       
       var $consola, $log, trace;
       trace=function(e){
-        /* * /
         if (console.log){
           console.log(e);
-        } else {
-        /* */
-          alert(e);
-        /* * /
+        } else { 
+          alert(e);  
         }
-        // */
       };
       
       Modernizr.load([
@@ -48,12 +33,6 @@
             }
           }
         },
-        //"assets/jquery.mobile.1.4.5/jquery.mobile-1.4.5.min.js",
-        /*
-        "assets/bootstrap.min.js",
-        "assets/material.min.js",
-        "assets/ripples.min.js",
-        */
         "assets/moment.min.js",
         "assets/jquery.storageapi.min.js",
         "assets/jquery.serializejson.min.js",
@@ -71,13 +50,13 @@
             if(!window.tiempoFluido){
               trace("fallo tiempoFluido");
             } else {
-              /*** DEV ***/
+            
               //desbichador_init();
-              /* */
+             
               $("#clearAllNiceAlert").click(function(){
                 $("#nice_alert alertbox").hide();
               });
-              /* */
+             
               trace("cargó con éxito tiempo_fluido.js");
               $log = $("#consola #log");
               $consola = $("#consola");
@@ -102,9 +81,9 @@
               var miTiempoFluido = new tiempoFluido.aplicacion();
               miTiempoFluido.iniciar();
             }
-          }/* /complete */
+          } /* /complete */
         }
-      ]);/* /Modernizr.load */
+      ]); /* /Modernizr.load */
     </script>
 
     <!-- *** DEV *** -->
@@ -240,7 +219,9 @@
         </div><!-- /#listarCargas -->
       </div><!-- /tabs -->
       
-      <div data-plantilla-id="abm_carga" class="plantilla_html abm_carga">
+      <div 
+        data-plantilla-id="abm_carga" 
+        class="plantilla_html abm_carga">
         <form>
           <fieldset>
             <div class="acordion">
@@ -487,6 +468,7 @@ Escurrirse - distribuir una carga en los huecos
         
         <div id="otras" class="subseccion">
           <h1>Otras configuraciones</h1>
+          <p>en construxción</p>
         </div><!-- /#otras.subseccion -->
         
         <div id="dev" class="subseccion">
@@ -523,7 +505,11 @@ Escurrirse - distribuir una carga en los huecos
       <nav id="menu_accion" class="barra_acciones barra">
         <ul>
           <li>
-            <a id="m_agregarCarga" class="" href="#agregarCarga" ><span>Agregar carga</span></a>
+            <a id="m_agregarCarga" 
+              class="" 
+              href="#agregarCarga" >
+              <span>Agregar carga</span>
+            </a>
           </li>
         </ul>
       </nav>
@@ -533,17 +519,23 @@ Escurrirse - distribuir una carga en los huecos
   
     <div id="dialogos_div"></div>
     
-    <div id="dialogo_confirmar" data-plantilla-id="dialogo_confirmar" class="plantilla_html">
+    <div id="dialogo_confirmar" 
+      data-plantilla-id="dialogo_confirmar" 
+      class="plantilla_html">
       <header>
         <h1>Confirmar</h1>
       </header>
       <div class="contenido">
-        <h3 class="mensaje">(mensaje)</p>
+        <h3 class="mensaje">(mensaje)</h3>
         <button class="dialogo_no" >NO</button>
         <button class="dialogo_si" >SI</button>
       </div><!-- /.contenido -->
     </div><!-- /#dialogo_confirmar -->
-    
+
+  <!-- ------------------ -->
+
+    <!-- /* DEV */ -->
+        
     <div id="consola_fondo"></div>
     <div id="consola">
       <header class="cabecera">
@@ -555,8 +547,7 @@ Escurrirse - distribuir una carga en los huecos
     </div><!-- /#consola -->
     
     
-    <!-- /* DEV */ -->
-    <div id="clearAllNiceAlert" style="display:block;position:fixed;top:10px;left:40%;padding:.25em;background-color:#f00;border-radius:.25em;z-index:9100" class="btn btn-raised btn-danger btn-xs">
+    <div id="clearAllNiceAlert" class="btn btn-raised btn-danger btn-xs">
     Clear All NiceAlerts
     </div>
     <!-- -->

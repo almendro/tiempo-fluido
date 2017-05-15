@@ -314,6 +314,18 @@ table.listado
   right:0;
   z-index:8900;
 }
+
+#clearAllNiceAlert
+{
+    display:block;
+    position:fixed;
+    top:10px;
+    left:40%;
+    padding:.25em;
+    background-color:#f00;
+    border-radius:.25em;
+    z-index:9100;
+}
 /* FIN DEV */
 
 /* --------------------------------- */
