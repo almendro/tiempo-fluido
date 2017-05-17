@@ -1,4 +1,4 @@
-﻿/* 
+/* 
 
 Tiempo Fluido
 -------------
@@ -32,32 +32,9 @@ tiempoFluido.ui = (function($){
       
       trace("secciones: "+$secciones.length);
       trace("subsecciones: "+$subsecciones.length);
-      /*
-      trace('elementos jQuery mobile');
-      $( "#menu_principal" ).navbar();
-      $( "[data-role='header'], [data-role='footer']" ).toolbar();
-      */
-      //$( "[data-role='footer']" ).toolbar();
-      /*
-      $( document ).on( "pagecontainerchange", function() {
-        var current = $( ".ui-page-active" ).jqmData( "title" );
-        // Change the heading
-        //$( "[data-role='header'] h1" ).text( current );
-        // Remove active classCss from nav buttons
-        $( "#menu_principal a.ui-btn-active" ).removeClass( "ui-btn-active" );
-        // Add active classCss to current nav button
-        $( "#menu_principal a" ).each(function() {
-          //trace(current+" text  ="+ $(this).text());
-          if ( $( this ).text() === current ) {
-            $( this ).addClass( "ui-btn-active" );
-          }
-        });
-      }); /* /on.pagecontainerchange */
       
-      /*
-      $( "body>[data-role='panel']" ).panel();
-      */
       $celdasCargas = $("table.listado tr > *");
+      trace("celdasCargas ="+$celdasCargas.length);
       
     } /* iniciar */
     , 
