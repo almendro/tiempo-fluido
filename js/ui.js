@@ -164,6 +164,7 @@ tiempoFluido.ui = (function($){
         
     } /* /mostrarSeccion */
     ,
+    
     ocultarSecciones : function (){
       trace('UI: ocultarSecciones');
       $secciones
@@ -171,6 +172,7 @@ tiempoFluido.ui = (function($){
         .removeClass("actual");
     } /* /ocultarSecciones */
     ,
+    
     habilitarSeccion : function (seccion){
       seccion = listar(seccion);
       for ( s in seccion ){
@@ -198,12 +200,10 @@ tiempoFluido.ui = (function($){
       ui.ocultarSubsecciones();
       
       var prop = ui.subseccionProp(subseccion);
-      var $seccion = prop.$seccion;
-      var indice = prop.indice;
       
-      //trace("indice "+indice+" de seccion "+$seccion.attr("id"));
+      trace("indice "+prop.indice+" de seccion "+prop.seccion);
       
-      $(".subseccion", $seccion)
+      $(".subseccion", prop.$seccion)
         .removeClass("activada");
 
       var $subseccion =
@@ -215,7 +215,7 @@ tiempoFluido.ui = (function($){
         .addClass("actual")
         .addClass("activada");      
      
-      $(".barra a", $seccion )
+      $(".barra a", prop.$seccion )
         .removeClass("actual")
         .filter("#a_"+subseccion)
         .addClass("actual");
@@ -223,21 +223,6 @@ tiempoFluido.ui = (function($){
       if( prop.seccion != $secciones.filter(".actual").attr("id") ){
         ui.mostrarSeccion(prop.seccion);
       }
-      /*
-      activamos la seccion y 
-      establecer estado activo
-      del boton de subseccion
-      * /
-      $( ":mobile-pagecontainer" ).pagecontainer( "change", $seccion );
-      var $subsecciones = $( "[data-role='tabs']",$seccion );
-      $subsecciones.tabs("option","active",indice);
-      $( "[data-role='tabs'] a",$seccion ).each( function(e) {
-        $(this).removeClass("ui-tabs-active");
-        //trace("e="+e+" i="+$(this).index()+" "+$(this).attr("href")+" | indice "+indice);
-        if(e == indice){
-          $(this).addClass("ui-tabs-active");
-        }
-      }); /* / each */
     } /* / mostrarSubseccion */
     ,
     

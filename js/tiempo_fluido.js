@@ -133,17 +133,17 @@ tiempoFluido.aplicacion = (function($,moment){
                 fechaIni: true,
                 fechaFin: true,
                 fija: true,
-            uniforme: false,
-            continua: false,
-            distribucion: false,
-            patron: false,
-            contenedor: false,
-            contenidos: false,
-            prioridad: false,
-            recurrente: false,
-            responsable: false,
-            equipo: false,
-            resto: true
+                uniforme: false,
+                continua: false,
+                distribucion: false,
+                patron: false,
+                contenedor: false,
+                contenidos: false,
+                prioridad: false,
+                recurrente: false,
+                responsable: false,
+                equipo: false,
+                resto: true
               }
             }
           } /* /configuracion */
@@ -201,6 +201,9 @@ tiempoFluido.aplicacion = (function($,moment){
           dias: {
             cortos: [
               "lun", "mar", "mie", "jue", "vie", "sab", "dom"
+            ],
+            largos: [
+              "lunes", "martes", "miércoles","jueves","viernes","sábado","domingo"
             ]
           }
         }; /*/texto */
@@ -247,23 +250,27 @@ tiempoFluido.aplicacion = (function($,moment){
           var tipoObjetivo = $barra.attr( "data-tipo-objetivo" );
           
           $a.bind("click.misEventos", function(){
+            /* obtenemos el id del destino */
             var id = $a.attr("href").replace("#","");
             irA({
               id: id,
               tipo: tipoObjetivo,
-              preprocesarIrA: preprocesarIrA[id]
-            });
-          });
-        });
+              preprocesarIrA: preprocesarIrA[id] 
+              /* referenciamos a la funcion dentro de preprocesarIrA */
+            }); /* irA */
+          }); /* $a.bind */
+        }); /* .each */
         
-      $("#dev_borrar_todo").bind(
-        "click.misEventos",
-        borrarTodo
-      );
-      $("#dev_borrar_cargas").bind(
-        "click.misEventos",
-        borrarCargas
-      );
+        $("#dev_borrar_todo").bind(
+          "click.misEventos",
+          borrarTodo
+        );
+        
+        $("#dev_borrar_cargas").bind(
+          "click.misEventos",
+          borrarCargas
+        );
+        
         
         /* Interaccion con el usuario */
         trace(" *** ACA COMIENZA LA POSTA *** ");
@@ -432,23 +439,42 @@ tiempoFluido.aplicacion = (function($,moment){
     }; /* /estado */
     
     var irA = function(p){
-      trace("irA :"+p);
+      /*
+      actualiza la pantalla cambiando entre secciones
+      y subsecciones.
+      Puede recibir un string con el id de la DIV
+      o un object con el id, tipo y preprocesarIrA
+      id: string
+      tipo: string, indica si se trata de una seccion
+      preprocesarIrA: string, por lo general igual a id
+      */
+      trace("irA :"+p.id);
       var tipo, id;
       trace("typeof p: "+typeof(p));
       if (typeof(p)==="string"){
         id=p;
         tipo = $secciones.filter("#"+id).length == 1 ?
-          "seccion" : "subseccion";
+          "seccion" : "subseccion"; 
+          /* 
+          determina el tipo si existe en los objetos de 
+          seccion, de lo contrario se trata de una subseccion
+           */
       } else {
         id = p.id;
         tipo = p.tipo;
       }
-      
+      /*
+      Determina si antes de cambiar de seccion se debe
+      pre procesar algun datos o estado llamando a la funcion
+      dentro del objeto preprosesarIrA genneral referenciado
+      en el parametro.
+      */
       if( p.preprocesarIrA != undefined ){
         trace( "preprocesarIrA ...");
         var tmp = p.preprocesarIrA();
         trace( "tmp="+tmp);
       }
+      
       var uiMetodo = ui.mostrarSubseccion; 
       if (tipo=="seccion"){
         uiMetodo = ui.mostrarSeccion;
@@ -465,6 +491,8 @@ tiempoFluido.aplicacion = (function($,moment){
         salida["subseccion"] = id;
       }
       */
+      salida = true;
+      
       return (p.callback ) ? p.callback( salida ) : salida;
     }; /* /irA */
     
