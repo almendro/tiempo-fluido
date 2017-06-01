@@ -724,12 +724,12 @@ tiempoFluido.aplicacion = (function($,moment){
     
     var preprocesarIrA = {
       verGrilla : function(){
-        trace("verGrilla");
+        trace("preprocesarIrA :verGrilla");
         return "verGrilla";
       }
       ,
       agregarCarga : function(){
-        trace("agregarCarga");
+        trace("preprocesarIrA: agregarCarga");
         ui.ponerDatos ({
           form: "#agregarCarga",
           data: carga
@@ -740,11 +740,11 @@ tiempoFluido.aplicacion = (function($,moment){
     
     var callbacksPorDefecto = {
       verGrilla : function(){
-        trace("verGrilla");
+        trace("callbacksPorDefecto: verGrilla");
       }
       ,
       agregarCarga : function(){
-        trace("agregarCarga");
+        trace("callbacksPorDefecto: agregarCarga");
       }
     };
     

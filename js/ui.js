@@ -368,8 +368,9 @@ tiempoFluido.ui = (function($){
       });
       */
       var carga = p.carga;
+      var v;
       for( v in p.carga ){
-        trace("v = "+v);
+        // trace("v = "+v);
         filaHtml += "<td data-id=\""+v+"\" class=\""+v+"\" >";
         filaHtml += p.carga[v];
         filaHtml += "</td>";
@@ -379,6 +380,8 @@ tiempoFluido.ui = (function($){
     } /* /crearHtmlItemCarga */
     ,
     listarCargas : function(p){
+    
+      trace("UI listarCargas");
       var datos = p.datos;
       var subseccion = p.subseccion;
       var $subseccion = $subsecciones.filter("#"+subseccion);
@@ -386,9 +389,10 @@ tiempoFluido.ui = (function($){
       var $tbody = $("tbody",$subseccion);
       var $thead = $("thead",$subseccion);
       filasHtml = "";
+      trace("filas de datos: "+contar(datos));
       for( d in datos ){
         trace("d = "+d);
-        filaHtml = ui.crearListaCarga({
+        filaHtml = ui.crearHtmlItemCarga({
           carga: datos[d]
         });
         filaHtml = '<tr><td class="acciones"><button class="modificarCarga">M</button></td>' + filaHtml;
@@ -397,8 +401,8 @@ tiempoFluido.ui = (function($){
         filasHtml += filaHtml;
       }
       $tbody.append(filasHtml);
-      
-      filaHead =  ui.crearListaCarga({
+      trace("fila cabecera");
+      filaHead =  ui.crearHtmlItemCarga({
         carga: p.texto.carga
       });
       filaHead = replaceAll(filaHead, "<td","<th");
