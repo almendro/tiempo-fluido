@@ -610,9 +610,9 @@ tiempoFluido.aplicacion = (function($,moment){
       trace('habilitarFormulario: '+p.$subseccion.attr("id"));
       var salida;
       var enviar_callback = 
-        (p.enviar_callback) ? 
-        p.enviar_callback :
-        habilitarFormularioCallbackGeneral;
+            (p.enviar_callback) ? 
+              p.enviar_callback :
+              habilitarFormularioCallbackGeneral;
       $( ".enviar", p.$subseccion )
       .bind( 
         'click.misEventos',
@@ -723,6 +723,11 @@ tiempoFluido.aplicacion = (function($,moment){
     };
     
     var preprocesarIrA = {
+      /*
+      prepara las diferentes secciones y subsecciones
+      antes de visualizar el cambio, como rellernar
+      los forms con datos
+      */
       verGrilla : function(){
         trace("preprocesarIrA :verGrilla");
         return "verGrilla";
@@ -739,12 +744,17 @@ tiempoFluido.aplicacion = (function($,moment){
     };
     
     var callbacksPorDefecto = {
+      /*
+      se ejecutan al final la accion de enviar datos
+      de los formularios
+      */
       verGrilla : function(){
         trace("callbacksPorDefecto: verGrilla");
       }
       ,
       agregarCarga : function(){
         trace("callbacksPorDefecto: agregarCarga");
+        trace("(nada por ahora)");
       }
     };
     
